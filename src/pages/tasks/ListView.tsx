@@ -1,7 +1,4 @@
-export interface ListViewProps {
-}
-
-export default function ListView (_: ListViewProps) {
+export default function ListView () {
   return (
     <div>
       This is the ListView.
