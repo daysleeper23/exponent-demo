@@ -13,7 +13,13 @@ type ThemeProviderState = {
   changeTheme: (theme: Theme) => void
 }
 
-const ThemeProviderContext = createContext<ThemeProviderState | undefined>(undefined)
+// Provide a default implementation for changeTheme
+const defaultState: ThemeProviderState = {
+  theme: "dark",
+  changeTheme: () => null,
+}
+
+const ThemeProviderContext = createContext<ThemeProviderState>(defaultState)
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
@@ -26,7 +32,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   )
 
   const updateTheme = (theme: Theme) => {
-    localStorage.setItem(storageKey, theme)
     setTheme(theme)
   }
 
@@ -45,8 +50,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       return
     }
 
-    root.classList.add(theme)
     localStorage.setItem(storageKey, theme)
+    root.classList.add(theme)
   }, [theme])
 
   return (

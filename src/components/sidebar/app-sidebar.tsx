@@ -36,9 +36,16 @@ const data = {
   ],
 }
 
+export interface NavMainItem {
+  title: string
+  url: string
+  icon: React.ElementType
+  isActive: boolean
+}
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   
-  const [navMain] = React.useState([
+  const [navMain, setNavMain] = React.useState<NavMainItem[]>([
     {
       title: "List",
       url: "/",
@@ -63,7 +70,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar className="border-r-0" {...props}>
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
-        <NavMain items={navMain} />
+        <NavMain items={navMain} setActiveItem={setNavMain}/>
       </SidebarHeader>
       <SidebarRail />
     </Sidebar>
