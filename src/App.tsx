@@ -5,7 +5,7 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from './components/ui/s
 import { AppSidebar } from './components/sidebar/app-sidebar';
 import { Separator } from './components/ui/separator';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from './components/ui/breadcrumb';
-import { Button } from './components/ui/button';
+import Button from './components/ui/button/button';
 import { useTheme } from "@/components/context/ThemeProvider";
 import { Moon, Sun } from 'lucide-react';
 

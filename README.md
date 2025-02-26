@@ -14,3 +14,8 @@ Designed as a proof-of-concept for scalable, high-quality web apps, Exponent dem
 - Routing: react-router
 - Code splitting: lazy load pages on demand
 
+## Features
+
+### Dark-mode
+
+Implemented using the [Context API](https://react.dev/reference/react/createContext), allowing the user to seamlessly switch between Dark and Light mode. This feature enhances the user experience by providing a personalized interface and improving readability based on user preferences. The selected mode is stored in localStorage, ensuring that the user's preference persists across sessions for a consistent experience.
