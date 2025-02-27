@@ -7,8 +7,8 @@ import {
   SquareKanban,
 } from "lucide-react"
 
-import { NavMain } from "@/components/sidebar/nav-main"
-import { TeamSwitcher } from "@/components/sidebar/team-switcher"
+import { NavMain } from "@/components/ui/sidebar/nav-main"
+import { TeamSwitcher } from "@/components/ui/sidebar/team-switcher"
 import {
   Sidebar,
   SidebarHeader,
