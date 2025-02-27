@@ -4,15 +4,18 @@ import { SyntheticEvent, useRef, useState } from "react";
 
 interface TaskListViewProps {
   tasks: Task[];
-  height: number;
+  viewHeight: number;
 }
 
-const TaskListView = ({ tasks, height }: TaskListViewProps) => {
+const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
 
   //Virtualized List
   const rowCount = tasks.length;
   const rowHeight = 45;
-  const overScan = 5;
+
+  //overScan is the number of items to render above and below the visible area
+  //overScan ~ half of the number of items that fit in the viewport, but not more than 5
+  const overScan = Math.min(Math.floor((viewHeight / rowHeight) / 2), 5);
   
   const [scrollTop, setScrollTop] = useState(0);
   const containerRef = useRef(null);
@@ -21,7 +24,7 @@ const TaskListView = ({ tasks, height }: TaskListViewProps) => {
   const startIndex = Math.max(0, Math.floor(scrollTop / rowHeight) - overScan);
 
   //number of items that fit in the viewport plus overscan
-  const visibleCount = Math.ceil(height / rowHeight) + overScan * 2;
+  const visibleCount = Math.ceil(viewHeight / rowHeight) + overScan * 2;
 
   // the endIndex must not go past the end of the list
   const endIndex = Math.min(rowCount, startIndex + visibleCount);

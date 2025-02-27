@@ -76,7 +76,7 @@ const App = () => {
           <div ref={contentRef} className="flex flex-1 flex-col overflow-hidden relative">
             <Suspense fallback={<div>Loading...</div>}>
               <Routes>
-                <Route path="/" element={<TaskListView tasks={tasks} height={contentHeight} />} />
+                <Route path="/" element={<TaskListView tasks={tasks} viewHeight={contentHeight} />} />
                 <Route path="/board" element={<TaskBoardView />} />
                 <Route path="/timeline" element={<TaskTimelineView />} />
               </Routes>
