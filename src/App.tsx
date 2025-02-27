@@ -18,52 +18,54 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(false)
 
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b border-primary-200 dark:border-primary-700">
-          <div className="flex items-center gap-2 px-4 w-full">
-            <SidebarTrigger className="-ml-1" />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Exponent
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Tasks</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-            <Button 
-              variant="ghost" className="ml-auto"
-              size={"icon"}
-              onClick={() => {
-                const theme = darkMode === true ? "light" : "dark";
-                setDarkMode(!darkMode);
-                changeTheme(theme);
-              }}
-            >
-              {
-                darkMode ? <Sun /> : <Moon />
-              }
-            </Button>
+    <div className="flex h-screen w-screen">
+      <SidebarProvider>
+        <AppSidebar />
+        <SidebarInset className="flex flex-col h-full">
+          <header className="flex h-16 shrink-0 items-center gap-2 border-b border-primary-200 dark:border-primary-700">
+            <div className="flex items-center gap-2 px-4 w-full">
+              <SidebarTrigger className="-ml-1" />
+              <Separator orientation="vertical" className="mr-2 h-4" />
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem className="hidden md:block">
+                    <BreadcrumbLink href="#">
+                      Exponent
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator className="hidden md:block" />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>Tasks</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
+              <Button
+                variant="ghost" className="ml-auto"
+                size={"icon"}
+                onClick={() => {
+                  const theme = darkMode === true ? "light" : "dark";
+                  setDarkMode(!darkMode);
+                  changeTheme(theme);
+                }}
+              >
+                {
+                  darkMode ? <Sun /> : <Moon />
+                }
+              </Button>
+            </div>
+          </header>
+          <div className="flex flex-1 flex-col overflow-hidden relative">
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<TaskListView />} />
+                <Route path="/board" element={<TaskBoardView />} />
+                <Route path="/timeline" element={<TaskTimelineView />} />
+              </Routes>
+            </Suspense>
           </div>
-        </header>
-        <div className="flex flex-1 flex-col">
-          <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-              <Route path="/" element={<TaskListView />} />
-              <Route path="/board" element={<TaskBoardView />} />
-              <Route path="/timeline" element={<TaskTimelineView />} />
-            </Routes>
-          </Suspense>
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+        </SidebarInset>
+      </SidebarProvider>
+    </div>
   );
 }
 

@@ -3,9 +3,9 @@ import { Task } from "@/types/task";
 import TaskListRow from "./TaskListRow";
 
 const TaskListView = () => {
-  const tasks: Task[] = getTasks(10);
+  const tasks: Task[] = getTasks(100);
   return (
-    <div className="text-sm">
+    <div className="text-sm overflow-y-auto relative">
       {tasks.map((task) => (
         <TaskListRow task={task} />
       ))}
