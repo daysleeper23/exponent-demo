@@ -1,16 +1,16 @@
 import { lazy, Suspense, useState } from 'react';
 import { Route, Routes } from 'react-router';
-import ListView from './pages/tasks/ListView';
+import TaskListView from './components/task/list/TaskListView';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from './components/ui/sidebar';
-import { AppSidebar } from './components/sidebar/app-sidebar';
+import { AppSidebar } from './components/ui/sidebar/app-sidebar';
 import { Separator } from './components/ui/separator';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from './components/ui/breadcrumb';
-import { Button } from './components/ui/button';
+import Button from './components/ui/button';
 import { useTheme } from "@/components/context/ThemeProvider";
 import { Moon, Sun } from 'lucide-react';
 
-const BoardView = lazy(() => import('@/pages/tasks/BoardView'));
-const TimelineView = lazy(() => import('@/pages/tasks/TimelineView'));
+const TaskBoardView = lazy(() => import('@/components/task/board/TaskBoardView'));
+const TaskTimelineView = lazy(() => import('@/components/task/timeline/TaskTimelineView'));
 
 const App = () => {
 
@@ -53,12 +53,12 @@ const App = () => {
             </Button>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 px-4 py-10">
+        <div className="flex flex-1 flex-col">
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
-              <Route path="/" element={<ListView />} />
-              <Route path="/board" element={<BoardView />} />
-              <Route path="/timeline" element={<TimelineView />} />
+              <Route path="/" element={<TaskListView />} />
+              <Route path="/board" element={<TaskBoardView />} />
+              <Route path="/timeline" element={<TaskTimelineView />} />
             </Routes>
           </Suspense>
         </div>
