@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Route, Routes } from 'react-router';
 import { Moon, Sun } from 'lucide-react';
 
-
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/ui/sidebar/app-sidebar';
 import { Separator } from '@/components/ui/separator';
@@ -76,7 +75,7 @@ const App = () => {
           <div ref={contentRef} className="flex flex-1 flex-col overflow-hidden relative">
             <Suspense fallback={<div>Loading...</div>}>
               <Routes>
-                <Route path="/" element={<TaskListView tasks={tasks} height={contentHeight} />} />
+                <Route path="/" element={<TaskListView tasks={tasks} viewHeight={contentHeight} />} />
                 <Route path="/board" element={<TaskBoardView />} />
                 <Route path="/timeline" element={<TaskTimelineView />} />
               </Routes>

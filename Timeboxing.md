@@ -12,14 +12,14 @@
 | - Add ThemeProvider for dark mode                         | 1             |
 |                                                           |               |
 | Storybook                                                 |               |
-| - Setup & configure Storybook                             | 2             |
+| - Setup & configure Storybook                             | 1             |
 | - Write stories for Button                                | 1             |
 |                                                           |               |
 | ListView                                                  |               |
 | - Initial types & mock data                               | 1             |
-| - Basic view with simple row component                    | 2             |
+| - Basic view with simple row component                    | 3             |
 | - Improve row visualization: spacing, typo, layout        | 2             |
-| - Combobox for task status                                | 4             |
 | - Virtualizing the list for large dataset                 | 4             |
+| - Unit testing for ListView & related component           | 4             |
 | --------------------------------------------------------- | ------------- |
 | Total                                                     | 22            |
