@@ -4,6 +4,7 @@ import TaskProperty from "./TaskProperty";
 
 interface TaskListRowProps {
   task: Task;
+  style?: React.CSSProperties;
 }
 
 export interface TaskPropertyMap {
@@ -13,7 +14,7 @@ export interface TaskPropertyMap {
   };
 }
 
-const TaskListRow = ({ task }: TaskListRowProps) => {
+const TaskListRow = ({ task, style }: TaskListRowProps) => {
   const statusMap: TaskPropertyMap = {
     '0': {
       label: "Backlog",
@@ -61,7 +62,8 @@ const TaskListRow = ({ task }: TaskListRowProps) => {
   };
 
   return (
-    <div 
+    <div
+      style={style}
       className="w-full px-4 py-2 flex gap-4 items-center justify-between
         border-b border-primary-200 dark:border-primary-700
         hover:bg-primary-foreground

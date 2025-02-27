@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Route, Routes } from 'react-router';
 import TaskListView from './components/task/list/TaskListView';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from './components/ui/sidebar';
@@ -8,6 +8,8 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import Button from './components/ui/button/button';
 import { useTheme } from "@/components/context/ThemeProvider";
 import { Moon, Sun } from 'lucide-react';
+import { Task } from './types/task';
+import { getTasks } from './api/task';
 
 const TaskBoardView = lazy(() => import('@/components/task/board/TaskBoardView'));
 const TaskTimelineView = lazy(() => import('@/components/task/timeline/TaskTimelineView'));
@@ -16,6 +18,19 @@ const App = () => {
 
   const { changeTheme } = useTheme()
   const [darkMode, setDarkMode] = useState(false)
+
+  const taskCount = 1000;
+  const tasks: Task[] = getTasks(taskCount);
+
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentHeight, setContentHeight] = useState(0);
+
+  useEffect(() => {
+    const content: HTMLElement | null = contentRef.current;
+    if (content !== null) {
+      setContentHeight(content.getBoundingClientRect().height);
+    }
+  }, []);
 
   return (
     <div className="flex h-screen w-screen">
@@ -54,10 +69,10 @@ const App = () => {
               </Button>
             </div>
           </header>
-          <div className="flex flex-1 flex-col overflow-hidden relative">
+          <div ref={contentRef} className="flex flex-1 flex-col overflow-hidden relative">
             <Suspense fallback={<div>Loading...</div>}>
               <Routes>
-                <Route path="/" element={<TaskListView />} />
+                <Route path="/" element={<TaskListView tasks={tasks} height={contentHeight} />} />
                 <Route path="/board" element={<TaskBoardView />} />
                 <Route path="/timeline" element={<TaskTimelineView />} />
               </Routes>
