@@ -81,4 +81,3 @@ const TaskListRow = ({ task, style }: TaskListRowProps) => {
   );
 }
 export default TaskListRow;
-
