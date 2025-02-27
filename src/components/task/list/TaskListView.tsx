@@ -2,7 +2,12 @@ import { Task } from "@/types/task";
 import TaskListRow from "./TaskListRow";
 import { SyntheticEvent, useRef, useState } from "react";
 
-const TaskListView = ({ tasks, height }: { tasks: Task[], height: number }) => {
+interface TaskListViewProps {
+  tasks: Task[];
+  height: number;
+}
+
+const TaskListView = ({ tasks, height }: TaskListViewProps) => {
 
   //Virtualized List
   const rowCount = tasks.length;
@@ -29,7 +34,8 @@ const TaskListView = ({ tasks, height }: { tasks: Task[], height: number }) => {
     This function is called whenever the user scrolls the list.
     It checks if the user is scrolling up or down and updates the scrollTop state accordingly.
 
-    Instead of updating the scrollTop state on every scroll event, we only update it when the user scrolls past the overscan limit.
+    To reduce the number of re-render,
+    instead of updating the scrollTop state on every scroll event, only update it when the user scrolls past the overscan limit.
     - overScan = 5, rowCount = 1000
       without checking: 488 re-renders 
       with checking:  ~200 re-renders
