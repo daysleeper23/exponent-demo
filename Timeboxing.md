@@ -22,5 +22,19 @@
 | - Virtualizing the list for large dataset                 | 4             |
 | - Unit testing for ListView & related component           | 4             |
 | - Sorting: status, priority, title, number                | 6             |
+| - Integrate with GET /tasks                               | 1             |
+|                                                           |               |
+| Form                                                      |               |
+| - Form to create new tasks                                | 4             |
+| - Form validation                                         | 4             |
+| - Integrate with POST /tasks                              | 2             |
+| - Optimistic rendering with React Query                   | 2             |
+| - Unit testing                                            | 2             |
+| - End-2-end testing                                       | 2             |
+|                                                           |               |
+| API integration                                           |               |
+| - Setup Axios & React Query                               | 1             |
+| - Hook for GET /tasks                                     | 1             |
+| - PendingBoundary & ErrorBoundary                         | 1             |
 | --------------------------------------------------------- | ------------- |
-| Total                                                     | 22            |
+| Total                                                     | 48            |
