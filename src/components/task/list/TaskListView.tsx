@@ -1,8 +1,8 @@
 import { Task } from "@/types/task";
 import TaskListRow from "./TaskListRow";
-import { SyntheticEvent, useRef, useState } from "react";
+import { SyntheticEvent, useMemo, useRef, useState } from "react";
 import Button from "@/components/ui/button/button";
-import { ChevronsUpDown } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
 
 interface TaskListViewProps {
   tasks: Task[];
@@ -11,7 +11,22 @@ interface TaskListViewProps {
 
 const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
 
+  const [sortAsc, setSortAsc] = useState(1);
+  const [sortBy, setSortBy] = useState(0);
+  const sortedVariants = useMemo(() => {
+    return {
+      sortByNumberAsc: [...tasks].sort((a, b) => b.number - a.number),
+      sortByNumberDesc: [...tasks].sort((a, b) => a.number - b.number),
+      sortByTitleAsc: [...tasks].sort((a, b) => -sortAsc * a.title.localeCompare(b.title)),
+      sortByTitleDesc: [...tasks].sort((a, b) => sortAsc * a.title.localeCompare(b.title)),
+      sortByStatusAsc: [...tasks].sort((a, b) => -sortAsc * (a.status - b.status)),
+      sortByStatusDesc: [...tasks].sort((a, b) => sortAsc * (a.status - b.status)),
+      sortByPriorityAsc: [...tasks].sort((a, b) => -sortAsc * (a.priority - b.priority)),
+      sortByPriorityDesc: [...tasks].sort((a, b) => sortAsc * (a.priority - b.priority)),
+    }
+  }, [tasks]);
 
+  const [sortedTasks, setSortedTasks] = useState(tasks);
 
   //Virtualized List
   const rowCount = tasks.length;
@@ -70,7 +85,7 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
       height: rowHeight,
       width: '100%',
     };
-    visibleItems.push(renderItem({ task: tasks[i], style: style as React.CSSProperties }));
+    visibleItems.push(renderItem({ task: sortedTasks[i], style: style as React.CSSProperties }));
   }
 
   return (
@@ -81,26 +96,94 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
           bg-primary-foreground
           pointer-events-auto"
       >
-        <Button variant="ghost" size="sm" className="-ml-4 w-20">
+        <Button 
+          variant="ghost" size="sm" className="-ml-4 w-20" 
+          onClick={() => {
+            if (sortAsc === 1) {
+              setSortedTasks(sortedVariants.sortByNumberDesc);
+              setSortAsc(-1);
+            } else {
+              setSortedTasks(sortedVariants.sortByNumberAsc);
+              setSortAsc(1);
+            }
+            setSortBy(0);
+          }}
+        >
           Task
-          <ChevronsUpDown />
+          { sortBy === 0 
+            ? sortAsc === 1 
+              ? <ArrowUp />
+              : <ArrowDown />
+            : <ChevronsUpDown />
+          }
         </Button>
-        <Button variant="ghost" className="w-20">
+        <Button 
+          variant="ghost" size="sm" className="w-20"  
+          onClick={() => {
+            if (sortAsc === 1) {
+              setSortedTasks(sortedVariants.sortByTitleDesc);
+              setSortAsc(-1);
+            } else {
+              setSortedTasks(sortedVariants.sortByTitleAsc);
+              setSortAsc(1);
+            }
+            setSortBy(1);
+          }}
+        >
           Title
-          <ChevronsUpDown />
+          { sortBy === 1 
+            ? sortAsc === 1 
+              ? <ArrowUp />
+              : <ArrowDown />
+            : <ChevronsUpDown />
+          }
         </Button>
 
         <div className="hidden sm:ml-auto sm:flex sm:gap-4 sm:pointer-events-auto">
           <div className="w-[120px]">
-            <Button variant="ghost" className="w-20">
+            <Button 
+              variant="ghost" className="w-20" 
+              onClick={() => {
+                if (sortAsc === 1) {
+                  setSortedTasks(sortedVariants.sortByStatusDesc);
+                  setSortAsc(-1);
+                } else {
+                  setSortedTasks(sortedVariants.sortByStatusAsc);
+                  setSortAsc(1);
+                }
+                setSortBy(2);
+              }}
+            >
               Status
-              <ChevronsUpDown />
+              { sortBy === 2 
+                ? sortAsc === 1 
+                  ? <ArrowUp />
+                  : <ArrowDown />
+                : <ChevronsUpDown />
+              }
             </Button>
           </div>
           <div className="w-[120px]">
-            <Button variant="ghost" className="w-20">
+            <Button 
+              variant="ghost" className="w-20" 
+              onClick={() => {
+                if (sortAsc === 1) {
+                  setSortedTasks(sortedVariants.sortByPriorityDesc);
+                  setSortAsc(-1);
+                } else {
+                  setSortedTasks(sortedVariants.sortByPriorityAsc);
+                  setSortAsc(1);
+                }
+                setSortBy(3);
+              }}
+            >
               Priority
-              <ChevronsUpDown />
+              { sortBy === 3 
+                ? sortAsc === 1 
+                  ? <ArrowUp />
+                  : <ArrowDown />
+                : <ChevronsUpDown />
+              }
             </Button>
           </div>
         </div>

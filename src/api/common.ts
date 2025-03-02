@@ -1,10 +1,12 @@
 import { ArrowDown, ArrowRight, ArrowUp, Circle, CircleCheckBig, CircleHelp, CircleOff, LucideIcon, Minus, OctagonAlert, Timer } from "lucide-react";
 
+export interface Metadata {
+  label: string;
+  icon: LucideIcon;
+}
+
 export interface TaskPropertyMap {
-  [key: string]: {
-    label: string;
-    icon: LucideIcon;
-  };
+  [key: string]: Metadata;
 }
 
 export const statusMap: TaskPropertyMap = {
@@ -52,3 +54,14 @@ export const priorityMap: TaskPropertyMap = {
     icon: OctagonAlert
   }
 };
+
+export const sortingOptions: Metadata[] = [
+  {
+    label: "Asc",
+    icon: ArrowDown
+  },
+  {
+    label: "Desc",
+    icon: ArrowUp
+  }
+];
