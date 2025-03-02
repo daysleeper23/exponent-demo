@@ -14,11 +14,12 @@ const TaskListRow = ({ task, style }: TaskListRowProps) => {
       data-testid={task.id}
       style={style}
       className="w-full px-4 py-2 flex gap-4 items-center
+        text-primary/80
         border-b border-primary-200 dark:border-primary-700
         hover:bg-primary-foreground
         pointer-events-auto"
-      key={task.id}>
-      
+      key={task.id}
+    >  
       <span className="w-20">{"EXP-" + task.number}</span>
       <span className="flex-1 overflow-hidden text-nowrap">{task.title}</span>
 

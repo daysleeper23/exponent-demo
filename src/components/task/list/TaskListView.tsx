@@ -1,6 +1,8 @@
 import { Task } from "@/types/task";
 import TaskListRow from "./TaskListRow";
 import { SyntheticEvent, useRef, useState } from "react";
+import Button from "@/components/ui/button/button";
+import { ChevronsUpDown } from "lucide-react";
 
 interface TaskListViewProps {
   tasks: Task[];
@@ -8,6 +10,8 @@ interface TaskListViewProps {
 }
 
 const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
+
+
 
   //Virtualized List
   const rowCount = tasks.length;
@@ -70,15 +74,48 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
   }
 
   return (
-    <div 
-      className="text-sm overflow-y-auto relative"
-      ref={containerRef}
-      onScroll={onScroll}
-    >
-      <div style={{ height: rowCount * rowHeight, position: 'relative' }}>
-        {visibleItems}
+    <>
+      <div
+        className="w-full px-4 py-2 flex gap-4 items-center
+          border-b border-primary-200 dark:border-primary-700
+          bg-primary-foreground
+          pointer-events-auto"
+      >
+        <Button variant="ghost" size="sm" className="-ml-4 w-20">
+          Task
+          <ChevronsUpDown />
+        </Button>
+        <Button variant="ghost" className="w-20">
+          Title
+          <ChevronsUpDown />
+        </Button>
+
+        <div className="hidden sm:ml-auto sm:flex sm:gap-4 sm:pointer-events-auto">
+          <div className="w-[120px]">
+            <Button variant="ghost" className="w-20">
+              Status
+              <ChevronsUpDown />
+            </Button>
+          </div>
+          <div className="w-[120px]">
+            <Button variant="ghost" className="w-20">
+              Priority
+              <ChevronsUpDown />
+            </Button>
+          </div>
+        </div>
       </div>
-    </div>
+      <div 
+        className="text-sm overflow-y-auto relative"
+        ref={containerRef}
+        onScroll={onScroll}
+      >
+        <div style={{ height: rowCount * rowHeight, position: 'relative' }}>
+          {visibleItems}
+        </div>
+      </div>
+    </>
+    
   );
 }
 export default TaskListView;
