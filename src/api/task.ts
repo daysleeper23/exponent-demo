@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid';
-import { Task } from "@/types/task";
+import { Task, TasksSchema } from "@/types/task";
 import { faker } from '@faker-js/faker';
 import localUsers from './user';
+import apiClient from './apiClient';
 
 // export const TaskSchema = z.object({
 //     id: z.string().uuid(),
@@ -45,3 +46,15 @@ export const getTasks = (count: number): Task[] => {
   }
   return tasks;
 };
+
+export async function fetchTasks(): Promise<Task[]> {
+  const response = await apiClient.get("/tasks");
+  if (response.status !== 200) {
+    throw new Error("Failed to fetch tasks");
+  }
+  
+  // Validate array of tasks using Zod
+  const data = TasksSchema.parse(response.data.data);
+  
+  return data;
+}
