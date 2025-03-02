@@ -21,5 +21,6 @@
 | - Improve row visualization: spacing, typo, layout        | 2             |
 | - Virtualizing the list for large dataset                 | 4             |
 | - Unit testing for ListView & related component           | 4             |
+| - Sorting: status, priority, title, number                | 6             |
 | --------------------------------------------------------- | ------------- |
 | Total                                                     | 22            |

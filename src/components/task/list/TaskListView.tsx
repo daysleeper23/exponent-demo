@@ -1,6 +1,8 @@
 import { Task } from "@/types/task";
 import TaskListRow from "./TaskListRow";
 import { SyntheticEvent, useRef, useState } from "react";
+import useColumnSorting from "@/hooks/use-column-sorting";
+import TaskListViewHeader from "./TaskListViewHeader";
 
 interface TaskListViewProps {
   tasks: Task[];
@@ -8,6 +10,14 @@ interface TaskListViewProps {
 }
 
 const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
+
+  //use the useColumnSorting hook to manage sorting state
+  const {
+    sortedTasks,
+    handleSortClick,
+    getSortIcon,
+    sortOptions
+  } = useColumnSorting(tasks);
 
   //Virtualized List
   const rowCount = tasks.length;
@@ -66,19 +76,27 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
       height: rowHeight,
       width: '100%',
     };
-    visibleItems.push(renderItem({ task: tasks[i], style: style as React.CSSProperties }));
+    visibleItems.push(renderItem({ task: sortedTasks[i], style: style as React.CSSProperties }));
   }
 
   return (
-    <div 
-      className="text-sm overflow-y-auto relative"
-      ref={containerRef}
-      onScroll={onScroll}
-    >
-      <div style={{ height: rowCount * rowHeight, position: 'relative' }}>
-        {visibleItems}
+    <>
+      <TaskListViewHeader
+        sortOptions={sortOptions}
+        handleSortClick={handleSortClick}
+        getSortIcon={getSortIcon}
+      />
+      <div 
+        className="text-sm overflow-y-auto relative"
+        ref={containerRef}
+        onScroll={onScroll}
+      >
+        <div style={{ height: rowCount * rowHeight, position: 'relative' }}>
+          {visibleItems}
+        </div>
       </div>
-    </div>
+    </>
+    
   );
 }
 export default TaskListView;
