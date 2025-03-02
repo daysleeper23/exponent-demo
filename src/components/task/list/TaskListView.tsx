@@ -1,8 +1,8 @@
-import { Task } from "@/types/task";
-import TaskListRow from "./TaskListRow";
-import { SyntheticEvent, useRef, useState } from "react";
-import useColumnSorting from "@/hooks/use-column-sorting";
-import TaskListViewHeader from "./TaskListViewHeader";
+import { Task } from '@/types/task';
+import TaskListRow from './TaskListRow';
+import { SyntheticEvent, useRef, useState } from 'react';
+import useColumnSorting from '@/hooks/use-column-sorting';
+import TaskListViewHeader from './TaskListViewHeader';
 
 interface TaskListViewProps {
   tasks: Task[];
@@ -10,14 +10,9 @@ interface TaskListViewProps {
 }
 
 const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
-
   //use the useColumnSorting hook to manage sorting state
-  const {
-    sortedTasks,
-    handleSortClick,
-    getSortIcon,
-    sortOptions
-  } = useColumnSorting(tasks);
+  const { sortedTasks, handleSortClick, getSortIcon, sortOptions } =
+    useColumnSorting(tasks);
 
   //Virtualized List
   const rowCount = tasks.length;
@@ -25,8 +20,8 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
 
   //overScan is the number of items to render above and below the visible area
   //overScan ~ half of the number of items that fit in the viewport, but not more than 5
-  const overScan = Math.min(Math.floor((viewHeight / rowHeight) / 2), 5);
-  
+  const overScan = Math.min(Math.floor(viewHeight / rowHeight / 2), 5);
+
   const [scrollTop, setScrollTop] = useState(0);
   const containerRef = useRef(null);
 
@@ -39,9 +34,13 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
   // the endIndex must not go past the end of the list
   const endIndex = Math.min(rowCount, startIndex + visibleCount);
 
-  const renderItem = ({ task, style }: { task: Task; style: React.CSSProperties }) => (
-    <TaskListRow key={task.id} style={style} task={task} />
-  );
+  const renderItem = ({
+    task,
+    style,
+  }: {
+    task: Task;
+    style: React.CSSProperties;
+  }) => <TaskListRow key={task.id} style={style} task={task} />;
 
   /*
     This function is called whenever the user scrolls the list.
@@ -57,12 +56,18 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
     const currentScrollTop = event.currentTarget.scrollTop;
     if (currentScrollTop >= scrollTop) {
       //scrolling down
-      if (event.currentTarget.scrollTop >= scrollTop + (overScan - 1) * rowHeight) {
+      if (
+        event.currentTarget.scrollTop >=
+        scrollTop + (overScan - 1) * rowHeight
+      ) {
         setScrollTop(event.currentTarget.scrollTop);
       }
     } else {
       //scrolling up
-      if (event.currentTarget.scrollTop <= scrollTop - (overScan - 1) * rowHeight) {
+      if (
+        event.currentTarget.scrollTop <=
+        scrollTop - (overScan - 1) * rowHeight
+      ) {
         setScrollTop(event.currentTarget.scrollTop);
       }
     }
@@ -76,7 +81,9 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
       height: rowHeight,
       width: '100%',
     };
-    visibleItems.push(renderItem({ task: sortedTasks[i], style: style as React.CSSProperties }));
+    visibleItems.push(
+      renderItem({ task: sortedTasks[i], style: style as React.CSSProperties })
+    );
   }
 
   return (
@@ -86,7 +93,7 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
         handleSortClick={handleSortClick}
         getSortIcon={getSortIcon}
       />
-      <div 
+      <div
         className="text-sm overflow-y-auto relative"
         ref={containerRef}
         onScroll={onScroll}
@@ -96,7 +103,6 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
         </div>
       </div>
     </>
-    
   );
-}
+};
 export default TaskListView;

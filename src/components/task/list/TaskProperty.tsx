@@ -1,4 +1,4 @@
-import { TaskPropertyMap } from "@/api/common";
+import { TaskPropertyMap } from '@/api/common';
 
 interface TaskPropertyProps {
   value: number;
@@ -6,7 +6,6 @@ interface TaskPropertyProps {
 }
 
 const TaskProperty = ({ value, items }: TaskPropertyProps) => {
-  
   const prop = items[value.toString()];
 
   return (
@@ -16,6 +15,6 @@ const TaskProperty = ({ value, items }: TaskPropertyProps) => {
       )}
       <span>{prop.label}</span>
     </div>
-  ) 
-}
+  );
+};
 export default TaskProperty;

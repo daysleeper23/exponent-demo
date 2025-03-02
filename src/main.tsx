@@ -11,7 +11,7 @@ import { ErrorBoundary } from './components/common/ErrorBoundary.tsx';
 createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
     <ErrorBoundary fallback={<div>Something went wrong...</div>}>
-      <ThemeProvider defaultTheme={"dark"} storageKey="vite-ui-theme">
+      <ThemeProvider defaultTheme={'dark'} storageKey="vite-ui-theme">
         <BrowserRouter>
           <App />
         </BrowserRouter>
@@ -19,5 +19,4 @@ createRoot(document.getElementById('root')!).render(
       <ReactQueryDevtools initialIsOpen={false} />
     </ErrorBoundary>
   </QueryClientProvider>
-  
 );

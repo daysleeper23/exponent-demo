@@ -8,7 +8,9 @@ describe('Rendering statuses', () => {
     const { container } = render(<TaskProperty value={0} items={statusMap} />);
     const labelElement = screen.getByText(/Backlog/i);
     expect(labelElement).toBeInTheDocument();
-    const iconElement = container.querySelector('svg.lucide.lucide-circle-help');
+    const iconElement = container.querySelector(
+      'svg.lucide.lucide-circle-help'
+    );
     expect(iconElement).toBeInTheDocument();
   });
 
@@ -32,7 +34,9 @@ describe('Rendering statuses', () => {
     const { container } = render(<TaskProperty value={3} items={statusMap} />);
     const labelElement = screen.getByText(/Done/i);
     expect(labelElement).toBeInTheDocument();
-    const iconElement = container.querySelector('svg.lucide.lucide-circle-check-big');
+    const iconElement = container.querySelector(
+      'svg.lucide.lucide-circle-check-big'
+    );
     expect(iconElement).toBeInTheDocument();
   });
 
@@ -47,7 +51,9 @@ describe('Rendering statuses', () => {
 
 describe('Rendering priorities', () => {
   test('renders TaskProperty with correct label and icon for No priority', () => {
-    const { container } = render(<TaskProperty value={0} items={priorityMap} />);
+    const { container } = render(
+      <TaskProperty value={0} items={priorityMap} />
+    );
     const labelElement = screen.getByText(/No priority/i);
     expect(labelElement).toBeInTheDocument();
     const iconElement = container.querySelector('svg.lucide.lucide-minus');
@@ -55,7 +61,9 @@ describe('Rendering priorities', () => {
   });
 
   test('renders TaskProperty with correct label and icon for Low', () => {
-    const { container } = render(<TaskProperty value={1} items={priorityMap} />);
+    const { container } = render(
+      <TaskProperty value={1} items={priorityMap} />
+    );
     const labelElement = screen.getByText(/Low/i);
     expect(labelElement).toBeInTheDocument();
     const iconElement = container.querySelector('svg.lucide.lucide-arrow-down');
@@ -63,15 +71,21 @@ describe('Rendering priorities', () => {
   });
 
   test('renders TaskProperty with correct label and icon for Medium', () => {
-    const { container } = render(<TaskProperty value={2} items={priorityMap} />);
+    const { container } = render(
+      <TaskProperty value={2} items={priorityMap} />
+    );
     const labelElement = screen.getByText(/Medium/i);
     expect(labelElement).toBeInTheDocument();
-    const iconElement = container.querySelector('svg.lucide.lucide-arrow-right');
+    const iconElement = container.querySelector(
+      'svg.lucide.lucide-arrow-right'
+    );
     expect(iconElement).toBeInTheDocument();
   });
 
   test('renders TaskProperty with correct label and icon for High', () => {
-    const { container } = render(<TaskProperty value={3} items={priorityMap} />);
+    const { container } = render(
+      <TaskProperty value={3} items={priorityMap} />
+    );
     const labelElement = screen.getByText(/High/i);
     expect(labelElement).toBeInTheDocument();
     const iconElement = container.querySelector('svg.lucide.lucide-arrow-up');
@@ -79,10 +93,14 @@ describe('Rendering priorities', () => {
   });
 
   test('renders TaskProperty with correct label and icon for Urgent', () => {
-    const { container } = render(<TaskProperty value={4} items={priorityMap} />);
+    const { container } = render(
+      <TaskProperty value={4} items={priorityMap} />
+    );
     const labelElement = screen.getByText(/Urgent/i);
     expect(labelElement).toBeInTheDocument();
-    const iconElement = container.querySelector('svg.lucide.lucide-octagon-alert');
+    const iconElement = container.querySelector(
+      'svg.lucide.lucide-octagon-alert'
+    );
     expect(iconElement).toBeInTheDocument();
   });
 });

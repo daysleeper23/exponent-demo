@@ -9,11 +9,14 @@ import { useTasks } from './hooks/api/use-tasks';
 import HeaderBar from './components/ui/header-bar';
 import PendingBoundary from './components/common/PendingBoundary';
 
-const TaskBoardView = lazy(() => import('@/components/task/board/TaskBoardView'));
-const TaskTimelineView = lazy(() => import('@/components/task/timeline/TaskTimelineView'));
+const TaskBoardView = lazy(
+  () => import('@/components/task/board/TaskBoardView')
+);
+const TaskTimelineView = lazy(
+  () => import('@/components/task/timeline/TaskTimelineView')
+);
 
 const App = () => {
-
   const { data: tasks, isPending, isError, error } = useTasks();
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -26,7 +29,7 @@ const App = () => {
   }, [tasks]);
 
   if (isError) {
-    throw new Error(error?.message ?? "Unknown error");
+    throw new Error(error?.message ?? 'Unknown error');
   }
 
   return (
@@ -35,11 +38,22 @@ const App = () => {
         <AppSidebar />
         <SidebarInset className="flex flex-col h-full">
           <HeaderBar />
-          <div ref={contentRef} className="flex flex-1 flex-col overflow-hidden relative">
+          <div
+            ref={contentRef}
+            className="flex flex-1 flex-col overflow-hidden relative"
+          >
             <Suspense fallback={<div>Loading tasks...</div>}>
               <PendingBoundary isPending={isPending}>
                 <Routes>
-                  <Route path="/" element={<TaskListView tasks={tasks || []} viewHeight={contentHeight} />} />
+                  <Route
+                    path="/"
+                    element={
+                      <TaskListView
+                        tasks={tasks || []}
+                        viewHeight={contentHeight}
+                      />
+                    }
+                  />
                   <Route path="/board" element={<TaskBoardView />} />
                   <Route path="/timeline" element={<TaskTimelineView />} />
                 </Routes>
@@ -50,6 +64,5 @@ const App = () => {
       </SidebarProvider>
     </div>
   );
-}
+};
 export default App;
-
