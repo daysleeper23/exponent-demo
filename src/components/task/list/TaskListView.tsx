@@ -3,6 +3,7 @@ import TaskListRow from "./TaskListRow";
 import { SyntheticEvent, useMemo, useRef, useState } from "react";
 import Button from "@/components/ui/button/button";
 import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
+import { get } from "http";
 
 interface TaskListViewProps {
   tasks: Task[];
@@ -15,18 +16,18 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
   const [sortBy, setSortBy] = useState(0);
   const sortedVariants = useMemo(() => {
     return {
-      sortByNumberAsc: [...tasks].sort((a, b) => b.number - a.number),
-      sortByNumberDesc: [...tasks].sort((a, b) => a.number - b.number),
+      sortByNumberAsc: [...tasks].sort((a, b) => a.number - b.number),
+      sortByNumberDesc: [...tasks].sort((a, b) => b.number - a.number),
       sortByTitleAsc: [...tasks].sort((a, b) => -sortAsc * a.title.localeCompare(b.title)),
       sortByTitleDesc: [...tasks].sort((a, b) => sortAsc * a.title.localeCompare(b.title)),
-      sortByStatusAsc: [...tasks].sort((a, b) => -sortAsc * (a.status - b.status)),
-      sortByStatusDesc: [...tasks].sort((a, b) => sortAsc * (a.status - b.status)),
-      sortByPriorityAsc: [...tasks].sort((a, b) => -sortAsc * (a.priority - b.priority)),
-      sortByPriorityDesc: [...tasks].sort((a, b) => sortAsc * (a.priority - b.priority)),
+      sortByStatusAsc: [...tasks].sort((a, b) => a.status - b.status),
+      sortByStatusDesc: [...tasks].sort((a, b) => b.status - a.status),
+      sortByPriorityAsc: [...tasks].sort((a, b) => a.priority - b.priority),
+      sortByPriorityDesc: [...tasks].sort((a, b) => b.priority - a.priority),
     }
   }, [tasks]);
 
-  const [sortedTasks, setSortedTasks] = useState(tasks);
+  const [sortedTasks, setSortedTasks] = useState(sortedVariants.sortByNumberAsc);
 
   //Virtualized List
   const rowCount = tasks.length;
@@ -88,6 +89,18 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
     visibleItems.push(renderItem({ task: sortedTasks[i], style: style as React.CSSProperties }));
   }
 
+  const getSortIcon = (option: number, sortBy: number, sortAsc: number) => {
+    if (sortBy === option) {
+      if (sortAsc === 1) {
+        return <ArrowUp />;
+      } else {
+        return <ArrowDown />;
+      }
+    } else {
+      return <ChevronsUpDown />;
+    }
+  }
+
   return (
     <>
       <div
@@ -110,12 +123,7 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
           }}
         >
           Task
-          { sortBy === 0 
-            ? sortAsc === 1 
-              ? <ArrowUp />
-              : <ArrowDown />
-            : <ChevronsUpDown />
-          }
+          { getSortIcon(0, sortBy, sortAsc) }
         </Button>
         <Button 
           variant="ghost" size="sm" className="w-20"  
@@ -131,12 +139,7 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
           }}
         >
           Title
-          { sortBy === 1 
-            ? sortAsc === 1 
-              ? <ArrowUp />
-              : <ArrowDown />
-            : <ChevronsUpDown />
-          }
+          { getSortIcon(1, sortBy, sortAsc) }
         </Button>
 
         <div className="hidden sm:ml-auto sm:flex sm:gap-4 sm:pointer-events-auto">
@@ -155,12 +158,7 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
               }}
             >
               Status
-              { sortBy === 2 
-                ? sortAsc === 1 
-                  ? <ArrowUp />
-                  : <ArrowDown />
-                : <ChevronsUpDown />
-              }
+              { getSortIcon(1, sortBy, sortAsc) }
             </Button>
           </div>
           <div className="w-[120px]">
@@ -178,12 +176,7 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
               }}
             >
               Priority
-              { sortBy === 3 
-                ? sortAsc === 1 
-                  ? <ArrowUp />
-                  : <ArrowDown />
-                : <ChevronsUpDown />
-              }
+              { getSortIcon(1, sortBy, sortAsc) }
             </Button>
           </div>
         </div>
