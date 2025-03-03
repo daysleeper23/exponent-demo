@@ -73,6 +73,11 @@ yarn test
 
 ## Key Features
 
+### Form & Form-data Validation
+Implement a custom Form combined with a Select component to create new task, utilizing [React Hook Form](https://react-hook-form.com/) and [zod](https://zod.dev/) for schema-based synchronized data validation through out the app.
+
+- Custom **Select** component: ExpoSelect is a custom React component designed to streamline input validation and form handling within Exponent by ensuring type-safety for enum-like data.
+
 ### Virtualized List View
 The Virtualized List View feature enhances performance and user experience by utilizing 'windowing' technique - rendering only the visible portion of a large list of tasks (in the current viewport). 
 

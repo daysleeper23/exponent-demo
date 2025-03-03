@@ -23,8 +23,10 @@ export function ExpoSelect({
   value: string,
   onChange: (value: string) => void
 }) {
+
   return (
-    <Select onValueChange={onChange}>
+    
+    <Select onValueChange={onChange} defaultValue={value}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder={
           <div className="flex items-center gap-2">
