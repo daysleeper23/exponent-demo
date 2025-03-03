@@ -10,7 +10,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from './breadcrumb';
-import Button from './button/button';
+import Button from './button';
 import { Moon, Sun } from 'lucide-react';
 
 const HeaderBar = () => {

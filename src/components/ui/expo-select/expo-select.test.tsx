@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import ExpoSelect from './expo-select';
@@ -21,7 +21,8 @@ describe('ExpoSelect Component', () => {
     expect(iconElement).toBeInTheDocument();
   });
 
-  test('opens dropdown and displays all options', async () => {
+  // NOTE: a bug in @radix-ui/react-select is causing this test to fail
+  test('opens select and displays all options', async () => {
     render(<ExpoSelect items={statuses} value="0" onChange={jest.fn()} />, {
       container: document.body,
     });
@@ -41,15 +42,17 @@ describe('ExpoSelect Component', () => {
     }
   });
 
+  // NOTE: a bug in @radix-ui/react-select is causing this test to fail
+
   test('calls onChange with new value when an option is selected', async () => {
     const handleChange = jest.fn();
     render(<ExpoSelect items={statuses} value="0" onChange={handleChange} />);
 
-    // Open dropdown
+    // open select
     const trigger = screen.getByRole('combobox');
     userEvent.click(trigger);
 
-    // Click on an option (for example, Option 3)
+    // click on an option (Done)
     const newOption = await screen.findByText('Done');
     userEvent.click(newOption);
 

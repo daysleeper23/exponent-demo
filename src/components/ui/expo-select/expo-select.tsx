@@ -1,4 +1,4 @@
-import { createElement, CSSProperties } from 'react';
+import { createElement } from 'react';
 import { Metadata } from '@/api/common';
 import {
   Select,

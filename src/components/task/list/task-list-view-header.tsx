@@ -1,4 +1,4 @@
-import Button from '@/components/ui/button/button';
+import Button from '@/components/ui/button';
 import useColumnSorting from '@/hooks/use-column-sorting';
 
 interface TaskListViewHeaderProps {
@@ -18,6 +18,7 @@ const TaskListViewHeader = ({
         border-b border-primary-200 dark:border-primary-700
         bg-primary-foreground
         pointer-events-auto"
+      data-testid="task-list-view-header"
     >
       {/* number */}
       <Button
@@ -25,6 +26,7 @@ const TaskListViewHeader = ({
         size="sm"
         className="-ml-4 w-20"
         onClick={() => handleSortClick(0)}
+        data-testid="task-list-view-header-number"
       >
         {sortOptions[0].label}
         {getSortIcon(0)}
@@ -36,6 +38,7 @@ const TaskListViewHeader = ({
         size="sm"
         className="w-20"
         onClick={() => handleSortClick(1)}
+        data-testid="task-list-view-header-title"
       >
         {sortOptions[1].label}
         {getSortIcon(1)}
@@ -48,6 +51,7 @@ const TaskListViewHeader = ({
             variant="ghost"
             className="w-20"
             onClick={() => handleSortClick(2)}
+            data-testid="task-list-view-header-status"
           >
             {sortOptions[2].label}
             {getSortIcon(2)}
@@ -60,6 +64,7 @@ const TaskListViewHeader = ({
             variant="ghost"
             className="w-20"
             onClick={() => handleSortClick(3)}
+            data-testid="task-list-view-header-priority"
           >
             {sortOptions[3].label}
             {getSortIcon(3)}

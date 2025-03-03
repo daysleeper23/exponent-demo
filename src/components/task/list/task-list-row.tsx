@@ -1,5 +1,4 @@
 import { Task } from '@/types/task';
-import TaskProperty from './task-property';
 import { priorityMap, statusMap } from '@/api/common';
 import ExpoSelect from '@/components/ui/expo-select/expo-select';
 
@@ -22,7 +21,6 @@ const TaskListRow = ({ task, style }: TaskListRowProps) => {
 
   return (
     <div
-      data-testid={task.id}
       style={style}
       className="w-full px-4 py-2 flex gap-4 items-center
         text-primary/80
@@ -30,6 +28,8 @@ const TaskListRow = ({ task, style }: TaskListRowProps) => {
         hover:bg-primary-foreground
         pointer-events-auto"
       key={task.id}
+      // data-testid={`task-list-row-${task.id}`}
+      data-testid="task-list-row"
     >
       <span className="w-20">{'EXP-' + task.number}</span>
       <span className="flex-1 overflow-hidden text-nowrap">{task.title}</span>

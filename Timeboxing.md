@@ -38,5 +38,9 @@
 | - Setup Axios & React Query                               | 1             |
 | - Hook for GET /tasks                                     | 1             |
 | - PendingBoundary & ErrorBoundary                         | 1             |
+|                                                           |               |
+| E2E Testing                                               |               |
+| - Setup Cypress                                           | 1             |
+| - Implement testing for TaskListView                      | 3             |
 | --------------------------------------------------------- | ------------- |
-| Total                                                     | 52            |
+| Total                                                     | 60            |

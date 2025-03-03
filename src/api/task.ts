@@ -4,32 +4,9 @@ import { faker } from '@faker-js/faker';
 import { localUsers } from './user';
 import apiClient from './api-client';
 
-// export const TaskSchema = z.object({
-//     id: z.string().uuid(),
-//     number: z.number().min(1),
-//     title: z.string().nonempty({ message: "Task title could not be empty." }),
-//     description: z.string().default(""),
-//     status: z.number().max(4).min(0),
-//     assignee: z.string().uuid(),
-//     priority: z.number().max(4).min(0),
-//     team: z.string().uuid(),
-//     estimate: z.number().default(0),
-// });
-
 export const getTasks = (count: number): Task[] => {
   const tasks: Task[] = [];
 
-  // const statuses = [0, 1, 2, 3, 4] as Task['status'][];
-  // const randomDate = () => {
-  //   const today = new Date();
-  //   const maxDaysToAdd = 30; // Maximum days in the future
-  //   const randomDays = Math.floor(Math.random() * maxDaysToAdd) + 1; // At least 1 day in the future
-  //   const futureDate = new Date(today);
-  //   futureDate.setDate(today.getDate() + randomDays);
-  //   return futureDate;
-  // };
-
-  //
   const startNumber = Math.floor(Math.random() * 300);
 
   for (let i = 0; i < count; i++) {

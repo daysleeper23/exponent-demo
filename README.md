@@ -23,12 +23,12 @@ Follow these steps to get a local copy of Exponent up and running:
 
 1. Clone the repository
 2. Install dependencies
-```js
+```bash
 yarn install
 ```
 3. Open "src/hooks/api/use-tasks.ts", comment the section for **remote data** and uncomment **local data**.
 4. Run the development server
-```js
+```bash
 yarn dev
 ```
 5. Access the app: open browser and navigate to: http://localhost:5173
@@ -41,14 +41,14 @@ yarn dev
 - Type safety: [zod](https://zod.dev/)
 
 ## Project Structure & Routing
-- Routing: react-router
+- Routing: [React Router](https://reactrouter.com/home)
 - Code splitting: lazy load pages on demand
 
 ## Documentation
 [Storybook](https://storybook.js.org/) is the tool for documentation and showcase individual UI components in isolation. It makes browsing various states and variations of components easier, without needing to run the entire application.
 
 To run Storybook
-```
+```bash
 yarn storybook
 ```
 
@@ -67,7 +67,7 @@ The unit tests focus on:
 
 To run the unit tests, run:
 
-```js
+```bash
 yarn test
 ```
 

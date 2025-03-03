@@ -94,11 +94,15 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
         getSortIcon={getSortIcon}
       />
       <div
+        data-testid="task-list-view"
         className="text-sm overflow-y-auto relative"
         ref={containerRef}
         onScroll={onScroll}
       >
-        <div style={{ height: rowCount * rowHeight, position: 'relative' }}>
+        <div 
+          data-testid="task-list-view-full"
+          style={{ height: rowCount * rowHeight, position: 'relative' }}
+        >
           {visibleItems}
         </div>
       </div>
