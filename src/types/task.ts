@@ -9,9 +9,9 @@ export const TaskSchema = z.object({
     .default('')
     .nullable()
     .transform((val) => val ?? ''),
-  status: z.number().max(4).min(0),
+  status: z.preprocess((val) => Number(val), z.number().min(0).max(4)),
   assignee: z.string().uuid(),
-  priority: z.number().max(4).min(0),
+  priority: z.preprocess((val) => Number(val), z.number().min(0).max(4)),
   team: z.string().uuid(),
 });
 export const TasksSchema = z.array(TaskSchema);

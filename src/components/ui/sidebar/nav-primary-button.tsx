@@ -6,7 +6,6 @@ import ExpoDrawer from '../expo-form/expo-drawer';
 import { Plus } from 'lucide-react';
 import ExpoFormTaskCreate from '../expo-form/expo-form-task-create';
 
-export interface NavPrimaryButtonProps {}
 const NavPrimaryButton = () => {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery('(min-width: 768px)');

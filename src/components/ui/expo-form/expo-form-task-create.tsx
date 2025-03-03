@@ -15,6 +15,8 @@ import { Input } from '@/components/ui/input';
 import { TaskCreateSchema } from '@/types/task';
 import { cn } from '@/lib/utils';
 import { Textarea } from '../textarea';
+import { ExpoSelect } from '../expo-select/expo-select';
+import { priorityMap, statusMap } from '@/api/common';
 
 const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
   const form = useForm<z.infer<typeof TaskCreateSchema>>({
@@ -30,10 +32,15 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
   });
 
   const onSubmit = (values: z.infer<typeof TaskCreateSchema>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    // console.log(values)
-    console.log('submit', values);
+    // Alert the user with the form values
+    // TODO: Replace this with a real API call
+    window.alert(`You want to create a task:
+    - Title: ${values.title}
+    - Description: ${values.description}
+    - Status: ${statusMap[values.status].label}
+    - Priority: ${priorityMap[values.priority].label}
+    - Assignee: ${values.assignee}
+    `);
   };
 
   return (
@@ -43,7 +50,6 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
         className={cn('space-y-8', className)}
       >
         <FormField
-          // {...form.register("title")}
           control={form.control}
           name="title"
           render={({ field }) => (
@@ -58,7 +64,6 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
         />
 
         <FormField
-          // {...form.register("description")}
           control={form.control}
           name="description"
           render={({ field }) => (
@@ -73,14 +78,18 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
         />
 
         <FormField
-          // {...form.register("status")}
           control={form.control}
           name="status"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Status</FormLabel>
               <FormControl>
-                <Input placeholder="Task status" {...field} />
+                {/* <Input type="number" placeholder="Task status" {...field} /> */}
+                <ExpoSelect
+                  items={Object.values(statusMap)}
+                  value={field.value.toString()}
+                  onChange={(val: string) => field.onChange(val)}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -88,14 +97,17 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
         />
 
         <FormField
-          // {...form.register("priority")}
           control={form.control}
           name="priority"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Priority</FormLabel>
               <FormControl>
-                <Input placeholder="Task priority" {...field} />
+                <ExpoSelect
+                  items={Object.values(priorityMap)}
+                  value={field.value.toString()}
+                  onChange={(val: string) => field.onChange(val)}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -103,7 +115,6 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
         />
 
         <FormField
-          // {...form.register("assignee")}
           control={form.control}
           name="assignee"
           render={({ field }) => (
