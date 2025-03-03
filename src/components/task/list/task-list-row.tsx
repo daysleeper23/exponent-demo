@@ -1,5 +1,5 @@
 import { Task } from '@/types/task';
-import TaskProperty from './TaskProperty';
+import TaskProperty from './task-property';
 import { priorityMap, statusMap } from '@/api/common';
 
 interface TaskListRowProps {

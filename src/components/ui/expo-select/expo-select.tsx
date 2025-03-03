@@ -25,7 +25,6 @@ export function ExpoSelect({
 }) {
 
   return (
-    
     <Select onValueChange={onChange} defaultValue={value}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder={

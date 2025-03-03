@@ -4,13 +4,13 @@ import { Route, Routes } from 'react-router';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/ui/sidebar/app-sidebar';
 
-import TaskListView from '@/components/task/list/TaskListView';
+import TaskListView from '@/components/task/list/task-list-view';
 import { useTasks } from './hooks/api/use-tasks';
 import HeaderBar from './components/ui/header-bar';
-import PendingBoundary from './components/common/PendingBoundary';
+import PendingBoundary from './components/common/pending-boundary';
 
 const TaskBoardView = lazy(
-  () => import('@/components/task/board/TaskBoardView')
+  () => import('@/components/task/board/task-board-view')
 );
 const TaskTimelineView = lazy(
   () => import('@/components/task/timeline/TaskTimelineView')

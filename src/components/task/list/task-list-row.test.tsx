@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import TaskListRow from './TaskListRow';
+import TaskListRow from './task-list-row';
 import { Task } from '@/types/task';
 import '@testing-library/jest-dom';
 

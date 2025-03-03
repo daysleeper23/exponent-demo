@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useTheme } from '../context/ThemeProvider';
+import { useTheme } from '../context/theme-provider';
 import { SidebarTrigger } from './sidebar';
 import { Separator } from './separator';
 import {
