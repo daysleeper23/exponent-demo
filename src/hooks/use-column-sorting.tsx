@@ -1,6 +1,6 @@
-import { useState, useMemo } from "react";
-import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
-import { Task } from "@/types/task";
+import { useState, useMemo } from 'react';
+import { ArrowDown, ArrowUp, ChevronsUpDown } from 'lucide-react';
+import { Task } from '@/types/task';
 
 /**
  * a custom hook that manages column sorting state, sorted tasks arrays,
@@ -19,7 +19,9 @@ const useColumnSorting = (tasks: Task[]) => {
       sortByNumberAsc: [...tasks].sort((a, b) => a.number - b.number),
       sortByNumberDesc: [...tasks].sort((a, b) => b.number - a.number),
       sortByTitleAsc: [...tasks].sort((a, b) => a.title.localeCompare(b.title)),
-      sortByTitleDesc: [...tasks].sort((a, b) => b.title.localeCompare(a.title)),
+      sortByTitleDesc: [...tasks].sort((a, b) =>
+        b.title.localeCompare(a.title)
+      ),
       sortByStatusAsc: [...tasks].sort((a, b) => a.status - b.status),
       sortByStatusDesc: [...tasks].sort((a, b) => b.status - a.status),
       sortByPriorityAsc: [...tasks].sort((a, b) => a.priority - b.priority),
@@ -32,23 +34,23 @@ const useColumnSorting = (tasks: Task[]) => {
     {
       asc: sortedVariants.sortByNumberAsc,
       desc: sortedVariants.sortByNumberDesc,
-      label: "Task"
+      label: 'Task',
     },
     {
       asc: sortedVariants.sortByTitleAsc,
       desc: sortedVariants.sortByTitleDesc,
-      label: "Title"
+      label: 'Title',
     },
     {
       asc: sortedVariants.sortByStatusAsc,
       desc: sortedVariants.sortByStatusDesc,
-      label: "Status"
+      label: 'Status',
     },
     {
       asc: sortedVariants.sortByPriorityAsc,
       desc: sortedVariants.sortByPriorityDesc,
-      label: "Priority"
-    }
+      label: 'Priority',
+    },
   ] as const;
 
   const sortedTasks = useMemo(() => {
@@ -63,7 +65,7 @@ const useColumnSorting = (tasks: Task[]) => {
    * switch to a new column or toggle between ascending/descending if the same column is clicked again.
    */
   const handleSortClick = (option: number) => {
-    console.log('updating sort')
+    console.log('updating sort');
     // changing columns, reset to ascending
     if (sortBy !== option) {
       setSortBy(option);
@@ -72,7 +74,7 @@ const useColumnSorting = (tasks: Task[]) => {
       // same column => toggle ascending/descending
       setSortAsc((prev) => -prev);
     }
-  }
+  };
 
   /**
    * returns the correct icon to show in a button based on the current
@@ -83,7 +85,7 @@ const useColumnSorting = (tasks: Task[]) => {
       return sortAsc === 1 ? <ArrowUp /> : <ArrowDown />;
     }
     return <ChevronsUpDown />;
-  }
+  };
 
   return {
     sortedTasks,
@@ -91,7 +93,7 @@ const useColumnSorting = (tasks: Task[]) => {
     sortAsc,
     handleSortClick,
     getSortIcon,
-    sortOptions
+    sortOptions,
   };
-}
+};
 export default useColumnSorting;

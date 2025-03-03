@@ -1,66 +1,61 @@
-import * as React from "react"
+import * as React from 'react';
 import {
   AudioWaveform,
   ChartGantt,
   Command,
   ListChecks,
   SquareKanban,
-} from "lucide-react"
+} from 'lucide-react';
 
-import { NavMain } from "@/components/ui/sidebar/nav-main"
-import { TeamSwitcher } from "@/components/ui/sidebar/team-switcher"
-import {
-  Sidebar,
-  SidebarHeader,
-  SidebarRail,
-} from "@/components/ui/sidebar"
-
+import { NavMain } from '@/components/ui/sidebar/nav-main';
+import { TeamSwitcher } from '@/components/ui/sidebar/team-switcher';
+import { Sidebar, SidebarHeader, SidebarRail } from '@/components/ui/sidebar';
+import NavPrimaryButton from './nav-primary-button';
 
 const data = {
   teams: [
     {
-      name: "Acme Inc",
+      name: 'Acme Inc',
       logo: Command,
-      plan: "Enterprise",
+      plan: 'Enterprise',
     },
     {
-      name: "Acme Corp.",
+      name: 'Acme Corp.',
       logo: AudioWaveform,
-      plan: "Startup",
+      plan: 'Startup',
     },
     {
-      name: "Evil Corp.",
+      name: 'Evil Corp.',
       logo: Command,
-      plan: "Free",
+      plan: 'Free',
     },
   ],
-}
+};
 
 export interface NavMainItem {
-  title: string
-  url: string
-  icon: React.ElementType
-  isActive: boolean
+  title: string;
+  url: string;
+  icon: React.ElementType;
+  isActive: boolean;
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  
   const [navMain, setNavMain] = React.useState<NavMainItem[]>([
     {
-      title: "List",
-      url: "/",
+      title: 'List',
+      url: '/',
       icon: ListChecks,
       isActive: true,
     },
     {
-      title: "Board",
-      url: "/board",
+      title: 'Board',
+      url: '/board',
       icon: SquareKanban,
       isActive: false,
     },
     {
-      title: "Timeline",
-      url: "/timeline",
+      title: 'Timeline',
+      url: '/timeline',
       icon: ChartGantt,
       isActive: false,
     },
@@ -70,9 +65,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar className="border-r-0" {...props}>
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
-        <NavMain items={navMain} setActiveItem={setNavMain}/>
+        <NavPrimaryButton />
+        <NavMain items={navMain} setActiveItem={setNavMain} />
       </SidebarHeader>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

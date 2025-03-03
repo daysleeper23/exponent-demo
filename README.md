@@ -6,6 +6,17 @@ As a proof-of-concept for scalable, high-quality web apps, Exponent demonstrates
 
 Even though the current focus is task management, the architecture is flexible and extensible, enabling future integrations like project and sprint planning.
 
+## Table of Contents
+- [Project Setup](#project-setup)
+- [Project Structure & Routing](#project-structure--routing)
+- [Documentation](#documentation)
+- [Testing](#testing)
+- [Features](#features)
+  - [Virtualized List View](#virtualized-list-view)
+  - [Hooks Usage](#hooks-usage)
+  - [Dark-mode](#dark-mode)
+- [API Integration](#api-integration)
+
 ## Project Setup
 
 - Build tool & language: React with Typescript using [Vite](https://vitejs.dev/)
@@ -44,7 +55,7 @@ To run the unit tests, run:
 yarn test
 ```
 
-## Features
+## Key Features
 
 ### Virtualized List View
 The Virtualized List View feature enhances performance and user experience by utilizing 'windowing' technique - rendering only the visible portion of a large list of tasks (in the current viewport). 
@@ -53,13 +64,47 @@ Instead of rendering all items at once, which can be slow and resource-intensive
 
 Key benefits:
 
-- Performance Optimization: minimizes memory usage and improves rendering performance.
-- Smooth Scrolling: Ensures a smooth scrolling experience even with a large number of tasks.
-- Scalability: Supports large datasets without compromising performance, making it suitable for extensive task management needs.
+- **Performance Optimization**: minimizes memory usage and improves rendering performance.
+- **Smooth Scrolling**: Ensures a smooth scrolling experience even with a large number of tasks.
+- **Scalability**: Supports large datasets without compromising performance, making it suitable for extensive task management needs.
 
 This feature is implemented using a combination of React hooks and CSS for positioning, ensuring a seamless and efficient user experience.
+
+### Hooks Usage
+This project showcases how to encapsulate complex or repetitive logic into custom React Hooks. 
+
+Reusable logic:
+- **tasks sorting**
+- **data fetching**
+- **theming**
+
+By extracting them into dedicated hooks, components remain simpler, more testable, and easier to maintain. 
+This pattern is widely recommended for clear separation of concerns and improved code reusability.
 
 ### Dark-mode
 
 Implemented using the [Context API](https://react.dev/reference/react/createContext), allowing the user to seamlessly switch between Dark and Light mode. This feature enhances the user experience by providing a personalized interface and improving readability based on user preferences. The selected mode is stored in localStorage, ensuring that the user's preference persists across sessions for a consistent experience.
 
+## API Integration
+This project uses [React Query](https://tanstack.com/query/latest/docs/framework/react/overview) combined with [Axios](https://axios-http.com/docs/intro) for efficient and declarative API integration. React Query handles asynchronous data fetching, caching, and background updates, while Axios simplifies making HTTP requests. Together, they help reduce boilerplate code and improve the overall responsiveness and reliability of the application.
+
+### Key Benefits
+- **Automated Caching & Re-Fetching**: React Query caches responses and automatically re-fetches data when needed, ensuring the UI stays up-to-date with minimal effort.
+- **Declarative API Calls**: Use familiar hooks (e.g., useQuery, useMutation) to manage data fetching, error handling, and loading states directly within React components.
+- **Clean Separation of Concerns**: By abstracting API calls into hooks, UI components remain focused on presentation and logic.
+
+### Example Usage
+```
+import { useQuery } from 'react-query';
+import axios from 'axios';
+
+const fetchTasks = () =>
+  axios.get('/api/tasks').then((res) => res.data);
+
+export function useTasks() {
+  return useQuery('tasks', fetchTasks, {
+    staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
+    retry: 1, // Retry once on failure
+  });
+}
+```

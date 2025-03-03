@@ -11,7 +11,7 @@ const mockTask: Task = {
   status: 1,
   priority: 2,
   assignee: '1',
-  team: '1'
+  team: '1',
 };
 
 test('renders TaskListRow without crashing', () => {
@@ -41,5 +41,7 @@ test('renders task priority correctly', () => {
 test('applies correct styles', () => {
   render(<TaskListRow task={mockTask} />);
   const taskRowElement = screen.getByTestId('1');
-  expect(taskRowElement).toHaveClass('w-full px-4 py-2 flex gap-4 items-center justify-between border-b border-primary-200 dark:border-primary-700 hover:bg-primary-foreground pointer-events-auto');
+  expect(taskRowElement).toHaveClass(
+    'w-full px-4 py-2 flex gap-4 items-center justify-between border-b border-primary-200 dark:border-primary-700 hover:bg-primary-foreground pointer-events-auto'
+  );
 });

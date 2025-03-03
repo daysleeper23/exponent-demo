@@ -1,4 +1,7 @@
-const PendingBoundary = ({ isPending, children }: {
+const PendingBoundary = ({
+  isPending,
+  children,
+}: {
   isPending: boolean;
   children: React.ReactNode;
 }) => {
