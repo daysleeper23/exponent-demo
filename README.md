@@ -71,6 +71,21 @@ To run the unit tests, run:
 yarn test
 ```
 
+### End-2-End Testing
+The chosen E2E testing framework for the project is [Cypress](https://www.cypress.io/) due to its modern and developer-friendly testing approach. Its fast, reliable, and interactive test runner allows for real-time debugging and immediate feedback, which accelerates the development workflow. In general, it's highly powerful yet easier to use than Selenium.
+ 
+Also, Cypress smoothly simulates user interactions (scrolling / clicking) makes testing virtualized list as well as sorting behavior consistent, ensuring high-quality user experience.
+
+To run the e2e test suite on the GUI
+```bash
+yarn cypress:open
+```
+
+To run the e2e test suite on terminal
+```bash
+npx cypress run
+```
+
 ## Key Features
 
 ### Form & Form-data Validation
