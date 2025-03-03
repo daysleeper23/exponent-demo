@@ -4,12 +4,20 @@ export const TaskSchema = z.object({
   id: z.string().uuid(),
   number: z.number().min(1),
   title: z.string().nonempty({ message: 'Task title could not be empty.' }),
-  description: z.string().default('').nullable(),
+  description: z
+    .string()
+    .default('')
+    .nullable()
+    .transform((val) => val ?? ''),
   status: z.number().max(4).min(0),
   assignee: z.string().uuid(),
   priority: z.number().max(4).min(0),
   team: z.string().uuid(),
 });
 export const TasksSchema = z.array(TaskSchema);
+export const TaskCreateSchema = TaskSchema.omit({
+  id: true,
+  number: true,
+});
 
 export type Task = z.infer<typeof TaskSchema>;
