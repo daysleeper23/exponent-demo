@@ -7,13 +7,11 @@ export default {
   component: ExpoSelect,
   // Setup default “props” or controls
   args: {
-    value: "0",
+    value: '0',
     items: Object.values(statusMap),
-    className: "w-[180px]"
+    className: 'w-[180px]',
   },
   argTypes: {},
 };
 
-export const Default = (args) => (
-  <ExpoSelect {...args} />
-);
+export const Default = (args) => <ExpoSelect {...args} />;

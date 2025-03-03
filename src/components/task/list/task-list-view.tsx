@@ -99,7 +99,7 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
         ref={containerRef}
         onScroll={onScroll}
       >
-        <div 
+        <div
           data-testid="task-list-view-full"
           style={{ height: rowCount * rowHeight, position: 'relative' }}
         >
