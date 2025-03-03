@@ -1,8 +1,8 @@
 import { Task } from '@/types/task';
-import TaskListRow from './TaskListRow';
+import TaskListRow from './task-list-row';
 import { SyntheticEvent, useRef, useState } from 'react';
 import useColumnSorting from '@/hooks/use-column-sorting';
-import TaskListViewHeader from './TaskListViewHeader';
+import TaskListViewHeader from './task-list-view-header';
 
 interface TaskListViewProps {
   tasks: Task[];
@@ -94,11 +94,15 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
         getSortIcon={getSortIcon}
       />
       <div
+        data-testid="task-list-view"
         className="text-sm overflow-y-auto relative"
         ref={containerRef}
         onScroll={onScroll}
       >
-        <div style={{ height: rowCount * rowHeight, position: 'relative' }}>
+        <div
+          data-testid="task-list-view-full"
+          style={{ height: rowCount * rowHeight, position: 'relative' }}
+        >
           {visibleItems}
         </div>
       </div>

@@ -28,6 +28,7 @@
 | Form                                                      |               |
 | - Form to create new tasks                                | 4             |
 | - Form validation                                         | 4             |
+| - Custom ExpoSelect component                             | 4             |
 | - Integrate with POST /tasks                              | 2             |
 | - Optimistic rendering with React Query                   | 2             |
 | - Unit testing                                            | 2             |
@@ -37,5 +38,9 @@
 | - Setup Axios & React Query                               | 1             |
 | - Hook for GET /tasks                                     | 1             |
 | - PendingBoundary & ErrorBoundary                         | 1             |
+|                                                           |               |
+| E2E Testing                                               |               |
+| - Setup Cypress                                           | 1             |
+| - Implement testing for TaskListView                      | 3             |
 | --------------------------------------------------------- | ------------- |
-| Total                                                     | 48            |
+| Total                                                     | 60            |

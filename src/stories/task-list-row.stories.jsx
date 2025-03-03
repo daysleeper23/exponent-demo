@@ -1,6 +1,6 @@
 // Button.stories.jsx
 import React from 'react';
-import TaskListRow from '../components/task/list/TaskListRow';
+import TaskListRow from '../components/task/list/task-list-row';
 
 export default {
   title: 'Components/TaskListRow',

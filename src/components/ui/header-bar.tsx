@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useTheme } from '../context/ThemeProvider';
+import { useTheme } from '../context/theme-provider';
 import { SidebarTrigger } from './sidebar';
 import { Separator } from './separator';
 import {
@@ -10,7 +10,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from './breadcrumb';
-import Button from './button/button';
+import Button from './button';
 import { Moon, Sun } from 'lucide-react';
 
 const HeaderBar = () => {

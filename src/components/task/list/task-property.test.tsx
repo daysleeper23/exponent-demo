@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import TaskProperty from './TaskProperty';
+import TaskProperty from './task-property';
 import '@testing-library/jest-dom';
 import { priorityMap, statusMap } from '@/api/common';
 

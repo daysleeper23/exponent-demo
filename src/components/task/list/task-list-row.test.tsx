@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import TaskListRow from './TaskListRow';
+import TaskListRow from './task-list-row';
 import { Task } from '@/types/task';
 import '@testing-library/jest-dom';
 
@@ -42,6 +42,6 @@ test('applies correct styles', () => {
   render(<TaskListRow task={mockTask} />);
   const taskRowElement = screen.getByTestId('1');
   expect(taskRowElement).toHaveClass(
-    'w-full px-4 py-2 flex gap-4 items-center justify-between border-b border-primary-200 dark:border-primary-700 hover:bg-primary-foreground pointer-events-auto'
+    'w-full px-4 py-2 flex gap-4 items-center text-primary/80 border-b border-primary-200 dark:border-primary-700 hover:bg-primary-foreground pointer-events-auto'
   );
 });

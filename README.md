@@ -7,6 +7,7 @@ As a proof-of-concept for scalable, high-quality web apps, Exponent demonstrates
 Even though the current focus is task management, the architecture is flexible and extensible, enabling future integrations like project and sprint planning.
 
 ## Table of Contents
+- [Getting Started](#getting-started)
 - [Project Setup](#project-setup)
 - [Project Structure & Routing](#project-structure--routing)
 - [Documentation](#documentation)
@@ -17,6 +18,21 @@ Even though the current focus is task management, the architecture is flexible a
   - [Dark-mode](#dark-mode)
 - [API Integration](#api-integration)
 
+## Getting Started
+Follow these steps to get a local copy of Exponent up and running:
+
+1. Clone the repository
+2. Install dependencies
+```bash
+yarn install
+```
+3. Open "src/hooks/api/use-tasks.ts", comment the section for **remote data** and uncomment **local data**.
+4. Run the development server
+```bash
+yarn dev
+```
+5. Access the app: open browser and navigate to: http://localhost:5173
+
 ## Project Setup
 
 - Build tool & language: React with Typescript using [Vite](https://vitejs.dev/)
@@ -25,14 +41,14 @@ Even though the current focus is task management, the architecture is flexible a
 - Type safety: [zod](https://zod.dev/)
 
 ## Project Structure & Routing
-- Routing: react-router
+- Routing: [React Router](https://reactrouter.com/home)
 - Code splitting: lazy load pages on demand
 
 ## Documentation
 [Storybook](https://storybook.js.org/) is the tool for documentation and showcase individual UI components in isolation. It makes browsing various states and variations of components easier, without needing to run the entire application.
 
 To run Storybook
-```
+```bash
 yarn storybook
 ```
 
@@ -51,11 +67,31 @@ The unit tests focus on:
 
 To run the unit tests, run:
 
-```
+```bash
 yarn test
 ```
 
+### End-2-End Testing
+The chosen E2E testing framework for the project is [Cypress](https://www.cypress.io/) due to its modern and developer-friendly testing approach. Its fast, reliable, and interactive test runner allows for real-time debugging and immediate feedback, which accelerates the development workflow. In general, it's highly powerful yet easier to use than Selenium.
+ 
+Also, Cypress smoothly simulates user interactions (scrolling / clicking) makes testing virtualized list as well as sorting behavior consistent, ensuring high-quality user experience.
+
+To run the e2e test suite on the GUI
+```bash
+yarn cypress:open
+```
+
+To run the e2e test suite on terminal
+```bash
+npx cypress run
+```
+
 ## Key Features
+
+### Form & Form-data Validation
+Implement a custom Form combined with a Select component to create new task, utilizing [React Hook Form](https://react-hook-form.com/) and [zod](https://zod.dev/) for schema-based synchronized data validation through out the app.
+
+- Custom **Select** component: ExpoSelect is a custom React component designed to streamline input validation and form handling within Exponent by ensuring type-safety for enum-like data.
 
 ### Virtualized List View
 The Virtualized List View feature enhances performance and user experience by utilizing 'windowing' technique - rendering only the visible portion of a large list of tasks (in the current viewport). 
@@ -94,7 +130,7 @@ This project uses [React Query](https://tanstack.com/query/latest/docs/framework
 - **Clean Separation of Concerns**: By abstracting API calls into hooks, UI components remain focused on presentation and logic.
 
 ### Example Usage
-```
+```js
 import { useQuery } from 'react-query';
 import axios from 'axios';
 

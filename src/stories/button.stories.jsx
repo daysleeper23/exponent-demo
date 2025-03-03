@@ -1,6 +1,6 @@
 // Button.stories.jsx
 import React from 'react';
-import Button from './button';
+import Button from '../components/ui/button';
 import { ChevronRight } from 'lucide-react';
 
 export default {
