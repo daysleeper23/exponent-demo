@@ -5,6 +5,7 @@
 | Project Setup                                             |               |
 | - Init project using Vite for React, Typescript, ESLint   | 1             |
 | - Setup Prettier, TailwindCSS, shadcn                     | 1             |
+| - Documentation                                           | 4             |
 |                                                           |               |
 | Routing                                                   |               |
 | - Basic routing & code splitting with lazy load           | 1             |
