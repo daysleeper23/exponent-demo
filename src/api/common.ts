@@ -15,7 +15,7 @@ import {
 export interface Metadata {
   label: string;
   icon: LucideIcon;
-  value: number;
+  value: string | number;
 }
 
 export interface TaskPropertyMap {

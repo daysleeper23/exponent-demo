@@ -17,6 +17,7 @@ import { cn } from '@/lib/utils';
 import { Textarea } from '../textarea';
 import { ExpoSelect } from '../expo-select/expo-select';
 import { priorityMap, statusMap } from '@/api/common';
+import { localUsersMap } from '@/api/user';
 
 const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
   const form = useForm<z.infer<typeof TaskCreateSchema>>({
@@ -39,7 +40,7 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
     - Description: ${values.description}
     - Status: ${statusMap[values.status].label}
     - Priority: ${priorityMap[values.priority].label}
-    - Assignee: ${values.assignee}
+    - Assignee: ${localUsersMap[localUsersMap.findIndex(user => user.value === values.assignee)].label}
     `);
   };
 
@@ -121,7 +122,11 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
             <FormItem>
               <FormLabel>Assignee</FormLabel>
               <FormControl>
-                <Input placeholder="Assignee" {...field} />
+                <ExpoSelect
+                  items={Object.values(localUsersMap)}
+                  value={field.value.toString()}
+                  onChange={(val: string) => field.onChange(val)}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

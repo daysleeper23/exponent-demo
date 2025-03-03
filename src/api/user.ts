@@ -1,6 +1,8 @@
 import { User } from '@/types/user';
+import { Metadata } from './common';
+import { CircleUser } from 'lucide-react';
 
-const localUsers: User[] = [
+export const localUsers: User[] = [
   {
     id: '156de810-1339-469d-9611-8443cdda88d1',
     team: '80c322ca-e7ac-4b4e-822e-db6d1983b8e2',
@@ -74,4 +76,9 @@ const localUsers: User[] = [
     onlineStatus: 'Online',
   },
 ];
-export default localUsers;
+
+export const localUsersMap: Metadata[] = localUsers.map(user => { return {
+  label: user.name,
+  icon: CircleUser,
+  value: user.id,
+}});
