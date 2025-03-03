@@ -7,6 +7,7 @@ As a proof-of-concept for scalable, high-quality web apps, Exponent demonstrates
 Even though the current focus is task management, the architecture is flexible and extensible, enabling future integrations like project and sprint planning.
 
 ## Table of Contents
+- [Getting Started](#getting-started)
 - [Project Setup](#project-setup)
 - [Project Structure & Routing](#project-structure--routing)
 - [Documentation](#documentation)
@@ -16,6 +17,21 @@ Even though the current focus is task management, the architecture is flexible a
   - [Hooks Usage](#hooks-usage)
   - [Dark-mode](#dark-mode)
 - [API Integration](#api-integration)
+
+## Getting Started
+Follow these steps to get a local copy of Exponent up and running:
+
+1. Clone the repository
+2. Install dependencies
+```js
+yarn install
+```
+3. Open "src/hooks/api/use-tasks.ts", comment the section for **remote data** and uncomment **local data**.
+4. Run the development server
+```js
+yarn dev
+```
+5. Access the app: open browser and navigate to: http://localhost:5173
 
 ## Project Setup
 
@@ -51,7 +67,7 @@ The unit tests focus on:
 
 To run the unit tests, run:
 
-```
+```js
 yarn test
 ```
 
@@ -94,7 +110,7 @@ This project uses [React Query](https://tanstack.com/query/latest/docs/framework
 - **Clean Separation of Concerns**: By abstracting API calls into hooks, UI components remain focused on presentation and logic.
 
 ### Example Usage
-```
+```js
 import { useQuery } from 'react-query';
 import axios from 'axios';
 

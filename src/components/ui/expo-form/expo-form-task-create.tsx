@@ -40,7 +40,7 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
     - Description: ${values.description}
     - Status: ${statusMap[values.status].label}
     - Priority: ${priorityMap[values.priority].label}
-    - Assignee: ${localUsersMap[localUsersMap.findIndex(user => user.value === values.assignee)].label}
+    - Assignee: ${localUsersMap[localUsersMap.findIndex((user) => user.value === values.assignee)].label}
     `);
   };
 

@@ -77,8 +77,10 @@ export const localUsers: User[] = [
   },
 ];
 
-export const localUsersMap: Metadata[] = localUsers.map(user => { return {
-  label: user.name,
-  icon: CircleUser,
-  value: user.id,
-}});
+export const localUsersMap: Metadata[] = localUsers.map((user) => {
+  return {
+    label: user.name,
+    icon: CircleUser,
+    value: user.id,
+  };
+});
