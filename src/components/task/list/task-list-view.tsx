@@ -2,7 +2,7 @@ import { Task } from '@/types/task';
 import TaskListRow from './task-list-row';
 import { SyntheticEvent, useRef, useState } from 'react';
 import useColumnSorting from '@/hooks/use-column-sorting';
-import TaskListViewHeader from './TaskListViewHeader';
+import TaskListViewHeader from './task-list-view-header';
 
 interface TaskListViewProps {
   tasks: Task[];

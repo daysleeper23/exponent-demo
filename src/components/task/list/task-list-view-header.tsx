@@ -43,7 +43,7 @@ const TaskListViewHeader = ({
 
       <div className="hidden sm:ml-auto sm:flex sm:gap-4 sm:pointer-events-auto">
         {/* status */}
-        <div className="w-[120px]">
+        <div className="w-[152px]">
           <Button
             variant="ghost"
             className="w-20"
@@ -55,7 +55,7 @@ const TaskListViewHeader = ({
         </div>
 
         {/* priority */}
-        <div className="w-[120px]">
+        <div className="w-[144px]">
           <Button
             variant="ghost"
             className="w-20"

@@ -1,6 +1,7 @@
 import { Task } from '@/types/task';
 import TaskProperty from './task-property';
 import { priorityMap, statusMap } from '@/api/common';
+import ExpoSelect from '@/components/ui/expo-select/expo-select';
 
 interface TaskListRowProps {
   task: Task;
@@ -8,6 +9,17 @@ interface TaskListRowProps {
 }
 
 const TaskListRow = ({ task, style }: TaskListRowProps) => {
+  const handleUpdatePriority = (value: string) => {
+    window.alert(`You want to update the task: ${task.title}
+    - Priority from ${priorityMap[task.priority].label} to ${priorityMap[value].label} 
+    `);
+  };
+  const handleUpdateStatus = (value: string) => {
+    window.alert(`You want to update the task: ${task.title}
+    - Status from ${statusMap[task.status].label} to ${statusMap[value].label} 
+    `);
+  };
+
   return (
     <div
       data-testid={task.id}
@@ -23,8 +35,19 @@ const TaskListRow = ({ task, style }: TaskListRowProps) => {
       <span className="flex-1 overflow-hidden text-nowrap">{task.title}</span>
 
       <div className="hidden sm:ml-auto sm:flex sm:gap-4 sm:pointer-events-auto">
-        <TaskProperty value={task.status} items={statusMap} />
-        <TaskProperty value={task.priority} items={priorityMap} />
+        <ExpoSelect
+          className="w-[152px]"
+          items={Object.values(statusMap)}
+          value={task.status.toString()}
+          onChange={handleUpdateStatus}
+        />
+
+        <ExpoSelect
+          className="w-[144px]"
+          items={Object.values(priorityMap)}
+          value={task.priority.toString()}
+          onChange={handleUpdatePriority}
+        />
       </div>
     </div>
   );

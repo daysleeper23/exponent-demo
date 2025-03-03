@@ -13,7 +13,7 @@ const TaskBoardView = lazy(
   () => import('@/components/task/board/task-board-view')
 );
 const TaskTimelineView = lazy(
-  () => import('@/components/task/timeline/TaskTimelineView')
+  () => import('@/components/task/timeline/task-timeline-view')
 );
 
 const App = () => {

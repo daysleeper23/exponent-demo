@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { Task, TasksSchema } from '@/types/task';
 import { faker } from '@faker-js/faker';
 import { localUsers } from './user';
-import apiClient from './apiClient';
+import apiClient from './api-client';
 
 // export const TaskSchema = z.object({
 //     id: z.string().uuid(),

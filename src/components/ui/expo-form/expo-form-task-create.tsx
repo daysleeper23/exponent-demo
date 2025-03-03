@@ -15,7 +15,7 @@ import { Input } from '@/components/ui/input';
 import { TaskCreateSchema } from '@/types/task';
 import { cn } from '@/lib/utils';
 import { Textarea } from '../textarea';
-import { ExpoSelect } from '../expo-select/expo-select';
+import ExpoSelect from '../expo-select/expo-select';
 import { priorityMap, statusMap } from '@/api/common';
 import { localUsersMap } from '@/api/user';
 
@@ -90,6 +90,7 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
                   items={Object.values(statusMap)}
                   value={field.value.toString()}
                   onChange={(val: string) => field.onChange(val)}
+                  className="w-[180px]"
                 />
               </FormControl>
               <FormMessage />
@@ -108,6 +109,7 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
                   items={Object.values(priorityMap)}
                   value={field.value.toString()}
                   onChange={(val: string) => field.onChange(val)}
+                  className="w-[180px]"
                 />
               </FormControl>
               <FormMessage />
