@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { cn } from '@/lib/utils';
 
 import Button from '@/components/ui/button';
 import {
@@ -12,10 +13,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import ExpoSelect from '@/components/ui/expo-select/expo-select';
+
 import { TaskCreateSchema } from '@/types/task';
-import { cn } from '@/lib/utils';
-import { Textarea } from '../textarea';
-import ExpoSelect from '../expo-select/expo-select';
 import { priorityMap, statusMap } from '@/api/common';
 import { localUsersMap } from '@/api/user';
 
@@ -57,7 +58,11 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="Task title" {...field} />
+                <Input
+                  data-testid="form-task-create-title"
+                  placeholder="Task title"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -71,7 +76,11 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea placeholder="Task description" {...field} />
+                <Textarea
+                  data-testid="form-task-create-description"
+                  placeholder="Task description"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -85,8 +94,8 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
             <FormItem>
               <FormLabel>Status</FormLabel>
               <FormControl>
-                {/* <Input type="number" placeholder="Task status" {...field} /> */}
                 <ExpoSelect
+                  data-testid="form-task-create-status"
                   items={Object.values(statusMap)}
                   value={field.value.toString()}
                   onChange={(val: string) => field.onChange(val)}
@@ -106,6 +115,7 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
               <FormLabel>Priority</FormLabel>
               <FormControl>
                 <ExpoSelect
+                  data-testid="form-task-create-priority"
                   items={Object.values(priorityMap)}
                   value={field.value.toString()}
                   onChange={(val: string) => field.onChange(val)}
@@ -125,6 +135,7 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
               <FormLabel>Assignee</FormLabel>
               <FormControl>
                 <ExpoSelect
+                  data-testid="form-task-create-assignee"
                   items={Object.values(localUsersMap)}
                   value={field.value.toString()}
                   onChange={(val: string) => field.onChange(val)}
@@ -134,7 +145,7 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit">
+        <Button data-testid="form-task-create-submit" className="w-full" type="submit">
           Create task
         </Button>
       </form>

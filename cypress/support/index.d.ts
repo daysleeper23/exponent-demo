@@ -5,5 +5,6 @@ declare namespace Cypress {
      * @example cy.checkVisibilityOfText('text')
      */
     checkVisibilityOfText(text: string): Chainable<Subject>;
+    checkVisibilityOfElement(selector: string): Chainable<Subject>;
   }
 }
