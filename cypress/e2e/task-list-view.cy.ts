@@ -1,9 +1,9 @@
-const baseUrl = 'http://localhost:5173';
+beforeEach(() => {
+    cy.visit("/");
+  });
 
 describe('Task List View - Initial Render', () => {
-  beforeEach(() => {
-    cy.visit(baseUrl);
-  });
+  
 
   it('should render the header with sort options', () => {
     cy.get('[data-testid="task-list-view-header"]')
@@ -25,10 +25,7 @@ describe('Task List View - Initial Render', () => {
 });
 
 describe('Task List View - Scrolling', () => {
-  beforeEach(() => {
-    cy.visit(baseUrl);
-  });
-
+  
   it('should render new tasks when scrolling down', () => {
 
     // capture initial rendered first task text
@@ -51,9 +48,6 @@ describe('Task List View - Scrolling', () => {
 });
 
 describe('Task List View - Virtualization', () => {
-  beforeEach(() => {
-    cy.visit(baseUrl);
-  });
 
   it('should render only the visible task items with overscan', () => {
     cy.get('[data-testid="task-list-row"]').then($rows => {
@@ -64,10 +58,7 @@ describe('Task List View - Virtualization', () => {
 });
 
 describe('Task List View - Sorting', () => {
-  beforeEach(() => {
-    cy.visit(baseUrl);
-  });
-
+  
   it('should reorder tasks when a sort option is clicked', () => {
 
     cy.get('[data-testid="task-list-row"]')
