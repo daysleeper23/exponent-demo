@@ -14,11 +14,13 @@ import {
   - value: string
   - onChange: (value: string) => void
 */
+
 const ExpoSelect = ({
   items,
   value,
   onChange,
   className,
+  ...props
 }: {
   items: Metadata[];
   value: string;
@@ -27,7 +29,7 @@ const ExpoSelect = ({
 }) => {
   return (
     <Select onValueChange={onChange} defaultValue={value}>
-      <SelectTrigger className={className || ''}>
+      <SelectTrigger className={className || ''} {...props}>
         <SelectValue
           placeholder={
             <div className="flex items-center gap-2">

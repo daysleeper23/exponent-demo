@@ -25,13 +25,12 @@ export const getTasks = (count: number): Task[] => {
 };
 
 export async function fetchTasks(): Promise<Task[]> {
-  const response = await apiClient.get('/tasks');
-  if (response.status !== 200) {
+  try {
+    const response = await apiClient.get('/tasks');
+    const data = TasksSchema.parse(response.data.data);
+    return data;
+  } catch (error) {
+    console.error(error);
     throw new Error('Failed to fetch tasks');
   }
-
-  // Validate array of tasks using Zod
-  const data = TasksSchema.parse(response.data.data);
-
-  return data;
 }

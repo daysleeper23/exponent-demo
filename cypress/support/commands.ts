@@ -29,3 +29,7 @@
 Cypress.Commands.add('checkVisibilityOfText', (text: string) => {
   cy.contains(text).should('be.visible');
 });
+
+Cypress.Commands.add('checkVisibilityOfElement', (selector: string) => {
+  cy.get(selector).should('be.visible');
+});
