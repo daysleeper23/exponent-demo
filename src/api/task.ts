@@ -30,7 +30,7 @@ export async function fetchTasks(): Promise<Task[]> {
     const data = TasksSchema.parse(response.data.data);
     return data;
   } catch (error) {
-    // console.error(error);
+    console.error(error);
     throw new Error('Failed to fetch tasks');
   }
 }

@@ -145,7 +145,11 @@ const ExpoFormTaskCreate = ({ className }: React.ComponentProps<'form'>) => {
             </FormItem>
           )}
         />
-        <Button data-testid="form-task-create-submit" className="w-full" type="submit">
+        <Button
+          data-testid="form-task-create-submit"
+          className="w-full"
+          type="submit"
+        >
           Create task
         </Button>
       </form>
