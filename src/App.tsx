@@ -57,12 +57,7 @@ const App = () => {
                   />
                   <Route path="/board" element={<TaskBoardView />} />
                   <Route path="/timeline" element={<TaskTimelineView />} />
-                  <Route
-                    path="*"
-                    element={
-                      <Navigate to="/" />
-                    }
-                  />
+                  <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
               </PendingBoundary>
             </Suspense>

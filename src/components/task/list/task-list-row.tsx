@@ -3,7 +3,6 @@ import { priorityMap, statusMap } from '@/api/common';
 import ExpoSelect from '@/components/ui/expo-select/expo-select';
 import { useUpdateTask } from '@/hooks/api/use-tasks';
 
-
 interface TaskListRowProps {
   task: Task;
   style?: React.CSSProperties;
@@ -11,15 +10,15 @@ interface TaskListRowProps {
 
 const TaskListRow = ({ task, style }: TaskListRowProps) => {
   const updateTask = useUpdateTask();
-  
+
   const handleUpdatePriority = (value: string) => {
-    task.priority = parseInt(value);
-    updateTask(task);
+    const updatedTask = { ...task, priority: parseInt(value) };
+    updateTask(updatedTask);
   };
 
   const handleUpdateStatus = (value: string) => {
-    task.status = parseInt(value);
-    updateTask(task);
+    const updatedTask = { ...task, priority: parseInt(value) };
+    updateTask(updatedTask);
   };
 
   return (

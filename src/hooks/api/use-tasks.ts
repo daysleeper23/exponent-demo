@@ -27,17 +27,19 @@ export const useUpdateTask = () => {
       return updateTask(task.id, task).then((updatedTask) => updatedTask);
     },
     onMutate: async (updatedTask: Task) => {
-
       //cancel any outgoing queries
-      await queryClient.cancelQueries({ queryKey: ['tasks'] })
-      
+      await queryClient.cancelQueries({ queryKey: ['tasks'] });
+
       //snapshot the previous value
       const previousTasks = queryClient.getQueryData(['tasks']);
 
       //optimistic update
       queryClient.setQueryData(
-        ['tasks']
-        , (oldData: Task[]) => oldData.map((task) => task.id === updatedTask.id ? updatedTask : task) || []
+        ['tasks'],
+        (oldData: Task[]) =>
+          oldData.map((task) =>
+            task.id === updatedTask.id ? updatedTask : task
+          ) || []
       );
 
       return { previousTasks };
@@ -48,4 +50,4 @@ export const useUpdateTask = () => {
       }
     },
   }).mutate;
-}
+};

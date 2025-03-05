@@ -59,12 +59,15 @@ export async function fetchTasks(): Promise<Task[]> {
   }
 }
 
-export async function updateTask(taskId: string, taskUpdate: Partial<Task>): Promise<Task | null> {
+export async function updateTask(
+  taskId: string,
+  taskUpdate: Partial<Task>
+): Promise<Task | null> {
   try {
     const response = await apiClient.put(`/tasks/${taskId}`, taskUpdate);
     const updatedTask = TaskSchema.parse(response.data.data);
 
-    toast.success("Task has been updated.", {
+    toast.success('Task has been updated.', {
       description: updatedTask.title,
       action: {
         label: 'View task',
@@ -76,7 +79,6 @@ export async function updateTask(taskId: string, taskUpdate: Partial<Task>): Pro
     });
 
     return updatedTask;
-
   } catch (error) {
     //logging error to monitoring services
     if (error instanceof z.ZodError) {
@@ -91,14 +93,16 @@ export async function updateTask(taskId: string, taskUpdate: Partial<Task>): Pro
       action: {
         label: `Yes`,
         onClick: () => {
-          //retry the request in 15 seconds
+          //retry the request
           setTimeout(() => {
             updateTask(taskId, taskUpdate);
           }, waitTime * 1000);
         },
       },
     });
-    return null;
+
+    //throw error to be caught by React Query for optimistic update
+    throw error;
   }
 }
 
@@ -132,13 +136,15 @@ export async function createTask(taskCreate: TaskCreate): Promise<Task | null> {
       action: {
         label: `Yes`,
         onClick: () => {
-          //retry the request in 15 seconds
+          //retry the request
           setTimeout(() => {
             createTask(taskCreate);
           }, waitTime * 1000);
         },
       },
     });
-    return null;
+
+    //throw error to be caught by React Query for optimistic update
+    throw error;
   }
 }
