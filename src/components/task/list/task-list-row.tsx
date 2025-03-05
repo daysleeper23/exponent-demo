@@ -1,6 +1,8 @@
 import { Task } from '@/types/task';
 import { priorityMap, statusMap } from '@/api/common';
 import ExpoSelect from '@/components/ui/expo-select/expo-select';
+import { useUpdateTask } from '@/hooks/api/use-tasks';
+
 
 interface TaskListRowProps {
   task: Task;
@@ -8,15 +10,16 @@ interface TaskListRowProps {
 }
 
 const TaskListRow = ({ task, style }: TaskListRowProps) => {
+  const updateTask = useUpdateTask();
+  
   const handleUpdatePriority = (value: string) => {
-    window.alert(`You want to update the task: ${task.title}
-    - Priority from ${priorityMap[task.priority].label} to ${priorityMap[value].label} 
-    `);
+    task.priority = parseInt(value);
+    updateTask(task);
   };
+
   const handleUpdateStatus = (value: string) => {
-    window.alert(`You want to update the task: ${task.title}
-    - Status from ${statusMap[task.status].label} to ${statusMap[value].label} 
-    `);
+    task.status = parseInt(value);
+    updateTask(task);
   };
 
   return (
@@ -28,7 +31,6 @@ const TaskListRow = ({ task, style }: TaskListRowProps) => {
         hover:bg-primary-foreground
         pointer-events-auto"
       key={task.id}
-      // data-testid={`task-list-row-${task.id}`}
       data-testid="task-list-row"
     >
       <span className="w-20">{'EXP-' + task.number}</span>

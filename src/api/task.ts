@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { z } from 'zod';
 import { toast } from 'sonner';
 
-import { Task, TaskCreate, TasksSchema } from '@/types/task';
+import { Task, TaskCreate, TaskSchema, TasksSchema } from '@/types/task';
 import { faker } from '@faker-js/faker';
 import { localUsers } from './user';
 import apiClient from './api-client';
@@ -35,20 +35,70 @@ export async function fetchTasks(): Promise<Task[]> {
     const data = TasksSchema.parse(response.data.data);
     return data;
   } catch (error) {
-    const retry = 5;
+    //logging error to monitoring services
+    if (error instanceof z.ZodError) {
+      console.log('ZodError', error.errors);
+    } else {
+      console.error('Unknown Error', error);
+    }
+
+    const waitTime = 5;
     toast.error('Failed to fetch task.', {
-      description: `The backend (hosted on Render) is being warmed up. Try again in ${retry} seconds?`,
+      description: `The backend (hosted on Render) is being warmed up. Try again in ${waitTime} seconds?`,
       action: {
         label: `Yes`,
         onClick: () => {
           //retry the request in 15 seconds
           setTimeout(() => {
             fetchTasks();
-          }, retry * 1000);
+          }, waitTime * 1000);
         },
       },
     });
     return [];
+  }
+}
+
+export async function updateTask(taskId: string, taskUpdate: Partial<Task>): Promise<Task | null> {
+  try {
+    const response = await apiClient.put(`/tasks/${taskId}`, taskUpdate);
+    const updatedTask = TaskSchema.parse(response.data.data);
+
+    toast.success("Task has been updated.", {
+      description: updatedTask.title,
+      action: {
+        label: 'View task',
+        onClick: () => {
+          //navigate to the task
+          console.log('View task');
+        },
+      },
+    });
+
+    return updatedTask;
+
+  } catch (error) {
+    //logging error to monitoring services
+    if (error instanceof z.ZodError) {
+      console.log('ZodError', error.errors);
+    } else {
+      console.error('Unknown Error', error);
+    }
+
+    const waitTime = 5;
+    toast.error('Failed to update task.', {
+      description: `Try again in ${waitTime} seconds?`,
+      action: {
+        label: `Yes`,
+        onClick: () => {
+          //retry the request in 15 seconds
+          setTimeout(() => {
+            updateTask(taskId, taskUpdate);
+          }, waitTime * 1000);
+        },
+      },
+    });
+    return null;
   }
 }
 
@@ -69,40 +119,26 @@ export async function createTask(taskCreate: TaskCreate): Promise<Task | null> {
     });
     return null;
   } catch (error) {
+    //logging error to monitoring services
     if (error instanceof z.ZodError) {
-      //logging error to monitoring services
       console.log('ZodError', error.errors);
-
-      toast.error('Could not create task, please try again', {
-        description: new Intl.DateTimeFormat('en-US', {
-          dateStyle: 'medium',
-          timeStyle: 'medium',
-        }).format(new Date()),
-        action: {
-          label: 'Try Again',
-          onClick: () => {
-            //retry the request
-            console.log('Try Again');
-          },
-        },
-      });
     } else {
       console.error('Unknown Error', error);
-
-      toast.error('Failed to create task', {
-        description: new Intl.DateTimeFormat('en-US', {
-          dateStyle: 'medium',
-          timeStyle: 'medium',
-        }).format(new Date()),
-        action: {
-          label: 'Retry',
-          onClick: () => {
-            //retry the request
-            console.log('Retry');
-          },
-        },
-      });
     }
+
+    const waitTime = 5;
+    toast.error('Failed to create task.', {
+      description: `Try again in ${waitTime} seconds?`,
+      action: {
+        label: `Yes`,
+        onClick: () => {
+          //retry the request in 15 seconds
+          setTimeout(() => {
+            createTask(taskCreate);
+          }, waitTime * 1000);
+        },
+      },
+    });
     return null;
   }
 }

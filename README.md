@@ -126,6 +126,7 @@ This project uses [React Query](https://tanstack.com/query/latest/docs/framework
 
 ### Key Benefits
 - **Automated Caching & Re-Fetching**: React Query caches responses and automatically re-fetches data when needed, ensuring the UI stays up-to-date with minimal effort.
+- **Optimistic Updates**: Improved UX with manipulating cached data before & after API response.
 - **Declarative API Calls**: Use familiar hooks (e.g., useQuery, useMutation) to manage data fetching, error handling, and loading states directly within React components.
 - **Clean Separation of Concerns**: By abstracting API calls into hooks, UI components remain focused on presentation and logic.
 

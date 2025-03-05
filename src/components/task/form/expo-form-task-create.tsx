@@ -42,15 +42,6 @@ const ExpoFormTaskCreate = ({
   });
 
   const onSubmit = (values: z.infer<typeof TaskCreateSchema>) => {
-    // Alert the user with the form values
-    // TODO: Replace this with a real API call
-    // window.alert(`You want to create a task:
-    // - Title: ${values.title}
-    // - Description: ${values.description}
-    // - Status: ${statusMap[values.status].label}
-    // - Priority: ${priorityMap[values.priority].label}
-    // - Assignee: ${localUsersMap[localUsersMap.findIndex((user) => user.value === values.assignee)].label}
-    // `);
     createTask(values);
     setOpen(false);
   };

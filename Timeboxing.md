@@ -32,15 +32,18 @@
 | - Integrate with POST /tasks                              | 2             |
 | - Optimistic rendering with React Query                   | 2             |
 | - Unit testing                                            | 2             |
-| - End-2-end testing                                       | 2             |
 |                                                           |               |
 | API integration                                           |               |
 | - Setup Axios & React Query                               | 1             |
 | - Hook for GET /tasks                                     | 1             |
 | - PendingBoundary & ErrorBoundary                         | 1             |
+| - Hook for PUT /tasks/:id                                 | 1             |
+| - API Error Handling                                      | 1             |
+| - Integrate Sonner component for toast                    | 1             |
 |                                                           |               |
 | E2E Testing                                               |               |
 | - Setup Cypress                                           | 1             |
-| - Implement testing for TaskListView                      | 3             |
+| - Implement testing for TaskListView - List Behavior      | 3             |
+| - Implement testing for ExpoFormTaskCreate                | 3             |
 | --------------------------------------------------------- | ------------- |
-| Total                                                     | 60            |
+| Total                                                     | 64            |
