@@ -21,3 +21,4 @@ export const TaskCreateSchema = TaskSchema.omit({
 });
 
 export type Task = z.infer<typeof TaskSchema>;
+export type TaskCreate = z.infer<typeof TaskCreateSchema>;
