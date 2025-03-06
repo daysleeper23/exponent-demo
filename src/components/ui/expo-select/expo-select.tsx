@@ -28,7 +28,7 @@ const ExpoSelect = ({
   className?: string;
 }) => {
   return (
-    <Select onValueChange={onChange} defaultValue={value}>
+    <Select onValueChange={onChange} value={value}>
       <SelectTrigger className={className || ''} {...props}>
         <SelectValue
           placeholder={
