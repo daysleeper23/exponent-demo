@@ -1,6 +1,6 @@
 import React from 'react';
 import ExpoSelect from '../components/ui/expo-select/expo-select';
-import { statusMap } from '../api/common';
+import { statusMap } from '../api/api-common';
 
 export default {
   title: 'Components/ExpoSelect',
