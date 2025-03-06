@@ -55,7 +55,10 @@ const App = () => {
                       />
                     }
                   />
-                  <Route path="/board" element={<TaskBoardView tasks={tasks || []} />} />
+                  <Route
+                    path="/board"
+                    element={<TaskBoardView tasks={tasks || []} />}
+                  />
                   <Route path="/timeline" element={<TaskTimelineView />} />
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
