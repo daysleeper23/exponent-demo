@@ -1,4 +1,4 @@
-import { TaskPropertyMap } from '@/api/common';
+import { TaskPropertyMap } from '@/api/api-common';
 
 interface TaskPropertyProps {
   value: number;
