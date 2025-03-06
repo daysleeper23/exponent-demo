@@ -1,9 +1,9 @@
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useDroppable } from '@dnd-kit/core'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { CardContent, CardHeader } from '@/components/ui/card'
 import TaskBoardCard from './task-board-card'
 import { Column } from './task-board-view'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { statusMap } from '@/api/api-common'
 
 interface TaskBoardColumnProps {
   column: Column
@@ -15,32 +15,29 @@ export function TaskBoardColumn({ column }: TaskBoardColumnProps) {
   })
 
   return (
-    <Card className="w-[320px] h-full flex flex-col shadow-none bg-muted/40 border border-muted/70 ">
-      <CardHeader className='p-3'>
+    <div className="w-[320px] flex-1 flex flex-col gap-0 h-full py-0 shadow-none">
+      <CardHeader className='p-3 pt-6'>
         <ColumnTitle value={column.id} />
       </CardHeader>
       <CardContent className="flex-1 overflow-y-auto p-3">
-        <ScrollArea>
-          <SortableContext id={column.id} items={column.tasks} strategy={verticalListSortingStrategy}>
-            <div ref={setNodeRef} className="flex flex-col gap-2">
-              {column.tasks.map(task => (
-                <TaskBoardCard key={task} id={task} />
-              ))}
-            </div>
-          </SortableContext>
-        </ScrollArea>
+        <SortableContext id={column.id} items={column.tasks} strategy={verticalListSortingStrategy}>
+          <div ref={setNodeRef} className="flex flex-col gap-2">
+            {column.tasks.map(task => (
+              <TaskBoardCard key={task} id={task} />
+            ))}
+          </div>
+        </SortableContext>
       </CardContent>
-    </Card>
+    </div>
   )
 }
 
 const ColumnTitle = ({ value }: { value: string }) => {
-
+  const colInfo = statusMap[value];
   return (
-    <div className="flex gap-2 h-6 text-sm font-normal items-center overflow-hidden truncate">
-        {/* {meta?.icon} */}
-        {/* {meta?.label} */}
-        {value}
+    <div className="flex items-center gap-2 text-sm text-primary/80 px-2">
+        <colInfo.icon size={18}/>
+        <span>{colInfo.label}</span>
     </div>
   )
 }

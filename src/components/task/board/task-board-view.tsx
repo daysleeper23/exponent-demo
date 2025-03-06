@@ -5,7 +5,7 @@ export interface Column {
 }
 
 import { useMemo, useRef, useState } from 'react'
-import { DndContext, DragOverlay, closestCorners, KeyboardSensor, PointerSensor, useSensor, useSensors, DragStartEvent, DragOverEvent, DragEndEvent } from '@dnd-kit/core'
+import { DndContext, DragOverlay, closestCorners, KeyboardSensor, PointerSensor, useSensor, useSensors, DragStartEvent, DragOverEvent, DragEndEvent, closestCenter, pointerWithin } from '@dnd-kit/core'
 import { hasSortableData, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import { Task } from '@/types/task'
 import { TaskBoardColumn } from './task-board-column'
@@ -114,6 +114,7 @@ const TaskBoardView = ({ tasks }: TaskBoardViewProps) => {
           // active.data.current.sortable.items.splice(activeItemIndex, 1);
           console.log('temporarily insert to over at', overItemIndex);
           if (!over.data.current.sortable.items.includes(active.id)) {
+            console.log('item does not exists, inserting');
             over.data.current.sortable.items.splice(overItemIndex, 0, active.id);
           } else {
             console.log('already exists, just moving this temp to another position');
@@ -131,14 +132,14 @@ const TaskBoardView = ({ tasks }: TaskBoardViewProps) => {
   return (
     <DndContext
       sensors={sensors}
-      collisionDetection={closestCorners}
+      collisionDetection={closestCenter}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <div className='relative overflow-hidden flex-1 flex flex-col'>
-        <div className='flex w-full overflow-x-auto'>
-          <div className='flex-1 flex gap-3'>
+      <div className='relative overflow-hidden flex-1'>
+        <div className='flex w-full h-full overflow-x-auto'>
+          <div className='flex-1 flex px-3'>
             {[0, 1, 2, 3, 4].map(item => (
               <TaskBoardColumn key={item.toString()} column={columns.get(item.toString())!} />
             ))}

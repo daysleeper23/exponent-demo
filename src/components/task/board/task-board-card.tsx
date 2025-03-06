@@ -19,7 +19,7 @@ const TaskBoardCard = ({ id }: TaskBoardCardProps) => {
     transform,
     transition,
     isDragging,
-  } = useSortable({ id, resizeObserverConfig: {} })
+  } = useSortable({ id })
 
   const style = {
     transform: CSS.Transform.toString(transform),
