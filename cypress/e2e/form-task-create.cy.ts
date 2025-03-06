@@ -72,7 +72,7 @@ describe('Form Task Create - Form Validation & Error Message', () => {
 
 describe('Form Task Create - Form Submission', () => {
 
-  it('should display an alert with correct task details on form submission', () => {
+  it('should create the task with correct details on form submission', () => {
 
     cy.get('[data-testid="form-task-create-title"]').type('Test Task Title');
     cy.get('[data-testid="form-task-create-description"]').type('Test Task Description')
@@ -92,16 +92,16 @@ describe('Form Task Create - Form Submission', () => {
     cy.wait(500);
     cy.get('[data-slot="select-content"]').contains('Member 1').click();
 
-    // intercept the window alert and assert its content
-    cy.window().then(win => {
-      cy.stub(win, 'alert').as('alertStub');
-    });
-
     // Submit the form
     cy.get('button[type="submit"]').click();
 
-    // Verify the alert contains the expected task details
-    cy.get('@alertStub').should('have.been.calledOnce')
-      .and('have.been.calledWithMatch', /Test Task Title/);
-    });
+    // Resort the tasks by number DESC
+    cy.get('[data-testid="task-list-view-header-number"]').click();
+    cy.wait(500);
+
+    // Check the first task
+    cy.get('[data-testid="task-list-row"]').first().invoke('text').should('contain', 'Test Task Title');
+    cy.get('[data-testid="task-list-row"]').first().invoke('text').should('contain', 'In Progress');
+    cy.get('[data-testid="task-list-row"]').first().invoke('text').should('contain', 'High');
+  })
 });
