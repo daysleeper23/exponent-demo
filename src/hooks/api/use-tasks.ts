@@ -58,7 +58,7 @@ export const useCreateTask = () => {
       mutationFn: (taskCreate: TaskCreate) => {
         return createTask(taskCreate).then((newTask) => newTask);
       },
-      onMutate: async (_: TaskCreate) => {
+      onMutate: async () => {
         //cancel any outgoing queries
         await queryClient.cancelQueries({ queryKey: ['tasks'] });
 
