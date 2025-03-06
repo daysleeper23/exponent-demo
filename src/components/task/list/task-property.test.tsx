@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import TaskProperty from './task-property';
 import '@testing-library/jest-dom';
-import { priorityMap, statusMap } from '@/api/common';
+import { priorityMap, statusMap } from '@/api/api-common';
 
 describe('Rendering statuses', () => {
   test('renders TaskProperty with correct label and icon for Backlog', () => {

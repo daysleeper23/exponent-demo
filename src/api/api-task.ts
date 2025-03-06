@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 
 import { Task, TaskCreate, TaskSchema, TasksSchema } from '@/types/task';
 import { faker } from '@faker-js/faker';
-import { localUsers } from './user';
+import { localUsers } from './api-user';
 import apiClient from './api-client';
 
 //local data
@@ -108,11 +108,16 @@ export async function updateTask(
 
 export async function createTask(taskCreate: TaskCreate): Promise<Task | null> {
   try {
-    // const response = await apiClient.post('/tasks', task);
-    // const data = TaskSchema.parse(response.data.data);
-    // return data;)
-    toast.success("Task has been created (no it's not :) )", {
-      description: taskCreate.title,
+    //create a new task instead of sending the request to the server
+    const newTask: Task = {
+      id: uuid(),
+      number: 1000 + Math.floor(Math.random() * 1000),
+      ...taskCreate,
+    };
+
+    toast.success('Task has been created.', {
+      description:
+        "Actually, the task is created locally, but it's not saved on the server 😛. You can re-sort the task list by number DESC to see it.",
       action: {
         label: 'View task',
         onClick: () => {
@@ -121,7 +126,8 @@ export async function createTask(taskCreate: TaskCreate): Promise<Task | null> {
         },
       },
     });
-    return null;
+    console.log('returning new task', newTask);
+    return newTask;
   } catch (error) {
     //logging error to monitoring services
     if (error instanceof z.ZodError) {

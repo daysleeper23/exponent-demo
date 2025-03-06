@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { Metadata } from '@/api/common';
+import { Metadata } from '@/api/api-common';
 import {
   Select,
   SelectContent,
