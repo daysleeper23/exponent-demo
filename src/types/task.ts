@@ -21,3 +21,7 @@ export const TaskCreateSchema = TaskSchema.omit({
 });
 
 export type Task = z.infer<typeof TaskSchema>;
+export type TaskCreate = z.infer<typeof TaskCreateSchema>;
+export type TaskUpdate = {
+  id: Task['id'];
+} & Partial<Omit<Task, 'id' | 'number' | 'team'>>;

@@ -1,5 +1,5 @@
 import { lazy, Suspense, useLayoutEffect, useRef, useState } from 'react';
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/ui/sidebar/app-sidebar';
@@ -8,6 +8,7 @@ import TaskListView from '@/components/task/list/task-list-view';
 import { useTasks } from './hooks/api/use-tasks';
 import HeaderBar from './components/ui/header-bar';
 import PendingBoundary from './components/common/pending-boundary';
+import LoadingDataView from './components/common/loading-data-view';
 
 const TaskBoardView = lazy(
   () => import('@/components/task/board/task-board-view')
@@ -42,7 +43,7 @@ const App = () => {
             ref={contentRef}
             className="flex flex-1 flex-col overflow-hidden relative"
           >
-            <Suspense fallback={<div>Loading tasks...</div>}>
+            <Suspense fallback={<LoadingDataView message="Loading tasks..." />}>
               <PendingBoundary isPending={isPending}>
                 <Routes>
                   <Route
@@ -56,6 +57,7 @@ const App = () => {
                   />
                   <Route path="/board" element={<TaskBoardView />} />
                   <Route path="/timeline" element={<TaskTimelineView />} />
+                  <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
               </PendingBoundary>
             </Suspense>

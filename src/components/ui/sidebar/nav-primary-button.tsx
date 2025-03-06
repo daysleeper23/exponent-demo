@@ -20,7 +20,7 @@ const NavPrimaryButton = () => {
               onOpenChange={setOpen}
               title="Create new task"
               description=" "
-              form={<ExpoFormTaskCreate />}
+              form={<ExpoFormTaskCreate setOpen={setOpen} />}
             >
               <Plus />
               Create new task
@@ -31,7 +31,7 @@ const NavPrimaryButton = () => {
               onOpenChange={setOpen}
               title="Create new task"
               description=" "
-              form={<ExpoFormTaskCreate />}
+              form={<ExpoFormTaskCreate setOpen={setOpen} />}
             >
               <Plus />
               Create new task
