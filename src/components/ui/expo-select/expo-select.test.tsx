@@ -2,7 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import ExpoSelect from './expo-select';
-import { statusMap } from '@/api/common';
+import { statusMap } from '@/api/api-common';
 
 const statuses = Object.values(statusMap);
 // const priorities = Object.values(priorityMap);

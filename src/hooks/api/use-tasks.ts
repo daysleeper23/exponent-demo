@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { fetchTasks, updateTask } from '@/api/task';
+import { createTask, fetchTasks, updateTask } from '@/api/api-task';
 // import { getTasks } from '@/api/task';
-import { Task } from '@/types/task';
+import { Task, TaskCreate } from '@/types/task';
 import queryClient from '@/api/query-client';
 
 export function useTasks() {
@@ -50,4 +50,33 @@ export const useUpdateTask = () => {
       }
     },
   }).mutate;
+};
+
+export const useCreateTask = () => {
+  return useMutation<Task | null, Error, TaskCreate, { previousTasks: Task[] }>(
+    {
+      mutationFn: (taskCreate: TaskCreate) => {
+        return createTask(taskCreate).then((newTask) => newTask);
+      },
+      onMutate: async (_: TaskCreate) => {
+        //cancel any outgoing queries
+        await queryClient.cancelQueries({ queryKey: ['tasks'] });
+
+        return { previousTasks: queryClient.getQueryData(['tasks']) || [] };
+      },
+      onSuccess: (newTask, _, context) => {
+        if (context) {
+          queryClient.setQueryData(
+            ['tasks'],
+            [newTask, ...context.previousTasks]
+          );
+        }
+      },
+      onError: (_error, _, context) => {
+        if (context) {
+          queryClient.setQueryData(['tasks'], context.previousTasks);
+        }
+      },
+    }
+  ).mutate;
 };
