@@ -77,3 +77,16 @@ export const priorityMap: TaskPropertyMap = {
     value: 4,
   },
 };
+
+export const groupByOptions: Metadata[] = [
+  {
+    label: 'Status',
+    icon: Circle,
+    value: 'status',
+  },
+  {
+    label: 'Priority',
+    icon: ArrowUp,
+    value: 'priority',
+  },
+];

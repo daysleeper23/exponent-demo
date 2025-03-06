@@ -17,7 +17,7 @@ const TaskListRow = ({ task, style }: TaskListRowProps) => {
   };
 
   const handleUpdateStatus = (value: string) => {
-    const updatedTask = { ...task, priority: parseInt(value) };
+    const updatedTask = { ...task, status: parseInt(value) };
     updateTask(updatedTask);
   };
 

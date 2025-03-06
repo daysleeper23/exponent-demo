@@ -25,6 +25,12 @@
 | - Sorting: status, priority, title, number                | 6             |
 | - Integrate with GET /tasks                               | 1             |
 |                                                           |               |
+| Kanban Board                                              |               |
+| - UI Components: Card, Column, Board                      | 3             |
+| - Drag & drop function                                    | 4             |
+| - Dynamic grouping logic                                  | 2             |
+| - Data hook                                               | 1             |
+|                                                           |               |
 | Form                                                      |               |
 | - Form to create new tasks                                | 4             |
 | - Form validation                                         | 4             |
@@ -45,5 +51,6 @@
 | - Setup Cypress                                           | 1             |
 | - Implement testing for TaskListView - List Behavior      | 3             |
 | - Implement testing for ExpoFormTaskCreate                | 3             |
+| - Implement testing for KanBanBoard                       | 6             |
 | --------------------------------------------------------- | ------------- |
-| Total                                                     | 64            |
+| Total                                                     | 80            |
