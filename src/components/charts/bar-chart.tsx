@@ -106,7 +106,10 @@ const ExpoBarChart = ({
             </BarChart>
           </ChartContainer>
         </CardContent>
-        <ExpoChartFooter title='Current workload goes up by 5.2% this month' description='Showing data for April 2024' />
+        <ExpoChartFooter
+          title="Current workload goes up by 5.2% this month"
+          description="Showing data for April 2024"
+        />
       </Card>
     );
   }
@@ -124,9 +127,7 @@ const ExpoChartFooter = ({
       <div className="flex gap-2 font-medium leading-none">
         {title} <TrendingUp className="h-4 w-4" />
       </div>
-      <div className="leading-none text-muted-foreground">
-        {description}
-      </div>
+      <div className="leading-none text-muted-foreground">{description}</div>
     </CardFooter>
   );
 };
@@ -139,7 +140,7 @@ const ExpoChartHeader = ({
   description: string;
 }) => {
   return (
-    <CardHeader className='pb-6'>
+    <CardHeader className="pb-6">
       <CardTitle>{title}</CardTitle>
       <CardDescription>{description}</CardDescription>
     </CardHeader>

@@ -29,7 +29,10 @@ export default function TaskAnalyticsView() {
   return (
     <div className="grid overflow-y-auto w-full">
       <div className="p-6 gap-6 grid lg:grid-cols-2 xl:gap-10 scroll-mt-20">
-        <ExpoComposedChart title="Current Sprint Velocity" description="Show team progress for current sprint" />
+        <ExpoComposedChart
+          title="Current Sprint Velocity"
+          description="Show team progress for current sprint"
+        />
 
         <ExpoBarChart
           title="Tasks by status"

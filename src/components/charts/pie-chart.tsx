@@ -51,12 +51,17 @@ const ExpoPieChart = ({ title, description, data }: ExpoPieChartProps) => {
           className="mx-auto max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-foreground"
         >
           <PieChart>
-            <ChartTooltip content={<ChartTooltipContent labelKey="key" nameKey="value"/>} />
+            <ChartTooltip
+              content={<ChartTooltipContent labelKey="key" nameKey="value" />}
+            />
             <Pie data={data} dataKey="value" label nameKey="key" />
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <ExpoChartFooter title='Higher priority tasks trending upwards by 10%' description='Needs better prioritization' />
+      <ExpoChartFooter
+        title="Higher priority tasks trending upwards by 10%"
+        description="Needs better prioritization"
+      />
     </Card>
   );
 };
