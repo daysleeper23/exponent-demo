@@ -1,16 +1,20 @@
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts"
-
 import {
-  Card,
-  CardContent,
-} from "@/components/ui/card"
+  Bar,
+  BarChart,
+  CartesianGrid,
+  LabelList,
+  XAxis,
+  YAxis,
+} from 'recharts';
+
+import { Card, CardContent } from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
-import { BarChartData, ExpoChartFooter, ExpoChartHeader } from "./bar-chart"
+} from '@/components/ui/chart';
+import { BarChartData, ExpoChartFooter, ExpoChartHeader } from './bar-chart';
 
 interface ExpoBarChartCustomLabelProps {
   title: string;
@@ -18,17 +22,20 @@ interface ExpoBarChartCustomLabelProps {
   data: Omit<BarChartData, 'fill'>[];
 }
 
-const ExpoBarChartCustomLabel = ({ title, description, data }: ExpoBarChartCustomLabelProps) => {
-
+const ExpoBarChartCustomLabel = ({
+  title,
+  description,
+  data,
+}: ExpoBarChartCustomLabelProps) => {
   const chartConfig = {
     value: {
-      label: "value",
-      color: "hsl(var(--chart-1))",
+      label: 'value',
+      color: 'hsl(var(--chart-1))',
     },
     label: {
-      color: "hsl(var(--background))",
+      color: 'hsl(var(--background))',
     },
-  } satisfies ChartConfig
+  } satisfies ChartConfig;
 
   return (
     <Card className="shadow-none">
@@ -84,6 +91,6 @@ const ExpoBarChartCustomLabel = ({ title, description, data }: ExpoBarChartCusto
       </CardContent>
       <ExpoChartFooter />
     </Card>
-  )
-}
+  );
+};
 export default ExpoBarChartCustomLabel;

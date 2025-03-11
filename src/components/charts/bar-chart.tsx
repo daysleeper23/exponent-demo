@@ -29,8 +29,12 @@ interface ExpoBarChartProps {
   dataPending: boolean;
 }
 
-const ExpoBarChart = ({ title, description, data, dataPending }: ExpoBarChartProps) => {
-
+const ExpoBarChart = ({
+  title,
+  description,
+  data,
+  dataPending,
+}: ExpoBarChartProps) => {
   if (dataPending) {
     return (
       <Card className="shadow-none">
@@ -79,29 +83,27 @@ const ExpoBarChart = ({ title, description, data, dataPending }: ExpoBarChartPro
               accessibilityLayer
               data={data}
               margin={{ top: 0, right: 0, left: -20, bottom: 0 }}
-            > 
+            >
               <CartesianGrid vertical={false} />
-              <XAxis dataKey="key" 
+              <XAxis
+                dataKey="key"
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
-                tickFormatter={(value) => value} />
+                tickFormatter={(value) => value}
+              />
               <YAxis
                 dataKey="value"
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
               />
-                
+
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent hideLabel />}
               />
-              <Bar 
-                dataKey="value"
-                
-                radius={8}
-              />
+              <Bar dataKey="value" radius={8} />
             </BarChart>
           </ChartContainer>
         </CardContent>
@@ -109,7 +111,7 @@ const ExpoBarChart = ({ title, description, data, dataPending }: ExpoBarChartPro
       </Card>
     );
   }
-}
+};
 
 const ExpoChartFooter = () => {
   return (
@@ -121,16 +123,22 @@ const ExpoChartFooter = () => {
         Showing total tasks for the last 6 months
       </div>
     </CardFooter>
-  )
-}
+  );
+};
 
-const ExpoChartHeader = ({ title, description }: { title: string, description: string }) => {
+const ExpoChartHeader = ({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) => {
   return (
     <CardHeader>
       <CardTitle>{title}</CardTitle>
       <CardDescription>{description}</CardDescription>
     </CardHeader>
-  )
-}
+  );
+};
 
 export { ExpoBarChart, ExpoChartFooter, ExpoChartHeader };

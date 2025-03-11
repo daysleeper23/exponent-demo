@@ -1,17 +1,13 @@
-import { Pie, PieChart } from "recharts"
+import { Pie, PieChart } from 'recharts';
 
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card"
+import { Card, CardContent } from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
-import { BarChartData, ExpoChartFooter, ExpoChartHeader } from "./bar-chart"
-
+} from '@/components/ui/chart';
+import { BarChartData, ExpoChartFooter, ExpoChartHeader } from './bar-chart';
 
 interface ExpoPieChartProps {
   title: string;
@@ -20,32 +16,31 @@ interface ExpoPieChartProps {
 }
 
 const ExpoPieChart = ({ title, description, data }: ExpoPieChartProps) => {
-
   const chartConfig = {
     tasks: {
-      label: "Tasks",
+      label: 'Tasks',
     },
     0: {
       label: data[0].key,
-      color: "hsl(var(--chart-2))",
+      color: 'hsl(var(--chart-2))',
     },
     1: {
       label: data[1].key,
-      color: "hsl(var(--chart-3))",
+      color: 'hsl(var(--chart-3))',
     },
     2: {
       label: data[2].key,
-      color: "hsl(var(--chart-4))",
+      color: 'hsl(var(--chart-4))',
     },
     3: {
       label: data[3].key,
-      color: "hsl(var(--chart-5))",
+      color: 'hsl(var(--chart-5))',
     },
     4: {
       label: data[4].key,
-      color: "hsl(var(--chart-1))",
+      color: 'hsl(var(--chart-1))',
     },
-  } satisfies ChartConfig
+  } satisfies ChartConfig;
 
   return (
     <Card className="flex flex-col shadow-none">
@@ -63,6 +58,6 @@ const ExpoPieChart = ({ title, description, data }: ExpoPieChartProps) => {
       </CardContent>
       <ExpoChartFooter />
     </Card>
-  )
-}
+  );
+};
 export default ExpoPieChart;
