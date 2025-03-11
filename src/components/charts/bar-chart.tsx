@@ -44,7 +44,6 @@ const ExpoBarChart = ({
             <Loader2 className="animate-spin" />
           </div>
         </CardContent>
-        <ExpoChartFooter />
       </Card>
     );
   } else {
@@ -107,20 +106,26 @@ const ExpoBarChart = ({
             </BarChart>
           </ChartContainer>
         </CardContent>
-        <ExpoChartFooter />
+        <ExpoChartFooter title='Current workload goes up by 5.2% this month' description='Showing data for April 2024' />
       </Card>
     );
   }
 };
 
-const ExpoChartFooter = () => {
+const ExpoChartFooter = ({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) => {
   return (
     <CardFooter className="flex-col items-start gap-2 text-sm">
       <div className="flex gap-2 font-medium leading-none">
-        Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+        {title} <TrendingUp className="h-4 w-4" />
       </div>
       <div className="leading-none text-muted-foreground">
-        Showing total tasks for the last 6 months
+        {description}
       </div>
     </CardFooter>
   );
@@ -134,7 +139,7 @@ const ExpoChartHeader = ({
   description: string;
 }) => {
   return (
-    <CardHeader>
+    <CardHeader className='pb-6'>
       <CardTitle>{title}</CardTitle>
       <CardDescription>{description}</CardDescription>
     </CardHeader>

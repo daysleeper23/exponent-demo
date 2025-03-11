@@ -4,6 +4,7 @@ import { ExpoBarChart } from '@/components/charts/bar-chart';
 import ExpoBarChartCustomLabel from '@/components/charts/bar-chart-custom-label';
 import ExpoPieChart from '@/components/charts/pie-chart';
 import { useTasks } from '@/hooks/api/use-tasks';
+import ExpoComposedChart from '@/components/charts/composed-chart';
 
 export default function TaskAnalyticsView() {
   const { data: tasks, isPending } = useTasks();
@@ -28,6 +29,8 @@ export default function TaskAnalyticsView() {
   return (
     <div className="grid overflow-y-auto w-full">
       <div className="p-6 gap-6 grid lg:grid-cols-2 xl:gap-10 scroll-mt-20">
+        <ExpoComposedChart title="Current Sprint Velocity" description="Show team progress for current sprint" />
+
         <ExpoBarChart
           title="Tasks by status"
           description="Number of task by statuses"
@@ -45,7 +48,6 @@ export default function TaskAnalyticsView() {
           data={tasksByMember}
         />
       </div>
-      <div></div>
     </div>
   );
 }

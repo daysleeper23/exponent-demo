@@ -14,7 +14,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { BarChartData, ExpoChartFooter, ExpoChartHeader } from './bar-chart';
+import { BarChartData, ExpoChartHeader } from './bar-chart';
 
 interface ExpoBarChartCustomLabelProps {
   title: string;
@@ -78,18 +78,10 @@ const ExpoBarChartCustomLabel = ({
                 className="fill-background"
                 fontSize={12}
               />
-              {/* <LabelList
-                dataKey="key"
-                position="right"
-                offset={8}
-                className="fill-foreground"
-                fontSize={12}
-              /> */}
             </Bar>
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <ExpoChartFooter />
     </Card>
   );
 };
