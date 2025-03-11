@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AudioWaveform,
   ChartGantt,
+  ChartPie,
   Command,
   ListChecks,
   SquareKanban,
@@ -51,6 +52,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       title: 'Board',
       url: '/board',
       icon: SquareKanban,
+      isActive: false,
+    },
+    {
+      title: 'Analytics',
+      url: '/analytics',
+      icon: ChartPie,
       isActive: false,
     },
     {

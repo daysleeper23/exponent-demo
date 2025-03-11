@@ -4,7 +4,7 @@ import { CircleUser } from 'lucide-react';
 
 export const localUsers: User[] = [
   {
-    id: '156de810-1339-469d-9611-8443cdda88d1',
+    id: '1d92af90-4c60-4f75-b8f3-89d19f60d809',
     team: '80c322ca-e7ac-4b4e-822e-db6d1983b8e2',
     email: 'owner@fs19java.com',
     name: 'Owner',
@@ -12,7 +12,7 @@ export const localUsers: User[] = [
     onlineStatus: 'Online',
   },
   {
-    id: '4a7d763b-9ec7-46a0-9861-9c0dfb8e7129',
+    id: '26be36d0-b70c-470d-a805-8cd0df39fcf0',
     team: '80c322ca-e7ac-4b4e-822e-db6d1983b8e2',
     email: 'member1@fs19java.com',
     name: 'Member 1',
@@ -20,7 +20,7 @@ export const localUsers: User[] = [
     onlineStatus: 'Online',
   },
   {
-    id: '4b4b4b4b-4b4b-4b4b-4b4b-4b4b4b4b4b4b',
+    id: '45f987b8-aa3c-4cfe-9baf-e0507937116d',
     team: '80c322ca-e7ac-4b4e-822e-db6d1983b8e2',
     email: 'member4@fs19java.com',
     name: 'Member 4',
@@ -28,7 +28,7 @@ export const localUsers: User[] = [
     onlineStatus: 'Online',
   },
   {
-    id: '745b3885-cb08-4076-b97e-626c56e10e0f',
+    id: '7cc01afe-e9d4-4727-85de-396bde166d82',
     team: '80c322ca-e7ac-4b4e-822e-db6d1983b8e2',
     email: 'member2@fs19java.com',
     name: 'Member 2',
@@ -36,7 +36,7 @@ export const localUsers: User[] = [
     onlineStatus: 'Online',
   },
   {
-    id: '7f28dd30-549a-41af-bd42-1239651fe4f5',
+    id: '82198bde-ae3c-43dd-9bd2-bda9381a39ce',
     team: '80c322ca-e7ac-4b4e-822e-db6d1983b8e2',
     email: 'workspace_manager2@fs19java.com',
     name: 'Workspace Manager 2',
@@ -44,7 +44,7 @@ export const localUsers: User[] = [
     onlineStatus: 'Online',
   },
   {
-    id: 'acd9c8ef-87f3-4eae-bd92-238b01b746b6',
+    id: '88f2e9da-0e6e-402c-9c88-e3d091fca909',
     team: '80c322ca-e7ac-4b4e-822e-db6d1983b8e2',
     email: 'company_manager@fs19java.com',
     name: 'Company Manager',
@@ -52,7 +52,7 @@ export const localUsers: User[] = [
     onlineStatus: 'Online',
   },
   {
-    id: 'f3b3b3b3-3b3b-3b3b-3b3b-3b3b3b3b3b3b',
+    id: '8f10bece-468d-4066-991c-2046d4438a81',
     team: '80c322ca-e7ac-4b4e-822e-db6d1983b8e2',
     email: 'member3@fs19java.com',
     name: 'Member 3',
@@ -60,7 +60,7 @@ export const localUsers: User[] = [
     onlineStatus: 'Online',
   },
   {
-    id: 'f980e928-2ba4-47c5-abaa-cc675be24671',
+    id: '949111a9-731c-475c-84eb-e9b7dafb1087',
     team: '80c322ca-e7ac-4b4e-822e-db6d1983b8e2',
     email: 'workspace_manager1@fs19java.com',
     name: 'Workspace Manager 1',
@@ -68,7 +68,7 @@ export const localUsers: User[] = [
     onlineStatus: 'Online',
   },
   {
-    id: 'f9a589e3-791b-43e4-9081-8251f9931214',
+    id: '9f4f972f-65b8-4869-a740-68635a677994',
     team: '80c322ca-e7ac-4b4e-822e-db6d1983b8e2',
     email: 'guest@fs19java.com',
     name: 'Guest',

@@ -17,6 +17,10 @@ const TaskTimelineView = lazy(
   () => import('@/components/task/timeline/task-timeline-view')
 );
 
+const TaskAnalyticsView = lazy(
+  () => import('@/components/task/analytics/task-analytics-view')
+);
+
 const App = () => {
   const { data: tasks, isPending, isError, error } = useTasks();
 
@@ -59,6 +63,7 @@ const App = () => {
                     path="/board"
                     element={<TaskBoardView tasks={tasks || []} />}
                   />
+                  <Route path="/analytics" element={<TaskAnalyticsView />} />
                   <Route path="/timeline" element={<TaskTimelineView />} />
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
