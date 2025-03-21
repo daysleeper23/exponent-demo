@@ -7,10 +7,7 @@ import {
   YAxis,
 } from 'recharts';
 
-import {
-  Card,
-  CardContent,
-} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,

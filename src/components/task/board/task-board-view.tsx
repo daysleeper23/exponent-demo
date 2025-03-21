@@ -4,7 +4,7 @@ export interface Column {
   tasks: string[];
 }
 
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import {
   DndContext,
   DragOverlay,
@@ -23,7 +23,7 @@ import {
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
 import { Task } from '@/types/task';
-import { TaskBoardColumn } from './task-board-column';
+import TaskBoardColumn from './task-board-column';
 import TaskBoardCard from './task-board-card';
 import TaskBoardViewHeader from './task-board-view-header';
 import { useTaskGrouping } from '@/hooks/use-tasks-grouping';
@@ -39,7 +39,7 @@ interface TaskBoardViewProps {
   tasks: Task[];
 }
 
-const TaskBoardView = ({ tasks }: TaskBoardViewProps) => {
+const TaskBoardView = memo(({ tasks }: TaskBoardViewProps) => {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [groupBy, setGroupBy] = useState<string>('status');
   const initialColumns = useTaskGrouping(tasks, groupBy);
@@ -180,5 +180,5 @@ const TaskBoardView = ({ tasks }: TaskBoardViewProps) => {
       </div>
     </div>
   );
-};
+});
 export default TaskBoardView;

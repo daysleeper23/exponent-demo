@@ -29,5 +29,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "cypress/component/task-board-card.cy.tsx"]
+  "include": ["src", "cypress/e2e/task-board-card.cy.tsx"]
 }

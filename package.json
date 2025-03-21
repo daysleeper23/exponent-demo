@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "NODE_EVN=development vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build --analyze",
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\" \"cypress/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "preview": "vite preview",
@@ -19,6 +19,7 @@
     "@dnd-kit/helpers": "^0.0.9",
     "@dnd-kit/react": "^0.0.9",
     "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "@hookform/resolvers": "^4.1.3",
     "@radix-ui/react-collapsible": "^1.1.3",
     "@radix-ui/react-dialog": "^1.1.6",
