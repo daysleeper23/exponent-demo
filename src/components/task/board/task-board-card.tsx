@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
@@ -9,7 +10,7 @@ interface TaskBoardCardProps {
   id: string;
 }
 
-const TaskBoardCard = ({ id }: TaskBoardCardProps) => {
+const TaskBoardCard = memo(({ id }: TaskBoardCardProps) => {
   const {
     attributes,
     listeners,
@@ -44,5 +45,5 @@ const TaskBoardCard = ({ id }: TaskBoardCardProps) => {
       </CardContent>
     </Card>
   );
-};
+});
 export default TaskBoardCard;

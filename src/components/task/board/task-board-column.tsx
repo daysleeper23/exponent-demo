@@ -1,18 +1,21 @@
+import { memo } from 'react';
 import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { useDroppable } from '@dnd-kit/core';
+
 import { CardContent, CardHeader } from '@/components/ui/card';
 import TaskBoardCard from './task-board-card';
 import { Column } from './task-board-view';
+
 import { priorityMap, statusMap } from '@/api/api-common';
 
 interface TaskBoardColumnProps {
   column: Column;
 }
 
-export function TaskBoardColumn({ column }: TaskBoardColumnProps) {
+const TaskBoardColumn = memo(({ column }: TaskBoardColumnProps) => {
   const { setNodeRef } = useDroppable({
     id: column.id,
   });
@@ -37,14 +40,15 @@ export function TaskBoardColumn({ column }: TaskBoardColumnProps) {
       </CardContent>
     </div>
   );
-}
+});
+export default TaskBoardColumn;
 
-const ColumnTitle = ({ value, type }: { value: string; type: string }) => {
+const ColumnTitle = memo(({ value, type }: { value: string; type: string }) => {
   const colInfo = type === 'status' ? statusMap[value] : priorityMap[value];
   return (
     <div className="flex items-center gap-2 text-sm text-primary/80 px-2">
-      <colInfo.icon size={18} />
+      {colInfo.icon}
       <span>{colInfo.label}</span>
     </div>
   );
-};
+});

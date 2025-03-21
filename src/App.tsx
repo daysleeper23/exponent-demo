@@ -10,8 +10,8 @@ import HeaderBar from './components/ui/header-bar';
 import PendingBoundary from './components/common/pending-boundary';
 import LoadingDataView from './components/common/loading-data-view';
 
-const TaskBoardView = lazy(
-  () => import('@/components/task/board/task-board-view')
+const DndBoardReact = lazy(
+  () => import('@/components/task/board-react')
 );
 const TaskTimelineView = lazy(
   () => import('@/components/task/timeline/task-timeline-view')
@@ -61,7 +61,7 @@ const App = () => {
                   />
                   <Route
                     path="/board"
-                    element={<TaskBoardView tasks={tasks || []} />}
+                    element={<DndBoardReact tasks={tasks || []} />}
                   />
                   <Route path="/analytics" element={<TaskAnalyticsView />} />
                   <Route path="/timeline" element={<TaskTimelineView />} />

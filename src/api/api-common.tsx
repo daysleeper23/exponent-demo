@@ -6,7 +6,6 @@ import {
   CircleCheckBig,
   CircleHelp,
   CircleOff,
-  LucideIcon,
   Minus,
   OctagonAlert,
   Timer,
@@ -14,7 +13,7 @@ import {
 
 export interface Metadata {
   label: string;
-  icon: LucideIcon;
+  icon: React.ReactNode;
   value: string | number;
 }
 
@@ -25,27 +24,27 @@ export interface TaskPropertyMap {
 export const statusMap: TaskPropertyMap = {
   '0': {
     label: 'Backlog',
-    icon: CircleHelp,
+    icon: <CircleHelp size={18} />,
     value: 0,
   },
   '1': {
     label: 'Todo',
-    icon: Circle,
+    icon: <Circle size={18} />,
     value: 1,
   },
   '2': {
     label: 'In Progress',
-    icon: Timer,
+    icon: <Timer size={18} />,
     value: 2,
   },
   '3': {
     label: 'Done',
-    icon: CircleCheckBig,
+    icon: <CircleCheckBig size={18} />,
     value: 3,
   },
   '4': {
     label: 'Canceled',
-    icon: CircleOff,
+    icon: <CircleOff size={18} />,
     value: 4,
   },
 };
@@ -53,40 +52,40 @@ export const statusMap: TaskPropertyMap = {
 export const priorityMap: TaskPropertyMap = {
   '0': {
     label: 'No priority',
-    icon: Minus,
+    icon: <Minus size={18} />,
     value: 0,
   },
   '1': {
     label: 'Low',
-    icon: ArrowDown,
+    icon: <ArrowDown size={18} />,
     value: 1,
   },
   '2': {
     label: 'Medium',
-    icon: ArrowRight,
+    icon: <ArrowRight size={18} />,
     value: 2,
   },
   '3': {
     label: 'High',
-    icon: ArrowUp,
+    icon: <ArrowUp size={18} />,
     value: 3,
   },
   '4': {
     label: 'Urgent',
-    icon: OctagonAlert,
+    icon: <OctagonAlert size={18} />,
     value: 4,
   },
 };
 
-export const groupByOptions: Metadata[] = [
-  {
+export const groupByOptions: TaskPropertyMap = {
+  status: {
     label: 'Status',
-    icon: Circle,
+    icon: <Circle size={18} />,
     value: 'status',
   },
-  {
+  priority: {
     label: 'Priority',
-    icon: ArrowUp,
+    icon: <ArrowUp size={18} />,
     value: 'priority',
   },
-];
+};

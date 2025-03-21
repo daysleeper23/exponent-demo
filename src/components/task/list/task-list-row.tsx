@@ -38,14 +38,14 @@ const TaskListRow = ({ task, style }: TaskListRowProps) => {
       <div className="hidden sm:ml-auto sm:flex sm:gap-4 sm:pointer-events-auto">
         <ExpoSelect
           className="w-[152px]"
-          items={Object.values(statusMap)}
+          items={statusMap}
           value={task.status.toString()}
           onChange={handleUpdateStatus}
         />
 
         <ExpoSelect
           className="w-[144px]"
-          items={Object.values(priorityMap)}
+          items={priorityMap}
           value={task.priority.toString()}
           onChange={handleUpdatePriority}
         />
