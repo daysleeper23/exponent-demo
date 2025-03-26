@@ -3,10 +3,9 @@ import { useSortable } from '@dnd-kit/react/sortable';
 import { Task } from '@/types/task';
 import queryClient from '@/api/query-client';
 import { cn } from '@/lib/utils';
+import { priorityMap, statusMap } from '@/api/api-common';
 import ExpoSelect from '@/components/ui/expo-select/expo-select';
-import { priorityMap, statusMap, TaskPropertyMap } from '@/api/api-common';
-import { useUpdateTask } from '@/hooks/api/use-tasks';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import taskAPI from '@/hooks/api/use-tasks-supabase';
 
 interface DndCardReactProps {
   id: string;
@@ -20,21 +19,21 @@ const DndCardReact = memo(({ id, column, index }: DndCardReactProps) => {
     group: column,
     index,
   });
-  // const updateTask = useUpdateTask();
+  const updateTask = taskAPI.useUpdateTask();
 
   const task: Task = (queryClient.getQueryData(['tasks']) as Task[]).find(
     (task: Task) => task.id === id
   )!;
 
-  // const handleUpdatePriority = (value: string) => {
-  //   const updatedTask = { ...task, priority: parseInt(value) };
-  //   updateTask(updatedTask);
-  // };
+  const handleUpdatePriority = (value: string) => {
+    const updatedTask = { ...task, priority: parseInt(value) };
+    updateTask(updatedTask);
+  };
 
-  // const handleUpdateStatus = (value: string) => {
-  //   const updatedTask = { ...task, status: parseInt(value) };
-  //   updateTask(updatedTask);
-  // };
+  const handleUpdateStatus = (value: string) => {
+    const updatedTask = { ...task, status: parseInt(value) };
+    updateTask(updatedTask);
+  };
 
   return (
     <div
@@ -54,19 +53,19 @@ const DndCardReact = memo(({ id, column, index }: DndCardReactProps) => {
       </div>
 
       <div className="flex gap-2 pointer-events-auto">
-        {/* <ExpoSelect
+        <ExpoSelect
           className="w-[152px]"
           items={statusMap}
           value={task.status.toString()}
           onChange={handleUpdateStatus}
-        /> */}
-        {/* <ExpoSelect
+        />
+        <ExpoSelect
           className="w-[144px]"
           items={priorityMap}
           value={task.priority.toString()}
           onChange={handleUpdatePriority}
-        /> */}
-        <div className="flex items-center gap-2 text-xs text-primary/80 px-2 py-1 border rounded-md">
+        />
+        {/* <div className="flex items-center gap-2 text-xs text-primary/80 px-2 py-1 border rounded-md">
           {statusMap[task.status.toString()].icon}
           {statusMap[task.status.toString()].label}
         </div>
@@ -74,9 +73,8 @@ const DndCardReact = memo(({ id, column, index }: DndCardReactProps) => {
         <div className="flex items-center gap-2 text-xs text-primary/80 px-2 py-1 border rounded-md">
           {priorityMap[task.priority.toString()].icon}
           {priorityMap[task.priority.toString()].label}
-        </div>
+        </div> */}
 
-        
         {/* <ComboBox
           className="w-[144px]"
           items={statusMap}

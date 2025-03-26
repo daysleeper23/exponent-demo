@@ -32,7 +32,8 @@ export const getTasks = (count: number): Task[] => {
 export async function fetchTasks(): Promise<Task[]> {
   try {
     const response = await apiClient.get('/tasks');
-    const data = TasksSchema.parse(response.data.data);
+    // const data = TasksSchema.parse(response.data.data);
+    const data = TasksSchema.parse(response.data);
     return data;
   } catch (error) {
     //logging error to monitoring services
@@ -65,7 +66,8 @@ export async function updateTask(
 ): Promise<Task | null> {
   try {
     const response = await apiClient.put(`/tasks/${taskId}`, taskUpdate);
-    const updatedTask = TaskSchema.parse(response.data.data);
+    // const updatedTask = TaskSchema.parse(response.data.data);
+    const updatedTask = TaskSchema.parse(response.data);
 
     toast.success('Task has been updated.', {
       description: updatedTask.title,

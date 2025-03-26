@@ -4,7 +4,7 @@ import { createTask, fetchTasks, updateTask } from '@/api/api-task';
 import { Task, TaskCreate } from '@/types/task';
 import queryClient from '@/api/query-client';
 
-export function useTasks() {
+const useTasks = () => {
   /* remote data */
   return useQuery<Task[], Error>({
     queryKey: ['tasks'],
@@ -19,9 +19,9 @@ export function useTasks() {
   //   isError: false,
   //   error: null
   // }
-}
+};
 
-export const useUpdateTask = () => {
+const useUpdateTask = () => {
   return useMutation({
     mutationFn: (task: Task) => {
       return updateTask(task.id, task).then((updatedTask) => updatedTask);
@@ -52,7 +52,7 @@ export const useUpdateTask = () => {
   }).mutate;
 };
 
-export const useCreateTask = () => {
+const useCreateTask = () => {
   return useMutation<Task | null, Error, TaskCreate, { previousTasks: Task[] }>(
     {
       mutationFn: (taskCreate: TaskCreate) => {
@@ -80,3 +80,4 @@ export const useCreateTask = () => {
     }
   ).mutate;
 };
+export default { useTasks, useUpdateTask, useCreateTask };

@@ -5,14 +5,13 @@ import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/ui/sidebar/app-sidebar';
 
 import TaskListView from '@/components/task/list/task-list-view';
-import { useTasks } from './hooks/api/use-tasks';
+import taskApi from './hooks/api/use-tasks';
+// import taskApi from './hooks/api/use-tasks-supabase';
 import HeaderBar from './components/ui/header-bar';
 import PendingBoundary from './components/common/pending-boundary';
 import LoadingDataView from './components/common/loading-data-view';
 
-const DndBoardReact = lazy(
-  () => import('@/components/task/board-react')
-);
+const DndBoardReact = lazy(() => import('@/components/task/board-react'));
 const TaskTimelineView = lazy(
   () => import('@/components/task/timeline/task-timeline-view')
 );
@@ -22,7 +21,7 @@ const TaskAnalyticsView = lazy(
 );
 
 const App = () => {
-  const { data: tasks, isPending, isError, error } = useTasks();
+  const { data: tasks, isPending, isError, error } = taskApi.useTasks();
 
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
