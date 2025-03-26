@@ -3,26 +3,28 @@ import { localUsers } from '@/api/api-user';
 import { ExpoBarChart } from '@/components/charts/bar-chart';
 import ExpoBarChartCustomLabel from '@/components/charts/bar-chart-custom-label';
 import ExpoPieChart from '@/components/charts/pie-chart';
-import { useTasks } from '@/hooks/api/use-tasks';
+import taskApi from '@/hooks/api/use-tasks';
 import ExpoComposedChart from '@/components/charts/composed-chart';
+import { Task } from '@/types/task';
 
 export default function TaskAnalyticsView() {
-  const { data: tasks, isPending } = useTasks();
+  const { data: tasks, isPending } = taskApi.useTasks();
 
   const tasksByMember = localUsers.map((user) => ({
     key: user.name,
-    value: tasks!.filter((task) => task.assignee === user.id).length,
+    value: (tasks || []).filter((task: Task) => task.assignee === user.id).length,
   }));
 
   const tasksByStatus = Object.values(statusMap).map((status, index) => ({
     key: status.label,
-    value: tasks!.filter((task) => task.status === status.value).length,
+    value: (tasks || []).filter((task: Task) => task.status === status.value).length,
     fill: `var(--color-${index})`,
   }));
 
   const tasksByPriority = Object.values(priorityMap).map((priority, index) => ({
     key: priority.label,
-    value: tasks!.filter((task) => task.priority === priority.value).length,
+    value: (tasks || []).filter((task: Task) => task.priority === priority.value)
+      .length,
     fill: `var(--color-${index})`,
   }));
 

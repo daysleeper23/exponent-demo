@@ -10,9 +10,7 @@ const TaskProperty = ({ value, items }: TaskPropertyProps) => {
 
   return (
     <div className="flex gap-1 w-[120px] items-center px-2 py-1 hover:bg-primary/5 rounded-md pointer-events-auto">
-      {prop.icon && (
-        <prop.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-      )}
+      {prop.icon && prop.icon}
       <span>{prop.label}</span>
     </div>
   );

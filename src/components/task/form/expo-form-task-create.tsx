@@ -19,7 +19,7 @@ import ExpoSelect from '@/components/ui/expo-select/expo-select';
 import { TaskCreateSchema } from '@/types/task';
 import { priorityMap, statusMap } from '@/api/api-common';
 import { localUsersMap } from '@/api/api-user';
-import { useCreateTask } from '@/hooks/api/use-tasks';
+import taskAPI from '@/hooks/api/use-tasks';
 
 interface ExpoFormTaskCreateProps extends React.ComponentProps<'form'> {
   setOpen: (open: boolean) => void;
@@ -41,12 +41,13 @@ const ExpoFormTaskCreate = ({
     },
   });
 
-  const createTask = useCreateTask();
+  const createTask = taskAPI.useCreateTask();
 
   const onSubmit = (values: z.infer<typeof TaskCreateSchema>) => {
     createTask(values);
     setOpen(false);
   };
+  console.log('localUsersMap', localUsersMap);
 
   return (
     <Form {...form}>
@@ -99,7 +100,7 @@ const ExpoFormTaskCreate = ({
               <FormControl>
                 <ExpoSelect
                   data-testid="form-task-create-status"
-                  items={Object.values(statusMap)}
+                  items={statusMap}
                   value={field.value.toString()}
                   onChange={(val: string) => field.onChange(val)}
                   className="w-[180px]"
@@ -119,7 +120,7 @@ const ExpoFormTaskCreate = ({
               <FormControl>
                 <ExpoSelect
                   data-testid="form-task-create-priority"
-                  items={Object.values(priorityMap)}
+                  items={priorityMap}
                   value={field.value.toString()}
                   onChange={(val: string) => field.onChange(val)}
                   className="w-[180px]"
@@ -139,7 +140,7 @@ const ExpoFormTaskCreate = ({
               <FormControl>
                 <ExpoSelect
                   data-testid="form-task-create-assignee"
-                  items={Object.values(localUsersMap)}
+                  items={localUsersMap}
                   value={field.value.toString()}
                   onChange={(val: string) => field.onChange(val)}
                 />

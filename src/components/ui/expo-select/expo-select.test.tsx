@@ -10,7 +10,7 @@ const statuses = Object.values(statusMap);
 describe('ExpoSelect Component', () => {
   test('renders with default status is In Progress', () => {
     const { container } = render(
-      <ExpoSelect items={statuses} value="2" onChange={jest.fn()} />
+      <ExpoSelect items={statusMap} value="2" onChange={jest.fn()} />
     );
 
     // Check that the default value is displayed
@@ -23,7 +23,7 @@ describe('ExpoSelect Component', () => {
 
   // NOTE: a bug in @radix-ui/react-select is causing this test to fail
   test('opens select and displays all options', async () => {
-    render(<ExpoSelect items={statuses} value="0" onChange={jest.fn()} />, {
+    render(<ExpoSelect items={statusMap} value="0" onChange={jest.fn()} />, {
       container: document.body,
     });
 
@@ -46,7 +46,7 @@ describe('ExpoSelect Component', () => {
 
   test('calls onChange with new value when an option is selected', async () => {
     const handleChange = jest.fn();
-    render(<ExpoSelect items={statuses} value="0" onChange={handleChange} />);
+    render(<ExpoSelect items={statusMap} value="0" onChange={handleChange} />);
 
     // open select
     const trigger = screen.getByRole('combobox');
