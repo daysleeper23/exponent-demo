@@ -1,16 +1,24 @@
-import { Task } from '@/types/task';
+import React from 'react';
 import { priorityMap, statusMap } from '@/api/static/common';
 import ExpoSelect from '@/components/ui/expo-select/expo-select';
-// import taskApi from '@/hooks/api/use-tasks';
-import taskApi from '@/hooks/api/use-tasks-supabase';
+import { useTasks } from '@/api/supabase/use-tasks';
+import useTaskStore from '@/store/task';
+
 
 interface TaskListRowProps {
-  task: Task;
+  id: string;
   style?: React.CSSProperties;
 }
 
-const TaskListRow = ({ task, style }: TaskListRowProps) => {
-  const updateTask = taskApi.useUpdateTask();
+const TaskListRow = React.memo(({
+  id,
+  style,
+}: TaskListRowProps) => {
+  const task = useTaskStore((state) => state.tasks[id]);
+  if (task.number === 1) {
+    console.log('rendering task', task);
+  }
+  const { updateTask } = useTasks();
 
   const handleUpdatePriority = (value: string) => {
     const updatedTask = { ...task, priority: parseInt(value) };
@@ -53,5 +61,8 @@ const TaskListRow = ({ task, style }: TaskListRowProps) => {
       </div>
     </div>
   );
-};
+});
+
+TaskListRow.whyDidYouRender = true;
+
 export default TaskListRow;

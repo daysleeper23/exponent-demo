@@ -6,8 +6,8 @@ import { move } from '@dnd-kit/helpers';
 import { useColumnGrouping } from './use-column-grouping';
 import DndCardReact from './card';
 import TaskBoardViewHeader from '../board/task-board-view-header';
-// import taskAPI from '@/hooks/api/use-tasks';
-import taskAPI from '@/hooks/api/use-tasks-supabase';
+
+import { useTasks } from '@/api/supabase/use-tasks';
 import LoadingDataView from '@/components/common/loading-data-view';
 
 const DndBoardReact = ({ tasks }: { tasks: Task[] }) => {
@@ -20,7 +20,7 @@ const DndBoardReact = ({ tasks }: { tasks: Task[] }) => {
     setColumns(initialColumns);
   }, [groupBy]);
 
-  const updateTask = taskAPI.useUpdateTask();
+  const { updateTask } = useTasks();
   const [sourceId, setSourceId] = useState<string>('');
   const [targetId, setTargetId] = useState<string>('');
 

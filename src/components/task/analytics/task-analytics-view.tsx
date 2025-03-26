@@ -12,19 +12,22 @@ export default function TaskAnalyticsView() {
 
   const tasksByMember = localUsers.map((user) => ({
     key: user.name,
-    value: (tasks || []).filter((task: Task) => task.assignee === user.id).length,
+    value: (tasks || []).filter((task: Task) => task.assignee === user.id)
+      .length,
   }));
 
   const tasksByStatus = Object.values(statusMap).map((status, index) => ({
     key: status.label,
-    value: (tasks || []).filter((task: Task) => task.status === status.value).length,
+    value: (tasks || []).filter((task: Task) => task.status === status.value)
+      .length,
     fill: `var(--color-${index})`,
   }));
 
   const tasksByPriority = Object.values(priorityMap).map((priority, index) => ({
     key: priority.label,
-    value: (tasks || []).filter((task: Task) => task.priority === priority.value)
-      .length,
+    value: (tasks || []).filter(
+      (task: Task) => task.priority === priority.value
+    ).length,
     fill: `var(--color-${index})`,
   }));
 

@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+import React from 'react';
 import './index.css';
 import App from './App.tsx';
 import { BrowserRouter } from 'react-router';
@@ -9,6 +10,11 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ErrorBoundary } from './components/common/error-boundary.tsx';
 import ServerError from './components/common/server-error.tsx';
 import { Toaster } from './components/ui/sonner.tsx';
+import whyDidYouRender from '@welldone-software/why-did-you-render';
+
+if (process.env.NODE_ENV === 'development') {
+  whyDidYouRender(React);
+}
 
 createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
@@ -23,3 +29,4 @@ createRoot(document.getElementById('root')!).render(
     </ErrorBoundary>
   </QueryClientProvider>
 );
+

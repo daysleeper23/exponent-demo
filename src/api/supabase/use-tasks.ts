@@ -3,22 +3,29 @@ import { taskApi } from './task';
 import useTaskStore from '@/store/task';
 import { Task } from '@/types/task';
 import { useEffect } from 'react';
+import { toast } from 'sonner';
 
-export const useTasks = (teamId: string) => {
+export const useTasks = () => {
   const queryClient = useQueryClient();
-  const setTasks = useTaskStore(state => state.setTasks);
-  const updateTask = useTaskStore(state => state.updateTask);
-  const deleteTask = useTaskStore(state => state.deleteTask);
-  const addTask = useTaskStore(state => state.addTask);
+  const setTasks = useTaskStore((state) => state.setTasks);
+  const updateTask = useTaskStore((state) => state.updateTask);
+  const deleteTask = useTaskStore((state) => state.deleteTask);
+  const addTask = useTaskStore((state) => state.addTask);
+  const teamId = useTaskStore((state) => state.teamId);
 
   // Query for fetching tasks
-  const { data: tasks, isPending, isError, error } = useQuery({
+  const {
+    data: tasks,
+    isPending,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ['tasks', teamId],
     queryFn: async () => {
       const { data, error } = await taskApi.getTasks(teamId);
       if (error) throw error;
       return data;
-    }
+    },
   });
 
   // Update Zustand store when tasks data changes
@@ -34,9 +41,17 @@ export const useTasks = (teamId: string) => {
     onSuccess: (updatedTask: Task) => {
       if (updatedTask) {
         updateTask(updatedTask);
-        queryClient.invalidateQueries({ queryKey: ['tasks', teamId] });
+        queryClient.setQueryData(['tasks', teamId], (oldData: Task[]) => {
+          if (oldData) {
+            return oldData.map((task) =>
+              task.id === updatedTask.id ? updatedTask : task
+            );
+          }
+          return oldData;
+        });
+        toast.success('Task updated successfully');
       }
-    }
+    },
   });
 
   // Mutation for deleting tasks
@@ -48,7 +63,7 @@ export const useTasks = (teamId: string) => {
     onSuccess: (_, taskId) => {
       deleteTask(taskId);
       queryClient.invalidateQueries({ queryKey: ['tasks', teamId] });
-    }
+    },
   });
 
   // Mutation for adding tasks
@@ -59,7 +74,7 @@ export const useTasks = (teamId: string) => {
         addTask(data);
         queryClient.invalidateQueries({ queryKey: ['tasks', teamId] });
       }
-    }
+    },
   });
 
   return {

@@ -5,11 +5,11 @@ import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/ui/sidebar/app-sidebar';
 
 import TaskListView from '@/components/task/list/task-list-view';
-import taskApi from './hooks/api/use-tasks';
-// import taskApi from './hooks/api/use-tasks-supabase';
+
 import HeaderBar from './components/ui/header-bar';
 import PendingBoundary from './components/common/pending-boundary';
 import LoadingDataView from './components/common/loading-data-view';
+import { useTasks } from './api/supabase/use-tasks';
 
 const DndBoardReact = lazy(() => import('@/components/task/board-react'));
 const TaskTimelineView = lazy(
@@ -21,20 +21,25 @@ const TaskAnalyticsView = lazy(
 );
 
 const App = () => {
-  const { data: tasks, isPending, isError, error } = taskApi.useTasks();
+  const { tasks, isPending, isError, error } = useTasks();
 
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
 
   useLayoutEffect(() => {
-    if (contentRef.current !== null) {
+    if (contentRef.current !== null && contentRef.current.getBoundingClientRect().height !== contentHeight) {
+      console.log('set new height')
       setContentHeight(contentRef.current.getBoundingClientRect().height);
     }
-  }, [tasks]);
+  }, [tasks?.length]);
 
   if (isError) {
     throw new Error(error?.message ?? 'Unknown error');
   }
+  if (isPending) {
+    return <LoadingDataView message="Loading tasks..." />;
+  }
+  console.log('rendering app')
 
   return (
     <div className="flex h-screen w-screen">
@@ -53,7 +58,7 @@ const App = () => {
                     path="/"
                     element={
                       <TaskListView
-                        tasks={tasks || []}
+                        // tasks={tasks || []}
                         viewHeight={contentHeight}
                       />
                     }

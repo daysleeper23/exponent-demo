@@ -1,21 +1,23 @@
-import { Task } from '@/types/task';
+import React from 'react';
 import TaskListRow from './task-list-row';
 import { SyntheticEvent, useRef, useState } from 'react';
-import useColumnSorting from '@/hooks/use-column-sorting';
 import TaskListViewHeader from './task-list-view-header';
+import useTaskStore from '@/store/task';
 
 interface TaskListViewProps {
-  tasks: Task[];
+  // tasks: Task[];
   viewHeight: number;
 }
 
-const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
-  //use the useColumnSorting hook to manage sorting state
-  const { sortedTasks, handleSortClick, getSortIcon, sortOptions } =
-    useColumnSorting(tasks);
+const TaskListView = React.memo(({ 
+  viewHeight 
+}: TaskListViewProps) => {
+  
+  const sortedList = useTaskStore(state => state.sortedList);
+  console.log('rendering task list view', viewHeight);
 
   //Virtualized List
-  const rowCount = tasks.length;
+  const rowCount = sortedList.length;
   const rowHeight = 45;
 
   //overScan is the number of items to render above and below the visible area
@@ -35,12 +37,18 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
   const endIndex = Math.min(rowCount, startIndex + visibleCount);
 
   const renderItem = ({
-    task,
+    id,
     style,
   }: {
-    task: Task;
+    id: string;
     style: React.CSSProperties;
-  }) => <TaskListRow key={task.id} style={style} task={task} />;
+  }) => (
+    <TaskListRow
+      key={id}
+      style={style}
+      id={id}
+    />
+  );
 
   /*
     This function is called whenever the user scrolls the list.
@@ -81,18 +89,15 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
       height: rowHeight,
       width: '100%',
     };
+
     visibleItems.push(
-      renderItem({ task: sortedTasks[i], style: style as React.CSSProperties })
+      renderItem({ id: sortedList[i], style: style as React.CSSProperties })
     );
   }
 
   return (
     <>
-      <TaskListViewHeader
-        sortOptions={sortOptions}
-        handleSortClick={handleSortClick}
-        getSortIcon={getSortIcon}
-      />
+      <TaskListViewHeader />
       <div
         data-testid="task-list-view"
         className="text-sm overflow-y-auto relative"
@@ -108,5 +113,12 @@ const TaskListView = ({ tasks, viewHeight }: TaskListViewProps) => {
       </div>
     </>
   );
-};
+}, (prevProps, nextProps) => {
+    console.log('Comparing props:', prevProps, nextProps);
+    return prevProps.viewHeight === nextProps.viewHeight;
+  }
+);
+
+TaskListView.whyDidYouRender = true;
+
 export default TaskListView;
