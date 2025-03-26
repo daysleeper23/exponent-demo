@@ -1,5 +1,5 @@
 import { Task } from '@/types/task';
-import { priorityMap, statusMap } from '@/api/api-common';
+import { priorityMap, statusMap } from '@/api/static/common';
 import ExpoSelect from '@/components/ui/expo-select/expo-select';
 // import taskApi from '@/hooks/api/use-tasks';
 import taskApi from '@/hooks/api/use-tasks-supabase';

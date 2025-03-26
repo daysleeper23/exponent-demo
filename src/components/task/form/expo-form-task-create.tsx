@@ -17,8 +17,8 @@ import { Textarea } from '@/components/ui/textarea';
 import ExpoSelect from '@/components/ui/expo-select/expo-select';
 
 import { TaskCreateSchema } from '@/types/task';
-import { priorityMap, statusMap } from '@/api/api-common';
-import { localUsersMap } from '@/api/api-user';
+import { priorityMap, statusMap } from '@/api/static/common';
+import { localUsersMap } from '@/api/static/user';
 import taskAPI from '@/hooks/api/use-tasks';
 
 interface ExpoFormTaskCreateProps extends React.ComponentProps<'form'> {

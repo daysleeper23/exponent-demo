@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import { useSortable } from '@dnd-kit/react/sortable';
 import { Task } from '@/types/task';
-import queryClient from '@/api/query-client';
+import queryClient from '@/api/reactQuery';
 import { cn } from '@/lib/utils';
-import { priorityMap, statusMap } from '@/api/api-common';
+import { priorityMap, statusMap } from '@/api/static/common';
 import ExpoSelect from '@/components/ui/expo-select/expo-select';
 import taskAPI from '@/hooks/api/use-tasks-supabase';
 

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { groupByOptions } from '@/api/api-common';
+import { groupByOptions } from '@/api/static/common';
 import ExpoSelect from '@/components/ui/expo-select/expo-select';
 
 export interface TaskBoardViewHeaderProps {

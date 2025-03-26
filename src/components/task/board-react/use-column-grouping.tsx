@@ -1,4 +1,4 @@
-import { priorityMap, statusMap } from '@/api/api-common';
+import { priorityMap, statusMap } from '@/api/static/common';
 import { Task } from '@/types/task';
 import { useMemo } from 'react';
 

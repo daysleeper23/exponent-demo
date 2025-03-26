@@ -27,7 +27,7 @@ import TaskBoardColumn from './task-board-column';
 import TaskBoardCard from './task-board-card';
 import TaskBoardViewHeader from './task-board-view-header';
 import { useTaskGrouping } from '@/hooks/use-tasks-grouping';
-import { priorityMap, statusMap } from '@/api/api-common';
+import { priorityMap, statusMap } from '@/api/static/common';
 
 export interface Column {
   id: string;

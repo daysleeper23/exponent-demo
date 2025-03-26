@@ -9,7 +9,7 @@ import { CardContent, CardHeader } from '@/components/ui/card';
 import TaskBoardCard from './task-board-card';
 import { Column } from './task-board-view';
 
-import { priorityMap, statusMap } from '@/api/api-common';
+import { priorityMap, statusMap } from '@/api/static/common';
 
 interface TaskBoardColumnProps {
   column: Column;

@@ -1,5 +1,5 @@
-import { priorityMap, statusMap } from '@/api/api-common';
-import { localUsers } from '@/api/api-user';
+import { priorityMap, statusMap } from '@/api/static/common';
+import { localUsers } from '@/api/static/user';
 import { ExpoBarChart } from '@/components/charts/bar-chart';
 import ExpoBarChartCustomLabel from '@/components/charts/bar-chart-custom-label';
 import ExpoPieChart from '@/components/charts/pie-chart';

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { TaskPropertyMap } from '@/api/api-common';
+import { TaskPropertyMap } from '@/api/static/common';
 import {
   Select,
   SelectContent,

@@ -4,7 +4,7 @@ import { CSS } from '@dnd-kit/utilities';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Task } from '@/types/task';
-import queryClient from '@/api/query-client';
+import queryClient from '@/api/reactQuery';
 
 interface TaskBoardCardProps {
   id: string;

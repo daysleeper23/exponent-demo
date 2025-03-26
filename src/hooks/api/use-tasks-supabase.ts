@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import supabase from '@/api/supabase/supabase-client';
+import supabase from '@/api/supabase/supabase';
 import { Task, TasksSchema } from '@/types/task';
 import { updateTaskSupabase } from '@/api/supabase/supabase-task';
 
