@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { groupByOptions } from '@/api/api-common';
+import { groupByOptions } from '@/api/static/common';
 import ExpoSelect from '@/components/ui/expo-select/expo-select';
 
 export interface TaskBoardViewHeaderProps {
@@ -7,7 +7,7 @@ export interface TaskBoardViewHeaderProps {
   onGroupByChange: (value: string) => void;
 }
 
-const TaskBoardViewHeader = memo(
+const DndBoardHeader = memo(
   ({ groupBy, onGroupByChange }: TaskBoardViewHeaderProps) => {
     return (
       <div
@@ -30,4 +30,4 @@ const TaskBoardViewHeader = memo(
     );
   }
 );
-export default TaskBoardViewHeader;
+export default DndBoardHeader;

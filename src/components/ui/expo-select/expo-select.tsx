@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { TaskPropertyMap } from '@/api/api-common';
+import { TaskPropertyMap } from '@/api/static/common';
 import {
   Select,
   SelectContent,
@@ -33,10 +33,14 @@ const ExpoSelect = memo(
         <SelectTrigger className={className || ''} {...props}>
           <SelectValue
             placeholder={
-              <div className="flex items-center gap-2">
-                {items[value].icon}
-                {items[value].label}
-              </div>
+              value !== null ? (
+                <div className="flex items-center gap-2">
+                  {items[value].icon}
+                  {items[value].label}
+                </div>
+              ) : (
+                'Select an option'
+              )
             }
           />
         </SelectTrigger>

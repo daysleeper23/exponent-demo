@@ -17,8 +17,8 @@ import { Textarea } from '@/components/ui/textarea';
 import ExpoSelect from '@/components/ui/expo-select/expo-select';
 
 import { TaskCreateSchema } from '@/types/task';
-import { priorityMap, statusMap } from '@/api/api-common';
-import { localUsersMap } from '@/api/api-user';
+import { priorityMap, statusMap } from '@/api/static/common';
+import { localUsers, localUsersMap } from '@/api/static/user';
 import taskAPI from '@/hooks/api/use-tasks';
 
 interface ExpoFormTaskCreateProps extends React.ComponentProps<'form'> {
@@ -37,7 +37,7 @@ const ExpoFormTaskCreate = ({
       status: 0,
       priority: 0,
       team: '80c322ca-e7ac-4b4e-822e-db6d1983b8e2',
-      assignee: '156de810-1339-469d-9611-8443cdda88d1',
+      assignee: localUsers[0].id,
     },
   });
 
@@ -47,7 +47,6 @@ const ExpoFormTaskCreate = ({
     createTask(values);
     setOpen(false);
   };
-  console.log('localUsersMap', localUsersMap);
 
   return (
     <Form {...form}>
@@ -141,7 +140,7 @@ const ExpoFormTaskCreate = ({
                 <ExpoSelect
                   data-testid="form-task-create-assignee"
                   items={localUsersMap}
-                  value={field.value.toString()}
+                  value={(field.value ?? '').toString()}
                   onChange={(val: string) => field.onChange(val)}
                 />
               </FormControl>

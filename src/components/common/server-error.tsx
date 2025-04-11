@@ -2,7 +2,6 @@ import { Frown } from 'lucide-react';
 import Button from '../ui/button';
 
 const ServerError = () => {
-  
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen gap-6">
       <Frown className="mt-4 text-primary/80" size={24} />

@@ -4,8 +4,8 @@ import { toast } from 'sonner';
 
 import { Task, TaskCreate, TaskSchema, TasksSchema } from '@/types/task';
 import { faker } from '@faker-js/faker';
-import { localUsers } from './api-user';
-import apiClient from './api-client';
+import { localUsers } from '../static/user';
+import apiClient from './axios';
 
 //local data
 export const getTasks = (count: number): Task[] => {

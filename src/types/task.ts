@@ -10,7 +10,7 @@ export const TaskSchema = z.object({
     .nullable()
     .transform((val) => val ?? ''),
   status: z.preprocess((val) => Number(val), z.number().min(0).max(4)),
-  assignee: z.string().uuid(),
+  assignee: z.string().uuid().nullable().default(null),
   priority: z.preprocess((val) => Number(val), z.number().min(0).max(4)),
   team: z.string().uuid(),
 });

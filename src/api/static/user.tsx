@@ -1,5 +1,5 @@
 import { User } from '@/types/user';
-import { Metadata } from './api-common';
+import { Metadata } from './common';
 import { CircleUser } from 'lucide-react';
 
 export const localUsers: User[] = [

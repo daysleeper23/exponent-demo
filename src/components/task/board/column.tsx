@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useDroppable } from '@dnd-kit/react';
 import { CardContent, CardHeader } from '@/components/ui/card';
-import { priorityMap, statusMap } from '@/api/api-common';
+import { priorityMap, statusMap } from '@/api/static/common';
 import { CollisionPriority } from '@dnd-kit/abstract';
 
 interface DndColumnReactProps {

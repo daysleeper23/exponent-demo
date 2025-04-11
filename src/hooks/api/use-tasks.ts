@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { createTask, fetchTasks, updateTask } from '@/api/api-task';
+import { createTask, fetchTasks, updateTask } from '@/api/axios/task';
 // import { getTasks } from '@/api/task';
 import { Task, TaskCreate } from '@/types/task';
-import queryClient from '@/api/query-client';
+import queryClient from '@/api/reactQuery';
 
 const useTasks = () => {
   /* remote data */

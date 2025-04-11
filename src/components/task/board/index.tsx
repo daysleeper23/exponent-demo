@@ -1,32 +1,35 @@
-import { Task } from '@/types/task';
-import { DragDropProvider } from '@dnd-kit/react';
-import DndColumnReact from './column';
 import { Suspense, useEffect, useState } from 'react';
+import { DragDropProvider } from '@dnd-kit/react';
 import { move } from '@dnd-kit/helpers';
-import { useColumnGrouping } from './use-column-grouping';
+
+import DndBoardHeader from './header';
 import DndCardReact from './card';
-import TaskBoardViewHeader from '../board/task-board-view-header';
-// import taskAPI from '@/hooks/api/use-tasks';
-import taskAPI from '@/hooks/api/use-tasks-supabase';
+import DndColumnReact from './column';
 import LoadingDataView from '@/components/common/loading-data-view';
 
-const DndBoardReact = ({ tasks }: { tasks: Task[] }) => {
+// import { useColumnGrouping } from './use-column-grouping';
+import { useTasks } from '@/api/supabase/use-tasks';
+import useTaskStore from '@/store/task';
+
+const DndBoardReact = () => {
+  const tasks = useTaskStore((state) => state.tasks);
   const [groupBy, setGroupBy] = useState<string>('status');
-  const initialColumns = useColumnGrouping(tasks, groupBy);
+  const initialColumns = useTaskStore((state) => state.tasksGrouped);
   const [columns, setColumns] =
     useState<Record<string, string[]>>(initialColumns);
+  console.log('columns', columns);
 
   useEffect(() => {
     setColumns(initialColumns);
   }, [groupBy]);
 
-  const updateTask = taskAPI.useUpdateTask();
+  const { updateTask } = useTasks();
   const [sourceId, setSourceId] = useState<string>('');
   const [targetId, setTargetId] = useState<string>('');
 
   const handleDragOver = (sourceId: string, targetId: string) => {
-    const target = tasks.find((task) => task.id === targetId);
-    const source = tasks.find((task) => task.id === sourceId);
+    const target = tasks[targetId];
+    const source = tasks[sourceId];
     if (target && source) {
       if (groupBy === 'priority' && target.priority !== source.priority) {
         const updatedTask = { ...source, priority: target.priority };
@@ -46,7 +49,7 @@ const DndBoardReact = ({ tasks }: { tasks: Task[] }) => {
         className="relative overflow-hidden flex-1 flex flex-col"
         data-testid="task-board-view"
       >
-        <TaskBoardViewHeader groupBy={groupBy} onGroupByChange={setGroupBy} />
+        <DndBoardHeader groupBy={groupBy} onGroupByChange={setGroupBy} />
         <div className="flex-1 flex w-full h-full overflow-x-auto">
           <DragDropProvider
             onDragStart={(event) => {
