@@ -4,20 +4,13 @@ import ExpoSelect from '@/components/ui/expo-select/expo-select';
 import { useTasks } from '@/api/supabase/use-tasks';
 import useTaskStore from '@/store/task';
 
-
 interface TaskListRowProps {
   id: string;
   style?: React.CSSProperties;
 }
 
-const TaskListRow = React.memo(({
-  id,
-  style,
-}: TaskListRowProps) => {
+const TaskListRow = React.memo(({ id, style }: TaskListRowProps) => {
   const task = useTaskStore((state) => state.tasks[id]);
-  if (task.number === 1) {
-    console.log('rendering task', task);
-  }
   const { updateTask } = useTasks();
 
   const handleUpdatePriority = (value: string) => {

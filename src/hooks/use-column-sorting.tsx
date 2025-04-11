@@ -16,16 +16,30 @@ const useColumnSorting = (tasks: Task[]) => {
   // pre-compute all sorted variations, keyed by "sort key", cached with useMemo
   const sortedVariants = useMemo(() => {
     return {
-      sortByNumberAsc: [...tasks].sort((a, b) => a.number - b.number).map((task) => task.id),
-      sortByNumberDesc: [...tasks].sort((a, b) => b.number - a.number).map((task) => task.id),
-      sortByTitleAsc: [...tasks].sort((a, b) => a.title.localeCompare(b.title)).map((task) => task.id),
-      sortByTitleDesc: [...tasks].sort((a, b) =>
-        b.title.localeCompare(a.title)
-      ).map((task) => task.id),
-      sortByStatusAsc: [...tasks].sort((a, b) => a.status - b.status).map((task) => task.id),
-      sortByStatusDesc: [...tasks].sort((a, b) => b.status - a.status).map((task) => task.id),
-      sortByPriorityAsc: [...tasks].sort((a, b) => a.priority - b.priority).map((task) => task.id),
-      sortByPriorityDesc: [...tasks].sort((a, b) => b.priority - a.priority).map((task) => task.id),
+      sortByNumberAsc: [...tasks]
+        .sort((a, b) => a.number - b.number)
+        .map((task) => task.id),
+      sortByNumberDesc: [...tasks]
+        .sort((a, b) => b.number - a.number)
+        .map((task) => task.id),
+      sortByTitleAsc: [...tasks]
+        .sort((a, b) => a.title.localeCompare(b.title))
+        .map((task) => task.id),
+      sortByTitleDesc: [...tasks]
+        .sort((a, b) => b.title.localeCompare(a.title))
+        .map((task) => task.id),
+      sortByStatusAsc: [...tasks]
+        .sort((a, b) => a.status - b.status)
+        .map((task) => task.id),
+      sortByStatusDesc: [...tasks]
+        .sort((a, b) => b.status - a.status)
+        .map((task) => task.id),
+      sortByPriorityAsc: [...tasks]
+        .sort((a, b) => a.priority - b.priority)
+        .map((task) => task.id),
+      sortByPriorityDesc: [...tasks]
+        .sort((a, b) => b.priority - a.priority)
+        .map((task) => task.id),
     };
   }, [tasks]);
 
@@ -65,7 +79,6 @@ const useColumnSorting = (tasks: Task[]) => {
    * switch to a new column or toggle between ascending/descending if the same column is clicked again.
    */
   const handleSortClick = (option: number) => {
-    console.log('updating sort');
     // changing columns, reset to ascending
     if (sortBy !== option) {
       setSortBy(option);

@@ -47,7 +47,6 @@ const ExpoFormTaskCreate = ({
     createTask(values);
     setOpen(false);
   };
-  console.log('localUsersMap', localUsersMap);
 
   return (
     <Form {...form}>

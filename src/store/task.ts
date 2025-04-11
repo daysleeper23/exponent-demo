@@ -42,7 +42,6 @@ const useTaskStore = create<TaskStore>((set, get) => ({
       tasksList.length === get().tasksArray.length
     )
       return;
-    console.log('setting tasks', tasksList);
     set({
       tasksArray: tasksList,
       tasks: Object.fromEntries(tasksList.map((task) => [task.id, task])),

@@ -27,8 +27,10 @@ const App = () => {
   const [contentHeight, setContentHeight] = useState(0);
 
   useLayoutEffect(() => {
-    if (contentRef.current !== null && contentRef.current.getBoundingClientRect().height !== contentHeight) {
-      console.log('set new height')
+    if (
+      contentRef.current !== null &&
+      contentRef.current.getBoundingClientRect().height !== contentHeight
+    ) {
       setContentHeight(contentRef.current.getBoundingClientRect().height);
     }
   }, [tasks?.length]);
@@ -36,10 +38,6 @@ const App = () => {
   if (isError) {
     throw new Error(error?.message ?? 'Unknown error');
   }
-  if (isPending) {
-    return <LoadingDataView message="Loading tasks..." />;
-  }
-  console.log('rendering app')
 
   return (
     <div className="flex h-screen w-screen">
@@ -65,9 +63,11 @@ const App = () => {
                   />
                   <Route
                     path="/board"
-                    element={<DndBoardReact 
-                    // tasks={tasks || []} 
-                    />}
+                    element={
+                      <DndBoardReact
+                      // tasks={tasks || []}
+                      />
+                    }
                   />
                   <Route path="/analytics" element={<TaskAnalyticsView />} />
                   <Route path="/timeline" element={<TaskTimelineView />} />

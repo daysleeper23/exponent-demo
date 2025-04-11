@@ -28,8 +28,6 @@ const ExpoSelect = memo(
     onChange: (value: string) => void;
     className?: string;
   }) => {
-    console.log('value', value);
-
     return (
       <Select onValueChange={onChange} value={value}>
         <SelectTrigger className={className || ''} {...props}>
