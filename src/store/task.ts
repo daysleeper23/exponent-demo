@@ -69,10 +69,11 @@ const useTaskStore = create<TaskStore>((set, get) => ({
       return { tasks: rest, tasksArray, sortedList: restSorted };
     }),
   addTask: (task: Task) => {
+    console.log('adding task', task);
     set((state) => ({
       tasks: {
         ...state.tasks,
-        [task.number]: task,
+        [task.id]: task,
       },
       tasksArray: [...state.tasksArray, task],
     }));

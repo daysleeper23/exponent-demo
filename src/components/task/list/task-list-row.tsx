@@ -1,6 +1,6 @@
 import React from 'react';
 import { priorityMap, statusMap } from '@/api/static/common';
-import ExpoSelect from '@/components/ui/expo-select/expo-select';
+import ExpoSelect from '@/components/common/expo-select/expo-select';
 import { useTasks } from '@/api/supabase/use-tasks';
 import useTaskStore from '@/store/task';
 

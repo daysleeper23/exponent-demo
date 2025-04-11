@@ -21,10 +21,9 @@ const TaskAnalyticsView = lazy(
 );
 
 const App = () => {
-  const { tasks, isPending, isError, error } = useTasks();
-
-  const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
+  const { tasks, isPending, isError, error } = useTasks();
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     if (
