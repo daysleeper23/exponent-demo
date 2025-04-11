@@ -15,31 +15,31 @@ const mockTask: Task = {
 };
 
 test('renders TaskListRow without crashing', () => {
-  render(<TaskListRow task={mockTask} />);
+  render(<TaskListRow id={mockTask.id} />);
   const taskNumberElement = screen.getByText(/EXP-123/i);
   expect(taskNumberElement).toBeInTheDocument();
 });
 
 test('renders task title correctly', () => {
-  render(<TaskListRow task={mockTask} />);
+  render(<TaskListRow id={mockTask.id} />);
   const taskTitleElement = screen.getByText(/Test Task/i);
   expect(taskTitleElement).toBeInTheDocument();
 });
 
 test('renders task status correctly', () => {
-  render(<TaskListRow task={mockTask} />);
+  render(<TaskListRow id={mockTask.id} />);
   const taskStatusElement = screen.getByText(/Todo/i);
   expect(taskStatusElement).toBeInTheDocument();
 });
 
 test('renders task priority correctly', () => {
-  render(<TaskListRow task={mockTask} />);
+  render(<TaskListRow id={mockTask.id} />);
   const taskPriorityElement = screen.getByText(/Medium/i);
   expect(taskPriorityElement).toBeInTheDocument();
 });
 
 test('applies correct styles', () => {
-  render(<TaskListRow task={mockTask} />);
+  render(<TaskListRow id={mockTask.id} />);
   const taskRowElement = screen.getByTestId('1');
   expect(taskRowElement).toHaveClass(
     'w-full px-4 py-2 flex gap-4 items-center text-primary/80 border-b border-primary-200 dark:border-primary-700 hover:bg-primary-foreground pointer-events-auto'

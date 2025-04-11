@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTheme } from '../context/theme-provider';
 import { SidebarTrigger } from './sidebar';
 import { Separator } from './separator';
@@ -14,8 +13,7 @@ import Button from './button';
 import { Moon, Sun } from 'lucide-react';
 
 const HeaderBar = () => {
-  const { changeTheme } = useTheme();
-  const [darkMode, setDarkMode] = useState(false);
+  const { theme, changeTheme } = useTheme();
 
   return (
     <header className="flex h-16 shrink-0 items-center gap-2 border-b border-primary-200 dark:border-primary-700">
@@ -38,12 +36,11 @@ const HeaderBar = () => {
           className="ml-auto"
           size={'icon'}
           onClick={() => {
-            const theme = darkMode === true ? 'light' : 'dark';
-            setDarkMode(!darkMode);
-            changeTheme(theme);
+            const newTheme = theme === 'dark' ? 'light' : 'dark';
+            changeTheme(newTheme);
           }}
         >
-          {darkMode ? <Sun /> : <Moon />}
+          {theme === 'dark' ? <Sun /> : <Moon />}
         </Button>
       </div>
     </header>

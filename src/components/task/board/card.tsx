@@ -1,11 +1,10 @@
 import { memo } from 'react';
 import { useSortable } from '@dnd-kit/react/sortable';
-import { Task } from '@/types/task';
-import queryClient from '@/api/reactQuery';
 import { cn } from '@/lib/utils';
 import { priorityMap, statusMap } from '@/api/static/common';
 import ExpoSelect from '@/components/ui/expo-select/expo-select';
 import { useTasks } from '@/api/supabase/use-tasks';
+import useTaskStore from '@/store/task';
 
 interface DndCardReactProps {
   id: string;
@@ -21,9 +20,7 @@ const DndCardReact = memo(({ id, column, index }: DndCardReactProps) => {
   });
   const { updateTask } = useTasks();
 
-  const task: Task = (queryClient.getQueryData(['tasks']) as Task[]).find(
-    (task: Task) => task.id === id
-  )!;
+  const task = useTaskStore((state) => state.tasks[id]);
 
   const handleUpdatePriority = (value: string) => {
     const updatedTask = { ...task, priority: parseInt(value) };

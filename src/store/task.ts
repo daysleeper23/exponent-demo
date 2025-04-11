@@ -21,7 +21,7 @@ interface TaskStore {
   groupTasks: () => void;
   groupBy: (groupBy: string) => void;
   calculateSortedList: () => void;
-  setSortOption: (key: keyof Task, direction: 1 | -1 ) => void;
+  setSortOption: (key: keyof Task, direction: 1 | -1) => void;
 }
 
 const useTaskStore = create<TaskStore>((set, get) => ({
@@ -35,7 +35,7 @@ const useTaskStore = create<TaskStore>((set, get) => ({
   sortedList: [] as string[], // Array of task IDs sorted based on the current criteria
   sortOption: { key: 'number', direction: 1 }, // Default sorting option
 
-  setTasks: (tasksList: Task[]) => {
+  setTasks: async (tasksList: Task[]) => {
     if (
       !tasksList ||
       tasksList.length === 0 ||
@@ -47,20 +47,20 @@ const useTaskStore = create<TaskStore>((set, get) => ({
       tasksArray: tasksList,
       tasks: Object.fromEntries(tasksList.map((task) => [task.id, task])),
     });
+    get().groupTasks();
+    get().groupBy('status');
     get().calculateSortedList();
   },
   getTaskById: (id: string) => get().tasks[id] || null,
   updateTask: (task: Task) => {
     set((state) => ({
-      tasksArray: state.tasksArray.map((t) =>
-        t.id === task.id ? task : t
-      ),
+      tasksArray: state.tasksArray.map((t) => (t.id === task.id ? task : t)),
       tasks: {
         ...state.tasks,
         [task.id]: task,
       },
     }));
-    get().calculateSortedList()
+    get().calculateSortedList();
   },
   deleteTask: (id: string) =>
     set((state) => {
@@ -77,7 +77,7 @@ const useTaskStore = create<TaskStore>((set, get) => ({
       },
       tasksArray: [...state.tasksArray, task],
     }));
-    get().calculateSortedList()
+    get().calculateSortedList();
   },
   groupTasks: () =>
     set({
@@ -130,9 +130,9 @@ const useTaskStore = create<TaskStore>((set, get) => ({
     const { tasksArray, sortOption } = get();
     const sorted = [...tasksArray].sort((a, b) => {
       const key = sortOption.key as keyof Task;
-      const direction = sortOption.direction ;
-      if (a[key] < b[key]) return -1 * direction;
-      if (a[key] > b[key]) return 1 * direction;
+      const direction = sortOption.direction;
+      if ((a[key] ?? 0) < (b[key] ?? 0)) return -1 * direction;
+      if ((a[key] ?? 0) > (b[key] ?? 0)) return 1 * direction;
       return 0;
     });
     set({ sortedList: sorted.map((task) => task.id) });

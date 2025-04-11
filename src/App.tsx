@@ -11,7 +11,7 @@ import PendingBoundary from './components/common/pending-boundary';
 import LoadingDataView from './components/common/loading-data-view';
 import { useTasks } from './api/supabase/use-tasks';
 
-const DndBoardReact = lazy(() => import('@/components/task/board-react'));
+const DndBoardReact = lazy(() => import('@/components/task/board'));
 const TaskTimelineView = lazy(
   () => import('@/components/task/timeline/task-timeline-view')
 );
@@ -65,7 +65,9 @@ const App = () => {
                   />
                   <Route
                     path="/board"
-                    element={<DndBoardReact tasks={tasks || []} />}
+                    element={<DndBoardReact 
+                    // tasks={tasks || []} 
+                    />}
                   />
                   <Route path="/analytics" element={<TaskAnalyticsView />} />
                   <Route path="/timeline" element={<TaskTimelineView />} />

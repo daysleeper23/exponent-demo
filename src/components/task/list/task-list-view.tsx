@@ -5,7 +5,6 @@ import TaskListViewHeader from './task-list-view-header';
 import useTaskStore from '@/store/task';
 
 interface TaskListViewProps {
-  // tasks: Task[];
   viewHeight: number;
 }
 
@@ -81,17 +80,33 @@ const TaskListView = React.memo(({
     }
   };
 
+  // Memoize the style creation function to prevent unnecessary object creation on each render
+  const getItemStyle = React.useCallback((index: number): React.CSSProperties => ({
+    position: 'absolute',
+    top: index * rowHeight,
+    height: rowHeight,
+    width: '100%',
+  }), [rowHeight]);
+
   const visibleItems = [];
   for (let i = startIndex; i < endIndex; i++) {
-    const style = {
-      position: 'absolute',
-      top: i * rowHeight,
-      height: rowHeight,
-      width: '100%',
-    };
+    // Add bounds checking to prevent accessing undefined indices
+    if (i >= 0 && i < sortedList.length) {
+      visibleItems.push(
+        renderItem({ id: sortedList[i], style: getItemStyle(i) })
+      );
+    }
+  }
 
-    visibleItems.push(
-      renderItem({ id: sortedList[i], style: style as React.CSSProperties })
+  // Handle empty state
+  if (rowCount === 0) {
+    return (
+      <>
+        <TaskListViewHeader />
+        <div className="flex items-center justify-center h-32 text-gray-500">
+          No tasks available
+        </div>
+      </>
     );
   }
 
@@ -103,10 +118,13 @@ const TaskListView = React.memo(({
         className="text-sm overflow-y-auto relative"
         ref={containerRef}
         onScroll={onScroll}
+        role="list"
+        tabIndex={0}
       >
         <div
           data-testid="task-list-view-full"
           style={{ height: rowCount * rowHeight, position: 'relative' }}
+          aria-rowcount={rowCount}
         >
           {visibleItems}
         </div>

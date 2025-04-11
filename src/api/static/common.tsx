@@ -21,30 +21,32 @@ export interface TaskPropertyMap {
   [key: string]: Metadata;
 }
 
+const ICON_SIZE = 18;
+
 export const statusMap: TaskPropertyMap = {
   '0': {
     label: 'Backlog',
-    icon: <CircleHelp size={18} />,
+    icon: <CircleHelp size={ICON_SIZE} />,
     value: 0,
   },
   '1': {
     label: 'Todo',
-    icon: <Circle size={18} />,
+    icon: <Circle size={ICON_SIZE} />,
     value: 1,
   },
   '2': {
     label: 'In Progress',
-    icon: <Timer size={18} />,
+    icon: <Timer size={ICON_SIZE} />,
     value: 2,
   },
   '3': {
     label: 'Done',
-    icon: <CircleCheckBig size={18} />,
+    icon: <CircleCheckBig size={ICON_SIZE} />,
     value: 3,
   },
   '4': {
     label: 'Canceled',
-    icon: <CircleOff size={18} />,
+    icon: <CircleOff size={ICON_SIZE} />,
     value: 4,
   },
 };
@@ -52,27 +54,27 @@ export const statusMap: TaskPropertyMap = {
 export const priorityMap: TaskPropertyMap = {
   '0': {
     label: 'No priority',
-    icon: <Minus size={18} />,
+    icon: <Minus size={ICON_SIZE} />,
     value: 0,
   },
   '1': {
     label: 'Low',
-    icon: <ArrowDown size={18} />,
+    icon: <ArrowDown size={ICON_SIZE} />,
     value: 1,
   },
   '2': {
     label: 'Medium',
-    icon: <ArrowRight size={18} />,
+    icon: <ArrowRight size={ICON_SIZE} />,
     value: 2,
   },
   '3': {
     label: 'High',
-    icon: <ArrowUp size={18} />,
+    icon: <ArrowUp size={ICON_SIZE} />,
     value: 3,
   },
   '4': {
     label: 'Urgent',
-    icon: <OctagonAlert size={18} />,
+    icon: <OctagonAlert size={ICON_SIZE} />,
     value: 4,
   },
 };
@@ -80,12 +82,12 @@ export const priorityMap: TaskPropertyMap = {
 export const groupByOptions: TaskPropertyMap = {
   status: {
     label: 'Status',
-    icon: <Circle size={18} />,
+    icon: <Circle size={ICON_SIZE} />,
     value: 'status',
   },
   priority: {
     label: 'Priority',
-    icon: <ArrowUp size={18} />,
+    icon: <ArrowUp size={ICON_SIZE} />,
     value: 'priority',
   },
 };

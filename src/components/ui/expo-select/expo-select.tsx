@@ -28,15 +28,21 @@ const ExpoSelect = memo(
     onChange: (value: string) => void;
     className?: string;
   }) => {
+    console.log('value', value);
+
     return (
       <Select onValueChange={onChange} value={value}>
         <SelectTrigger className={className || ''} {...props}>
           <SelectValue
             placeholder={
-              <div className="flex items-center gap-2">
-                {items[value].icon}
-                {items[value].label}
-              </div>
+              value !== null ? (
+                <div className="flex items-center gap-2">
+                  {items[value].icon}
+                  {items[value].label}
+                </div>
+              ) : (
+                'Select an option'
+              )
             }
           />
         </SelectTrigger>
