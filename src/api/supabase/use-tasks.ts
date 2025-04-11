@@ -68,11 +68,26 @@ export const useTasks = () => {
 
   // Mutation for adding tasks
   const addTaskMutation = useMutation({
-    mutationFn: taskApi.addTask,
+    mutationFn: taskApi.addTaskSimulation,
+    onMutate: async () => {
+      //cancel any outgoing queries
+      await queryClient.cancelQueries({ queryKey: ['tasks', teamId] });
+    },
     onSuccess: (data: Task) => {
       if (data) {
         addTask(data);
-        queryClient.invalidateQueries({ queryKey: ['tasks', teamId] });
+        queryClient.setQueryData(['tasks', teamId], (oldData: Task[]) => [
+          data,
+          ...(oldData || []),
+        ]);
+      }
+    },
+    onError: (_error, _, context) => {
+      if (context) {
+        queryClient.setQueryData(
+          ['tasks', teamId],
+          (oldData: Task[]) => oldData
+        );
       }
     },
   });

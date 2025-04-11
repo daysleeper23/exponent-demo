@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { useSortable } from '@dnd-kit/react/sortable';
 import { cn } from '@/lib/utils';
 import { priorityMap, statusMap } from '@/api/static/common';
-import ExpoSelect from '@/components/ui/expo-select/expo-select';
+import ExpoSelect from '@/components/common/expo-select/expo-select';
 import { useTasks } from '@/api/supabase/use-tasks';
 import useTaskStore from '@/store/task';
 

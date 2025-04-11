@@ -1,8 +1,8 @@
 import { SidebarMenu, SidebarMenuItem } from '../sidebar';
 import { useState } from 'react';
 import useMediaQuery from '@/hooks/use-media-query';
-import ExpoDialog from '../expo-form/expo-dialog';
-import ExpoDrawer from '../expo-form/expo-drawer';
+import ExpoDialog from '../../common/expo-form/expo-dialog';
+import ExpoDrawer from '../../common/expo-form/expo-drawer';
 import { Plus } from 'lucide-react';
 import ExpoFormTaskCreate from '../../task/form/expo-form-task-create';
 

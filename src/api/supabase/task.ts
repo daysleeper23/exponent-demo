@@ -1,5 +1,7 @@
 import supabase from './supabase';
-import { Task } from '@/types/task';
+import { v4 as uuid } from 'uuid';
+import { Task, TaskCreate } from '@/types/task';
+import { toast } from 'sonner';
 
 export const taskApi = {
   getTasks: async (
@@ -55,5 +57,25 @@ export const taskApi = {
 
     if (error) throw error;
     return data;
+  },
+  addTaskSimulation: async (taskCreate: TaskCreate): Promise<Task> => {
+    const newTask: Task = {
+      id: uuid(),
+      number: 1000 + Math.floor(Math.random() * 1000),
+      ...taskCreate,
+    };
+
+    toast.success('Task has been created.', {
+      description:
+        "Actually, the task is created locally, but it's not saved on the server 😛. You can re-sort the task list by number DESC to see it.",
+      action: {
+        label: 'View task',
+        onClick: () => {
+          //navigate to the task
+          console.log('View task');
+        },
+      },
+    });
+    return newTask;
   },
 };

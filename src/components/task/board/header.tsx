@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { groupByOptions } from '@/api/static/common';
-import ExpoSelect from '@/components/ui/expo-select/expo-select';
+import ExpoSelect from '@/components/common/expo-select/expo-select';
 
 export interface TaskBoardViewHeaderProps {
   groupBy: string;

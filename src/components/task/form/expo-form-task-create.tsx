@@ -14,12 +14,12 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import ExpoSelect from '@/components/ui/expo-select/expo-select';
+import ExpoSelect from '@/components/common/expo-select/expo-select';
 
 import { TaskCreateSchema } from '@/types/task';
 import { priorityMap, statusMap } from '@/api/static/common';
 import { localUsers, localUsersMap } from '@/api/static/user';
-import taskAPI from '@/hooks/api/use-tasks';
+import { useTasks } from '@/api/supabase/use-tasks';
 
 interface ExpoFormTaskCreateProps extends React.ComponentProps<'form'> {
   setOpen: (open: boolean) => void;
@@ -41,7 +41,7 @@ const ExpoFormTaskCreate = ({
     },
   });
 
-  const createTask = taskAPI.useCreateTask();
+  const createTask = useTasks().addTask;
 
   const onSubmit = (values: z.infer<typeof TaskCreateSchema>) => {
     createTask(values);

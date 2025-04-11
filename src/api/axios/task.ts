@@ -128,7 +128,6 @@ export async function createTask(taskCreate: TaskCreate): Promise<Task | null> {
         },
       },
     });
-    console.log('returning new task', newTask);
     return newTask;
   } catch (error) {
     //logging error to monitoring services
