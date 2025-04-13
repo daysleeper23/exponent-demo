@@ -3,6 +3,8 @@ import { v4 as uuid } from 'uuid';
 import { Task, TaskCreate } from '@/types/task';
 import { toast } from 'sonner';
 
+const TASK_LIMIT = 200;
+
 export const taskApi = {
   getTasks: async (
     teamId: string
@@ -10,7 +12,8 @@ export const taskApi = {
     const { data, error } = await supabase
       .from('tasks')
       .select('*')
-      .eq('team', teamId);
+      .eq('team', teamId)
+      .limit(TASK_LIMIT);
 
     if (error) throw error;
     return {

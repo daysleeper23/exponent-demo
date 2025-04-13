@@ -21,7 +21,7 @@ export interface TaskPropertyMap {
   [key: string]: Metadata;
 }
 
-const ICON_SIZE = 18;
+const ICON_SIZE = 16;
 
 export const statusMap: TaskPropertyMap = {
   '0': {
