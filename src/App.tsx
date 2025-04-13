@@ -10,6 +10,7 @@ import HeaderBar from './components/ui/header-bar';
 import PendingBoundary from './components/common/pending-boundary';
 import LoadingDataView from './components/common/loading-data-view';
 import { useTasks } from './api/supabase/use-tasks';
+import useTaskStore from './store/task';
 
 const DndBoardReact = lazy(() => import('@/components/task/board'));
 const TaskTimelineView = lazy(
@@ -23,6 +24,7 @@ const TaskAnalyticsView = lazy(
 const App = () => {
   const [contentHeight, setContentHeight] = useState(0);
   const { tasks, isPending, isError, error } = useTasks();
+  const { groupOption } = useTaskStore();
   const contentRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -64,7 +66,9 @@ const App = () => {
                     path="/board"
                     element={
                       <DndBoardReact
-                      // tasks={tasks || []}
+                        groupKey={groupOption}
+                        // tasks={tasks || []}
+                        // tasks={tasks || []}
                       />
                     }
                   />

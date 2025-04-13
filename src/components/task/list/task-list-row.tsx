@@ -1,8 +1,8 @@
 import React from 'react';
 import { priorityMap, statusMap } from '@/api/static/common';
-import ExpoSelect from '@/components/common/expo-select/expo-select';
 import { useTasks } from '@/api/supabase/use-tasks';
 import useTaskStore from '@/store/task';
+import ExpoCombobox from '@/components/common/expo-combo/expo-combo';
 
 interface TaskListRowProps {
   id: string;
@@ -27,7 +27,7 @@ const TaskListRow = React.memo(({ id, style }: TaskListRowProps) => {
     <div
       style={style}
       className="w-full px-4 py-2 flex gap-4 items-center
-        text-primary/80
+        text-muted-foreground
         border-b border-primary-200 dark:border-primary-700
         hover:bg-primary-foreground
         pointer-events-auto"
@@ -35,18 +35,20 @@ const TaskListRow = React.memo(({ id, style }: TaskListRowProps) => {
       data-testid="task-list-row"
     >
       <span className="w-20">{'EXP-' + task.number}</span>
-      <span className="flex-1 overflow-hidden text-nowrap">{task.title}</span>
+      <span className="flex-1 text-primary overflow-hidden text-nowrap">
+        {task.title}
+      </span>
 
       <div className="hidden sm:ml-auto sm:flex sm:gap-4 sm:pointer-events-auto">
-        <ExpoSelect
-          className="w-[152px]"
+        <ExpoCombobox
+          className="w-[128px]"
           items={statusMap}
           value={task.status.toString()}
           onChange={handleUpdateStatus}
         />
 
-        <ExpoSelect
-          className="w-[144px]"
+        <ExpoCombobox
+          className="w-[128px]"
           items={priorityMap}
           value={task.priority.toString()}
           onChange={handleUpdatePriority}

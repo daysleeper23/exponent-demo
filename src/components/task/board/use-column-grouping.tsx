@@ -2,11 +2,10 @@ import { priorityMap, statusMap } from '@/api/static/common';
 import { Task } from '@/types/task';
 import { useMemo } from 'react';
 
-export const useColumnGrouping = (tasks: Task[], groupBy: string) => {
-  if (!tasks) {
-    return {};
-  }
-
+export const useColumnGrouping = (
+  tasks: Task[],
+  groupBy: string
+): Array<Array<string>> => {
   if (groupBy !== 'status' && groupBy !== 'priority') {
     throw new Error('Invalid groupBy value');
   }

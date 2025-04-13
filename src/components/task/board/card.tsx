@@ -2,9 +2,9 @@ import { memo } from 'react';
 import { useSortable } from '@dnd-kit/react/sortable';
 import { cn } from '@/lib/utils';
 import { priorityMap, statusMap } from '@/api/static/common';
-import ExpoSelect from '@/components/common/expo-select/expo-select';
 import { useTasks } from '@/api/supabase/use-tasks';
 import useTaskStore from '@/store/task';
+import ExpoCombobox from '@/components/common/expo-combo/expo-combo';
 
 interface DndCardReactProps {
   id: string;
@@ -37,7 +37,7 @@ const DndCardReact = memo(({ id, column, index }: DndCardReactProps) => {
       ref={sortable.ref}
       className={cn(
         'cursor-grab active:cursor-grabbing hover:bg-muted/50 pointer-events-auto flex-1 relative',
-        'flex flex-col gap-3 rounded-md border p-3 bg-primary-foreground hover:bg-muted',
+        'flex flex-col gap-3 rounded-md border p-3 hover:bg-muted shadown-sm',
         { dragging: sortable.isDragging }
       )}
     >
@@ -45,79 +45,23 @@ const DndCardReact = memo(({ id, column, index }: DndCardReactProps) => {
         EXP-{task.number}
       </div>
 
-      <div className="text-left font-normal text-xs w-full flex-wrap">
+      <div className="text-left font-normal text-sm w-full flex-wrap">
         {task.title}
       </div>
 
       <div className="flex gap-2 pointer-events-auto">
-        <ExpoSelect
-          className="w-[152px]"
+        <ExpoCombobox
           items={statusMap}
           value={task.status.toString()}
           onChange={handleUpdateStatus}
         />
-        <ExpoSelect
-          className="w-[144px]"
+        <ExpoCombobox
           items={priorityMap}
           value={task.priority.toString()}
           onChange={handleUpdatePriority}
         />
-        {/* <div className="flex items-center gap-2 text-xs text-primary/80 px-2 py-1 border rounded-md">
-          {statusMap[task.status.toString()].icon}
-          {statusMap[task.status.toString()].label}
-        </div>
-
-        <div className="flex items-center gap-2 text-xs text-primary/80 px-2 py-1 border rounded-md">
-          {priorityMap[task.priority.toString()].icon}
-          {priorityMap[task.priority.toString()].label}
-        </div> */}
-
-        {/* <ComboBox
-          className="w-[144px]"
-          items={statusMap}
-          value={task.status.toString()}
-          onChange={handleUpdatePriority}
-        />
-        <ComboBox
-          className="w-[144px]"
-          items={priorityMap}
-          value={task.priority.toString()}
-          onChange={handleUpdatePriority}
-        /> */}
       </div>
     </div>
   );
 });
 export default DndCardReact;
-
-// const ComboBox = ({ items, value, onChange, className, ...props }: {
-//     items: TaskPropertyMap;
-//     value: string;
-//     onChange: (value: string) => void;
-//     className?: string;
-//   }) => {
-//   return (
-//     <Select onValueChange={onChange} value={value}>
-//         <SelectTrigger className={className || ''} {...props}>
-//           <SelectValue
-//             placeholder={
-//               <div className="flex items-center gap-2">
-//                 {items[value].icon}
-//                 {items[value].label}
-//               </div>
-//             }
-//           />
-//         </SelectTrigger>
-//         <SelectContent>
-//           <SelectGroup>
-//             {Object.values(items).map((item) => (
-//               <SelectItem key={item.value} value={item.value.toString()}>
-//                 {item.icon}
-//                 {item.label}
-//               </SelectItem>
-//             ))}
-//           </SelectGroup>
-//         </SelectContent>
-//       </Select>
-//   )
-// }

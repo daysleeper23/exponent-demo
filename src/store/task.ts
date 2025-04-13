@@ -19,6 +19,7 @@ interface TaskStore {
   deleteTask: (id: string) => void;
   addTask: (task: Task) => void;
   groupTasks: () => void;
+  setGroupOption: (groupBy: string) => void;
   groupBy: (groupBy: string) => void;
   calculateSortedList: () => void;
   setSortOption: (key: keyof Task, direction: 1 | -1) => void;
@@ -68,8 +69,7 @@ const useTaskStore = create<TaskStore>((set, get) => ({
       const restSorted = state.sortedList.filter((tId) => tId !== id);
       return { tasks: rest, tasksArray, sortedList: restSorted };
     }),
-  addTask: (task: Task) => {
-    console.log('adding task', task);
+  addTask: async (task: Task) => {
     set((state) => ({
       tasks: {
         ...state.tasks,
@@ -79,7 +79,7 @@ const useTaskStore = create<TaskStore>((set, get) => ({
     }));
     get().calculateSortedList();
   },
-  groupTasks: () =>
+  groupTasks: async () =>
     set({
       tasksByStatus: Object.fromEntries(
         Object.keys(statusMap).map((element) => {
@@ -126,6 +126,11 @@ const useTaskStore = create<TaskStore>((set, get) => ({
       tasksGrouped:
         groupBy === 'status' ? get().tasksByStatus : get().tasksByPriority,
     }),
+  setGroupOption: (groupBy: string) => {
+    set({ groupOption: groupBy });
+    get().groupTasks();
+    get().groupBy(groupBy);
+  },
   calculateSortedList: () => {
     const { tasksArray, sortOption } = get();
     const sorted = [...tasksArray].sort((a, b) => {

@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { groupByOptions } from '@/api/static/common';
-import ExpoSelect from '@/components/common/expo-select/expo-select';
+import ExpoCombobox from '@/components/common/expo-combo/expo-combo';
 
 export interface TaskBoardViewHeaderProps {
   groupBy: string;
@@ -19,11 +19,12 @@ const DndBoardHeader = memo(
       >
         <div className="ml-auto flex gap-4 items-center pointer-events-auto">
           <span className="text-sm text-primary/80">Group by</span>
-          <ExpoSelect
+          <ExpoCombobox
             className="w-32"
             items={groupByOptions}
             value={groupBy}
             onChange={onGroupByChange}
+            searchable={false}
           />
         </div>
       </div>

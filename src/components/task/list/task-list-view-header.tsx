@@ -3,7 +3,6 @@ import useTaskStore from '@/store/task';
 import { Task } from '@/types/task';
 import { ArrowDown, ArrowUp, ChevronsUpDown } from 'lucide-react';
 
-
 const TaskListViewHeader = () => {
   const setSortOptions = useTaskStore((state) => state.setSortOption);
   const sortOption = useTaskStore((state) => state.sortOption);
@@ -12,7 +11,7 @@ const TaskListViewHeader = () => {
     const { key, direction } = sortOption;
     // if the same column is clicked again, toggle the direction
     if (key === newKey) {
-      setSortOptions(newKey, -1 * direction as 1 | -1);
+      setSortOptions(newKey, (-1 * direction) as 1 | -1);
     } else {
       // changing columns, reset to ascending
       setSortOptions(newKey, 1);
@@ -61,7 +60,7 @@ const TaskListViewHeader = () => {
 
       <div className="hidden sm:ml-auto sm:flex sm:gap-4 sm:pointer-events-auto">
         {/* status */}
-        <div className="w-[152px]">
+        <div className="w-[128px]">
           <Button
             variant="ghost"
             className="w-20"
@@ -74,7 +73,7 @@ const TaskListViewHeader = () => {
         </div>
 
         {/* priority */}
-        <div className="w-[144px]">
+        <div className="w-[128px]">
           <Button
             variant="ghost"
             className="w-20"
