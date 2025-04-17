@@ -15,7 +15,7 @@ import LoadingDataView from '@/components/common/loading-data-view';
 
 import { useTasks } from '@/api/supabase/use-tasks';
 import useTaskStore from '@/store/task';
-import { useColumnGrouping } from './use-column-grouping';
+import { useColumnGrouping } from '../hooks/use-column-grouping';
 
 const DndBoardReact = memo(({ groupKey = 'status' }: { groupKey: string }) => {
   const { tasks, tasksArray, setGroupOption } = useTaskStore();
