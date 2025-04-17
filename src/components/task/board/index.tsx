@@ -1,18 +1,43 @@
-import { Suspense, useState } from 'react';
+import {
+  memo,
+  Suspense,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { DragDropProvider } from '@dnd-kit/react';
+import { move } from '@dnd-kit/helpers';
 
 import DndBoardHeader from './header';
-import DndCardReact from './card';
 import DndColumnReact from './column';
 import LoadingDataView from '@/components/common/loading-data-view';
 
-// import { useColumnGrouping } from './use-column-grouping';
 import { useTasks } from '@/api/supabase/use-tasks';
 import useTaskStore from '@/store/task';
+import { useColumnGrouping } from './use-column-grouping';
 
-const DndBoardReact = ({ groupKey = 'status' }: { groupKey: string }) => {
-  const { tasks, tasksGrouped, setGroupOption } = useTaskStore();
-  console.log('object', tasksGrouped);
+const DndBoardReact = memo(({ groupKey = 'status' }: { groupKey: string }) => {
+  const { tasks, tasksArray, setGroupOption } = useTaskStore();
+  const groupedTask = useColumnGrouping(tasksArray, groupKey);
+  const [columns, setColumns] = useState(groupedTask);
+  const [columnHeight, setColumnHeight] = useState(0);
+  const dndColumnRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (
+      dndColumnRef.current !== null &&
+      dndColumnRef.current.getBoundingClientRect().height !== columnHeight
+    ) {
+      setColumnHeight(
+        dndColumnRef.current.getBoundingClientRect().height - 49 - 52
+      );
+    }
+  }, [tasks?.length]);
+
+  useEffect(() => {
+    setColumns(groupedTask);
+  }, [tasksArray, groupKey]);
 
   const { updateTask } = useTasks();
   const [sourceId, setSourceId] = useState<string>('');
@@ -53,6 +78,7 @@ const DndBoardReact = ({ groupKey = 'status' }: { groupKey: string }) => {
             }}
             onDragOver={(event) => {
               const { operation } = event;
+              setColumns((columns) => move(columns, event));
               setTargetId((prev) =>
                 sourceId === (operation.target?.id || '').toString()
                   ? prev
@@ -63,22 +89,17 @@ const DndBoardReact = ({ groupKey = 'status' }: { groupKey: string }) => {
               handleDragOver(sourceId, targetId);
             }}
           >
-            <div className="flex-1 flex px-2">
-              {Object.entries(tasksGrouped).map(([column, items]) => (
+            <div ref={dndColumnRef} className="flex-1 flex gap-2 px-2">
+              {Object.entries(columns).map(([column, items]) => (
+                // <div ref={dndColumnRef} className="flex-1 flex">
                 <DndColumnReact
                   key={column}
-                  id={column}
+                  columnId={column}
                   groupingType={groupKey}
-                >
-                  {items.map((id: string, index: number) => (
-                    <DndCardReact
-                      key={id}
-                      id={id}
-                      column={column}
-                      index={index}
-                    />
-                  ))}
-                </DndColumnReact>
+                  columnHeight={columnHeight}
+                  items={items}
+                />
+                // </div>
               ))}
             </div>
           </DragDropProvider>
@@ -86,5 +107,5 @@ const DndBoardReact = ({ groupKey = 'status' }: { groupKey: string }) => {
       </div>
     </Suspense>
   );
-};
+});
 export default DndBoardReact;
