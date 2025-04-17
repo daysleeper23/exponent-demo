@@ -10,9 +10,10 @@ interface DndCardReactProps {
   id: string;
   column: string;
   index: number;
+  style?: React.CSSProperties;
 }
 
-const DndCardReact = memo(({ id, column, index }: DndCardReactProps) => {
+const DndCardReact = memo(({ id, column, index, style }: DndCardReactProps) => {
   const sortable = useSortable({
     id,
     group: column,
@@ -34,6 +35,7 @@ const DndCardReact = memo(({ id, column, index }: DndCardReactProps) => {
 
   return (
     <div
+      style={style}
       ref={sortable.ref}
       className={cn(
         'cursor-grab active:cursor-grabbing hover:bg-muted/50 pointer-events-auto flex-1 relative',
@@ -45,7 +47,7 @@ const DndCardReact = memo(({ id, column, index }: DndCardReactProps) => {
         EXP-{task.number}
       </div>
 
-      <div className="text-left font-normal text-sm w-full flex-wrap">
+      <div className="text-left font-normal text-sm w-full text-nowrap overflow-hidden text-ellipsis">
         {task.title}
       </div>
 
