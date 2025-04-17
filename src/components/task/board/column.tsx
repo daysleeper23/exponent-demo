@@ -23,15 +23,13 @@ const DndColumnReact = memo(
 
     //Virtualized List
     const rowCount = items.length;
-    const rowHeight = 126 + rowSpace; // 126px for card height
-    const realColumnHeight = columnHeight; // 48px for header and padding
+    const rowHeight = 126 + rowSpace; // 126px for card height plus the gap between cards
 
     //overScan is the number of items to render above and below the visible area
     //overScan ~ half of the number of items that fit in the viewport, but not more than 5
-    const overScan = Math.min(Math.floor(realColumnHeight / rowHeight / 2), 5);
+    const overScan = Math.min(Math.floor(columnHeight / rowHeight / 2), 5);
 
     const [scrollTop, setScrollTop] = useState(0);
-    // const containerRef = useRef(null);
 
     //index of the first visible item
     const startIndex = Math.max(
@@ -40,7 +38,7 @@ const DndColumnReact = memo(
     );
 
     //number of items that fit in the viewport plus overscan
-    const visibleCount = Math.ceil(realColumnHeight / rowHeight) + overScan * 2;
+    const visibleCount = Math.ceil(columnHeight / rowHeight) + overScan * 2;
 
     // the endIndex must not go past the end of the list
     const endIndex = Math.min(rowCount, startIndex + visibleCount);
@@ -69,9 +67,6 @@ const DndColumnReact = memo(
 
     To reduce the number of re-render,
     instead of updating the scrollTop state on every scroll event, only update it when the user scrolls past the overscan limit.
-    - overScan = 5, rowCount = 1000
-      without checking: 488 re-renders 
-      with checking:  ~200 re-renders
   */
     const onScroll = (event: SyntheticEvent) => {
       const currentScrollTop = event.currentTarget.scrollTop;

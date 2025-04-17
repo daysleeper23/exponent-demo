@@ -49,9 +49,6 @@ const TaskListView = React.memo(
 
     To reduce the number of re-render,
     instead of updating the scrollTop state on every scroll event, only update it when the user scrolls past the overscan limit.
-    - overScan = 5, rowCount = 1000
-      without checking: 488 re-renders 
-      with checking:  ~200 re-renders
   */
     const onScroll = (event: SyntheticEvent) => {
       const currentScrollTop = event.currentTarget.scrollTop;
