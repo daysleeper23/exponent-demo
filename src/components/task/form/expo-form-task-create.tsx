@@ -14,12 +14,12 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import ExpoSelect from '@/components/common/expo-select/expo-select';
 
 import { TaskCreateSchema } from '@/types/task';
 import { priorityMap, statusMap } from '@/api/static/common';
 import { localUsers, localUsersMap } from '@/api/static/user';
 import { useTasks } from '@/api/supabase/use-tasks';
+import ExpoCombobox from '@/components/common/expo-combo/expo-combo';
 
 interface ExpoFormTaskCreateProps extends React.ComponentProps<'form'> {
   setOpen: (open: boolean) => void;
@@ -97,7 +97,7 @@ const ExpoFormTaskCreate = ({
             <FormItem>
               <FormLabel>Status</FormLabel>
               <FormControl>
-                <ExpoSelect
+                <ExpoCombobox
                   data-testid="form-task-create-status"
                   items={statusMap}
                   value={field.value.toString()}
@@ -117,7 +117,7 @@ const ExpoFormTaskCreate = ({
             <FormItem>
               <FormLabel>Priority</FormLabel>
               <FormControl>
-                <ExpoSelect
+                <ExpoCombobox
                   data-testid="form-task-create-priority"
                   items={priorityMap}
                   value={field.value.toString()}
@@ -137,7 +137,7 @@ const ExpoFormTaskCreate = ({
             <FormItem>
               <FormLabel>Assignee</FormLabel>
               <FormControl>
-                <ExpoSelect
+                <ExpoCombobox
                   data-testid="form-task-create-assignee"
                   items={localUsersMap}
                   value={(field.value ?? '').toString()}

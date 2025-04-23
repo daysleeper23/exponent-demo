@@ -60,7 +60,7 @@ const TaskListViewHeader = () => {
 
       <div className="hidden sm:ml-auto sm:flex sm:gap-4 sm:pointer-events-auto">
         {/* status */}
-        <div className="w-[128px]">
+        <div className="w-32">
           <Button
             variant="ghost"
             className="w-20"
@@ -73,7 +73,7 @@ const TaskListViewHeader = () => {
         </div>
 
         {/* priority */}
-        <div className="w-[128px]">
+        <div className="w-32">
           <Button
             variant="ghost"
             className="w-20"
@@ -82,6 +82,18 @@ const TaskListViewHeader = () => {
           >
             {'Priority'}
             {getSortIcon('priority')}
+          </Button>
+        </div>
+
+        <div className="w-20">
+          <Button
+            variant="ghost"
+            className="w-20"
+            onClick={() => handleSortClick('assignee')}
+            data-testid="task-list-view-header-assignee"
+          >
+            {'Assignee'}
+            {getSortIcon('assignee')}
           </Button>
         </div>
       </div>

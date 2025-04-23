@@ -26,6 +26,7 @@ const ExpoCombobox = ({
   onChange,
   className,
   searchable = true,
+  labelTrigger = true,
   ...props
 }: {
   items: TaskPropertyMap;
@@ -33,6 +34,7 @@ const ExpoCombobox = ({
   onChange: (value: string) => void;
   className?: string;
   searchable?: boolean;
+  labelTrigger?: boolean;
 }) => {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState(value);
@@ -42,15 +44,19 @@ const ExpoCombobox = ({
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          size="sm"
+          size={labelTrigger ? 'sm' : 'icon'}
           role="combobox"
           aria-expanded={open}
-          className={cn('justify-between gap-2', className)}
+          className={
+            labelTrigger
+              ? cn('justify-between gap-2', className)
+              : cn('p-0', className)
+          }
           {...props}
         >
-          {value ? (
+          {value !== '' ? (
             <div className="flex items-center gap-2 text-xs font-normal text-muted-foreground">
-              {items[value].icon} {items[value].label}
+              {items[value].icon} {labelTrigger && items[value].label}
             </div>
           ) : (
             'Select'
@@ -88,7 +94,7 @@ const ExpoCombobox = ({
                   <Check
                     className={cn(
                       'ml-auto',
-                      item.value === parseInt(selected)
+                      item.value.toString() === selected
                         ? 'opacity-100'
                         : 'opacity-0'
                     )}

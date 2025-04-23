@@ -3,6 +3,7 @@ import { priorityMap, statusMap } from '@/api/static/common';
 import { useTasks } from '@/api/supabase/use-tasks';
 import useTaskStore from '@/store/task';
 import ExpoCombobox from '@/components/common/expo-combo/expo-combo';
+import { localUsersMap } from '@/api/static/user';
 
 interface TaskListRowProps {
   id: string;
@@ -20,6 +21,11 @@ const TaskListRow = React.memo(({ id, style }: TaskListRowProps) => {
 
   const handleUpdateStatus = (value: string) => {
     const updatedTask = { ...task, status: parseInt(value) };
+    updateTask(updatedTask);
+  };
+
+  const handleUpdateAssignee = (value: string) => {
+    const updatedTask = { ...task, assignee: value };
     updateTask(updatedTask);
   };
 
@@ -41,18 +47,28 @@ const TaskListRow = React.memo(({ id, style }: TaskListRowProps) => {
 
       <div className="hidden sm:ml-auto sm:flex sm:gap-4 sm:pointer-events-auto">
         <ExpoCombobox
-          className="w-[128px]"
+          className="w-32"
           items={statusMap}
           value={task.status.toString()}
           onChange={handleUpdateStatus}
         />
 
         <ExpoCombobox
-          className="w-[128px]"
+          className="w-32"
           items={priorityMap}
           value={task.priority.toString()}
           onChange={handleUpdatePriority}
         />
+
+        <div className="w-20">
+          <ExpoCombobox
+            className="w-8"
+            items={localUsersMap}
+            value={task.assignee || ''}
+            onChange={handleUpdateAssignee}
+            labelTrigger={false}
+          />
+        </div>
       </div>
     </div>
   );
